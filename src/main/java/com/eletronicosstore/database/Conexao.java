@@ -1,4 +1,4 @@
-package com.eletronicosstore.conexao;
+package com.eletronicosstore.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
