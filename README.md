@@ -1,4 +1,4 @@
-<h1>Concessionaria-Store</h1>
+<h1>Eletronicos-Store</h1>
 <h2>Projeto Integrador - 4º Semestre (Análise e Desenvolvimeto de Sistemas)</h2>
 
 <p>Integrantes: </p>
