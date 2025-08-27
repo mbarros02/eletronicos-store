@@ -3,25 +3,29 @@ package com.eletronicosstore.models;
 public class Usuario {
     private int id;
     private String nome;
-    private String sobrenome;
+    private String cpf;
     private String email;
     private String senha;
     private boolean status;
+    private int idGrupo;
 
-    public Usuario(String nome, String sobrenome, String email, String senha) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.email = email;
-        this.senha = senha;
+    public Usuario() {
     }
 
-    public Usuario(int id, String nome, String sobrenome, String email, String senha, boolean status) {
-        this.id = id;
+    public Usuario(String nome, String cpf, String email, String senha, int idGrupo) {
         this.nome = nome;
-        this.sobrenome = sobrenome;
+        this.cpf = cpf;
         this.email = email;
         this.senha = senha;
-        this.status = status;
+        this.idGrupo = idGrupo;
+    }
+
+    public int getIdGrupo() {
+        return idGrupo;
+    }
+
+    public void setIdGrupo(int idGrupo) {
+        this.idGrupo = idGrupo;
     }
 
     public int getId() {
@@ -40,12 +44,12 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public String getSobrenome() {
-        return sobrenome;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getEmail() {

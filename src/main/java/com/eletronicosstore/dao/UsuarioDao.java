@@ -12,15 +12,20 @@ public class UsuarioDao implements Base<Usuario> {
     @Override
     public Usuario cadastrar(Usuario input) {
 
-        String sql = "INSERT INTO USUARIOS (NOME, SOBRENOME, EMAIL, SENHA) VALUES (?, ?, ?, ?);";
+        String sql = "INSERT INTO USUARIOS (NOME, CPF, EMAIL, SENHA, ID_GRUPO_USUARIO) VALUES (?, ?, ?, ?, ?);";
 
         try(Connection conn = new Conexao().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, input.getNome());
-            stmt.setString(2, input.getSobrenome());
+            stmt.setString(2, input.getCpf());
             stmt.setString(3, input.getEmail());
             stmt.setString(4, input.getSenha());
+            stmt.setInt(5, input.getIdGrupo());
+
+            stmt.execute();
+            System.out.println("Usuário Cadastrado com Sucesso!");
+            stmt.close();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
