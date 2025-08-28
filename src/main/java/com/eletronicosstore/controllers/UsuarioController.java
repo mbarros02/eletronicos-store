@@ -3,6 +3,7 @@ package com.eletronicosstore.controllers;
 import com.eletronicosstore.dao.UsuarioDao;
 import com.eletronicosstore.database.HashUtils;
 import com.eletronicosstore.models.Usuario;
+import com.eletronicosstore.utils.ValidarCpf;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,7 +26,7 @@ public class UsuarioController extends HttpServlet {
 
     }
 
-    public void cadastrar (HttpServletRequest req, HttpServletResponse resp) throws ServletException, ClassNotFoundException, IOException {
+    private void cadastrar (HttpServletRequest req, HttpServletResponse resp) throws ServletException, ClassNotFoundException, IOException {
         String nome = req.getParameter("nome");
         String cpf = req.getParameter("cpf");
         String email = req.getParameter("email");
@@ -33,9 +34,19 @@ public class UsuarioController extends HttpServlet {
         String senha2 = req.getParameter("senha2");
         int idGrupo = Integer.parseInt(req.getParameter("idGrupo"));
 
-        if(!senha1.equals(senha2)) {
-            throw new IllegalArgumentException("As senhas são diferentes!!");
-        } else {
+        try {
+            if(this.ChecarValorNulo(nome, cpf, email, senha1, senha2)) {
+                req.setAttribute("erro", "Campos vazios!");
+                req.getRequestDispatcher("erro.jsp").forward(req, resp);
+            }
+            if (!ValidarCpf.valido(cpf)) {
+                req.setAttribute("erro", "CPF inválido!");
+                req.getRequestDispatcher("erro.jsp").forward(req, resp);
+                return;
+            }
+            if(!senha1.equals(senha2)) {
+                throw new IllegalArgumentException("As senhas são diferentes!!");
+            }
             String hashSenha = HashUtils.hashSenha(senha1);
 
             Usuario usuario = new Usuario();
@@ -49,6 +60,17 @@ public class UsuarioController extends HttpServlet {
             dao.cadastrar(usuario);
 
             resp.sendRedirect("list-usuario.jsp");
+
+        } catch (IOException exception) {
+            throw new ServletException(exception);
         }
+    }
+    private boolean ChecarValorNulo(String... valores) {
+        for (String c : valores) {
+            if(c == null || c.isBlank()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
