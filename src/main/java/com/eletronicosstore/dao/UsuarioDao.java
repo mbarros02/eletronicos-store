@@ -20,7 +20,7 @@ public class UsuarioDao implements Base<Usuario> {
             stmt.setString(1, input.getNome());
             stmt.setString(2, input.getCpf());
             stmt.setString(3, input.getEmail());
-            stmt.setString(4, input.getSenha());
+            stmt.setString(4, input.getSenha1());
             stmt.setInt(5, input.getIdGrupo());
 
             stmt.execute();

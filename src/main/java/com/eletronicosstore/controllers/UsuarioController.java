@@ -29,21 +29,26 @@ public class UsuarioController extends HttpServlet {
         String nome = req.getParameter("nome");
         String cpf = req.getParameter("cpf");
         String email = req.getParameter("email");
-        String senha = req.getParameter("senha");
+        String senha1 = req.getParameter("senha1");
+        String senha2 = req.getParameter("senha2");
         int idGrupo = Integer.parseInt(req.getParameter("idGrupo"));
 
-        String hashSenha = HashUtils.hashSenha(senha);
+        if(!senha1.equals(senha2)) {
+            throw new IllegalArgumentException("As senhas são diferentes!!");
+        } else {
+            String hashSenha = HashUtils.hashSenha(senha1);
 
-        Usuario usuario = new Usuario();
-        usuario.setNome(nome);
-        usuario.setCpf(cpf);
-        usuario.setEmail(email);
-        usuario.setSenha(hashSenha);
-        usuario.setIdGrupo(idGrupo);
+            Usuario usuario = new Usuario();
+            usuario.setNome(nome);
+            usuario.setCpf(cpf);
+            usuario.setEmail(email);
+            usuario.setSenha1(hashSenha);
+            usuario.setIdGrupo(idGrupo);
 
-        UsuarioDao dao = new UsuarioDao();
-        dao.cadastrar(usuario);
+            UsuarioDao dao = new UsuarioDao();
+            dao.cadastrar(usuario);
 
-        resp.sendRedirect("list-usuario.jsp");
+            resp.sendRedirect("list-usuario.jsp");
+        }
     }
 }

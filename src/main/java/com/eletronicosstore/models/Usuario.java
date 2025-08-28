@@ -5,18 +5,20 @@ public class Usuario {
     private String nome;
     private String cpf;
     private String email;
-    private String senha;
+    private String senha1;
+    private String senha2;
     private boolean status;
     private int idGrupo;
 
     public Usuario() {
     }
 
-    public Usuario(String nome, String cpf, String email, String senha, int idGrupo) {
+    public Usuario(String nome, String cpf, String email, String senha1, String senha2, int idGrupo) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
-        this.senha = senha;
+        this.senha1 = senha1;
+        this.senha2 = senha2;
         this.idGrupo = idGrupo;
     }
 
@@ -60,16 +62,24 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getSenha1() {
+        return senha1;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setSenha1(String senha) {
+        this.senha1 = senha;
     }
 
     public boolean getStatus() {
         return status;
+    }
+
+    public String getSenha2() {
+        return senha2;
+    }
+
+    public void setSenha2(String senha2) {
+        this.senha2 = senha2;
     }
 
     public void setStatus(boolean status) {
