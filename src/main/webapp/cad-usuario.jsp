@@ -66,7 +66,7 @@
       <input type="text" name="cpf" placeholder="CPF" required>
       <input type="email" name="email" placeholder="E-mail" required>
       <input type="password" name="senha" placeholder="Senha" required>
-      <input type="number" name="id" placeholder="Id Grupo de Usuarios" required>
+      <input type="number" name="idGrupo" placeholder="Id Grupo de Usuarios" required>
       <input type="submit" value="Cadastrar">
     </form>
   </div>

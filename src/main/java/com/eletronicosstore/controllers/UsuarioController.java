@@ -17,12 +17,20 @@ public class UsuarioController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            this.cadastrar(req, resp);
+        } catch (ClassNotFoundException ex) {
+            throw new ServletException(ex);
+        }
 
+    }
+
+    public void cadastrar (HttpServletRequest req, HttpServletResponse resp) throws ServletException, ClassNotFoundException, IOException {
         String nome = req.getParameter("nome");
         String cpf = req.getParameter("cpf");
         String email = req.getParameter("email");
         String senha = req.getParameter("senha");
-        int idGrupo = req.getIntHeader("idGrupo");
+        int idGrupo = Integer.parseInt(req.getParameter("idGrupo"));
 
         String hashSenha = HashUtils.hashSenha(senha);
 
