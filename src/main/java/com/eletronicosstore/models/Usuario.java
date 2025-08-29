@@ -13,13 +13,26 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nome, String cpf, String email, String senha1, String senha2, int idGrupo) {
+    public Usuario(int id, String nome, String cpf, String email, String senha1, int idGrupo) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.email = email;
+        this.senha1 = senha1;
+        this.idGrupo = idGrupo;
+    }
+    public Usuario(int id, String nome, String cpf, String email, String senha1, String senha2, int idGrupo) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.senha1 = senha1;
         this.senha2 = senha2;
         this.idGrupo = idGrupo;
+    }
+
+    public boolean isStatus() {
+        return status;
     }
 
     public int getIdGrupo() {

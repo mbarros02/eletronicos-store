@@ -61,14 +61,15 @@
 
   <div class="form-container">
     <h2>Cadastro de Usuarios</h2>
-    <form action="cadastro" method="post">
+    <form action="usuario" method="post">
+    <input type="hidden" name="action" value="alterar">
       <input type="text" name="nome" placeholder="Nome" required>
       <input type="text" name="cpf" placeholder="CPF" required>
-      <input type="email" name="email" placeholder="E-mail" required>
       <input type="password" name="senha1" placeholder="Senha" required>
       <input type="password" name="senha2" placeholder="Senha" required>
       <input type="number" name="idGrupo" placeholder="Id Grupo de Usuarios" required>
-      <input type="submit" value="Cadastrar">
+      <input type="number" name="id" placeholder="Id Usuário" required>
+      <input type="submit" value="Atualizar">
     </form>
   </div>
 

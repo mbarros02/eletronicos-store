@@ -61,7 +61,8 @@
 
   <div class="form-container">
     <h2>Cadastro de Usuarios</h2>
-    <form action="cadastro" method="post">
+    <form action="usuario" method="post">
+    <input type="hidden" name="action" value="cadastro">
       <input type="text" name="nome" placeholder="Nome" required>
       <input type="text" name="cpf" placeholder="CPF" required>
       <input type="email" name="email" placeholder="E-mail" required>
