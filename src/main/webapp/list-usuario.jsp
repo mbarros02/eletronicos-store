@@ -37,7 +37,7 @@
                 <td>${usuario.nome}</td>
                 <td>${usuario.email}</td>
                 <td>${usuario.status ? 'Ativo' : 'Inativo'}</td>
-                <td>${usuario.idGrupo}</td>
+                <td>${usuario.nomeGrupo}</td>
                 <td>
                     <a href="usuario?action=alterarForm&id=${usuario.id}" class="button">Alterar</a>
                     <a href="usuario?action=trocarStatus&id=${usuario.id}"
