@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/usuario")
 public class UsuarioController extends HttpServlet {
@@ -28,6 +29,7 @@ public class UsuarioController extends HttpServlet {
             throw new ServletException(ex);
         }
     }
+
     private void cadastrar (HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, ClassNotFoundException, IOException {
         String nome = req.getParameter("nome");
@@ -109,6 +111,7 @@ public class UsuarioController extends HttpServlet {
             throw new ServletException(exception);
         }
     }
+
     private boolean ChecarValorNulo(String... valores) {
         for (String c : valores) {
             if(c == null || c.isBlank()) {
@@ -117,4 +120,58 @@ public class UsuarioController extends HttpServlet {
         }
         return false;
     }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+        if (action == null || action.isBlank()) {
+            action = "listar";
+        }
+        try {
+            if ("listar".equals(action)) {
+                listar(req, resp);
+            } else if ("trocarStatus".equals(action)) {
+                trocarStatus(req, resp);
+            } else if ("incluir".equals(action)) {
+                req.getRequestDispatcher("cad-usuario.jsp").forward(req, resp);
+            } else if ("alterarForm".equals(action)) {
+                alterarForm(req, resp);
+            }
+        } catch (ClassNotFoundException ex) {
+            throw new ServletException(ex);
+        }
+    }
+
+    private void listar(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException {
+        String filtroNome = req.getParameter("filtroNome");
+        UsuarioDao dao = new UsuarioDao();
+        if (filtroNome == null) {
+            filtroNome = "";
+        }
+        List<Usuario> usuarios = dao.listarTodos(filtroNome);
+
+        req.setAttribute("usuarios", usuarios);
+        req.setAttribute("filtroNome", filtroNome);
+        req.getRequestDispatcher("list-usuario.jsp").forward(req, resp);
+    }
+
+    private void trocarStatus(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        UsuarioDao dao = new UsuarioDao();
+        Usuario usuario = dao.buscarPorId(id);
+        if(usuario != null) {
+            usuario.setStatus(!usuario.getStatus());
+            dao.alterar(usuario);
+        }
+        resp.sendRedirect("usuario?action=listar");
+    }
+
+    private void alterarForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        UsuarioDao dao = new UsuarioDao();
+        Usuario usuario = dao.buscarPorId(id);
+        req.setAttribute("usuario", usuario);
+        req.getRequestDispatcher("alt-usuario.jsp").forward(req, resp);
+    }
+
 }
