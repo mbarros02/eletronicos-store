@@ -9,9 +9,9 @@ public class Usuario {
     private String senha2;
     private boolean status;
     private int idGrupo;
+    private String nomeGrupo;
 
-    public Usuario() {
-    }
+    public Usuario() {}
 
     public Usuario(int id, String nome, String cpf, String email, String senha1, int idGrupo) {
         this.id = id;
@@ -21,6 +21,7 @@ public class Usuario {
         this.senha1 = senha1;
         this.idGrupo = idGrupo;
     }
+
     public Usuario(int id, String nome, String cpf, String email, String senha1, String senha2, int idGrupo) {
         this.id = id;
         this.nome = nome;
@@ -29,6 +30,18 @@ public class Usuario {
         this.senha1 = senha1;
         this.senha2 = senha2;
         this.idGrupo = idGrupo;
+    }
+
+    public Usuario(String cpf, String email, int id, int idGrupo, String nome, String nomeGrupo, String senha1, String senha2, boolean status) {
+        this.cpf = cpf;
+        this.email = email;
+        this.id = id;
+        this.idGrupo = idGrupo;
+        this.nome = nome;
+        this.nomeGrupo = nomeGrupo;
+        this.senha1 = senha1;
+        this.senha2 = senha2;
+        this.status = status;
     }
 
     public boolean isStatus() {
@@ -97,6 +110,14 @@ public class Usuario {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public String getNomeGrupo() {
+        return nomeGrupo;
+    }
+
+    public void setNomeGrupo(String nomeGrupo) {
+        this.nomeGrupo = nomeGrupo;
     }
 
     public void mudarStatus() {
