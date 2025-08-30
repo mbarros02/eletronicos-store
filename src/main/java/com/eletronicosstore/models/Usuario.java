@@ -100,11 +100,7 @@ public class Usuario {
     }
 
     public void mudarStatus() {
-        if (this.getStatus()) {
-            this.setStatus(false);
-        } else {
-            this.setStatus(false);
-        }
+        this.setStatus(!this.getStatus());
     }
 
     public void mudarStatus (int status) {
