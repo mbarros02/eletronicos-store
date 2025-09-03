@@ -1,0 +1,49 @@
+package com.eletronicosstore.controllers;
+
+import com.eletronicosstore.dao.UsuarioDao;
+import com.eletronicosstore.models.Usuario;
+import com.eletronicosstore.models.UsuarioAtual;
+import com.eletronicosstore.utils.ValidarSenha;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/login")
+public class LoginController extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String email = req.getParameter("email");
+        String senha = req.getParameter("senha");
+
+        if (this.checarValorNulo(email, senha)) {
+            req.setAttribute("erro", "Email e senha são obrigatórios!");
+            req.getRequestDispatcher("erro.jsp").forward(req, resp);
+            return;
+        }
+
+        UsuarioDao dao = new UsuarioDao();
+        Usuario usuario = dao.buscarPorEmail(email);
+
+        if (usuario != null && ValidarSenha.verificarSenha(senha, usuario.getSenha1())) {
+            UsuarioAtual.setUsuarioAtual(req, usuario);
+            resp.sendRedirect("usuario?action=listar");
+        } else {
+            req.setAttribute("erro", "Email ou senha inválidos!");
+            req.getRequestDispatcher("erro.jsp").forward(req, resp);
+        }
+    }
+
+    private boolean checarValorNulo(String... valores) {
+        for (String c : valores) {
+            if (c == null || c.isBlank()) {
+                return true;
+            }
+        }
+        return false;
+    }
+}

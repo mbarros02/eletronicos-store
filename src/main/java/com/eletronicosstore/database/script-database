@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS eletronicos_store;
-USE IF NOT EXISTS eletronicos_store;
+USE eletronicos_store;
 
 CREATE TABLE IF NOT EXISTS usuarios(
 IDUSUARIO INT PRIMARY KEY AUTO_INCREMENT,

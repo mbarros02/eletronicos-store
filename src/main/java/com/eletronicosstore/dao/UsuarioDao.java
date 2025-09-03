@@ -141,12 +141,12 @@ public class UsuarioDao implements Base<Usuario> {
 
             if(rs.next()) {
                 return new Usuario(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("cpf"),
-                        rs.getString("email"),
-                        rs.getString("senha1"),
-                        rs.getInt("idGrupo")
+                        rs.getInt("IDUSUARIO"),
+                        rs.getString("NOME"),
+                        rs.getString("CPF"),
+                        rs.getString("EMAIL"),
+                        rs.getString("SENHA"),
+                        rs.getInt("ID_GRUPO_USUARIO")
                 );
             }
 
