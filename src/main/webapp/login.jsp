@@ -4,55 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .form-container {
-      background-color: white;
-      padding: 20px 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-      text-align: center;
-    }
-
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      padding: 8px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    input[type="submit"] {
-      width: 100%;
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    input[type="submit"]:hover {
-      background-color: #45a049;
-    }
-
-    .mensagem {
-      color: red;
-      text-align: center;
-    }
-  </style>
 </head>
 
 <body>
@@ -74,4 +25,123 @@
 
 </body>
 
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <a href="/" class="Logo">
+            <div class="img-logo">
+                <h1 class="Logo">TechStore</h1>
+            </div>
+        </a>
+        <div class="links">
+            <div>
+                <a href="\" class="Inicio">Inicio</a>
+            </div>
+            <div>
+                <a href="\" class="Produtos">Produtos</a>
+            </div>
+            <div>
+                <a href="\" class="Categoria">Categoria</a>
+            </div>
+            <div>
+                <a href="\" class="Sobre">Sobre Nós</a>
+            </div>
+            <div>
+                <a href="\" class="Login">Login</a>
+            </div>
+        </div>
+        <a href="" class="carrinho">
+            <div class="img">
+                <img src="./Img/Shopping Cart.png" alt="">
+            </div>
+        </a>
+    </header>
+
+    <section id="login">
+        <div class="card">
+            <div class="title">
+                <h1>TechStore</h1>
+            </div>
+            <form action="login" method="post">
+            <input type="hidden" name="action" value="login">
+                <div class="login">
+                    <label for="">login</label>
+                    <input type="email" name="email" placeholder="E-mail" required>
+                </div>
+                <div class="login">
+                    <label for="">Senha</label>
+                    <input type="password" name="senha" placeholder="Senha" required>
+                </div>
+                <div class="margem"></div>
+                <div class="footer-card">
+                    <div class="buton">
+                        <button>LOGIN</button>
+                    </div>
+                    <div class="link">
+                        <a href="">Já tem um cadastro? Cadastra-se</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="top">
+            <div class="col1">
+                <div class="title">
+                    <h1>TechStore</h1>
+                </div>
+                <div class="text">
+                    <p>Sua loja online de eletrônicos com a mais alta tecnologia e os melhores preços.</p>
+                </div>
+            </div>
+            <div class="col2">
+                <div class="title">
+                    <h1>Links Rápidos</h1>
+                </div>
+                <div class="link-footer">
+                    <a href="">Incio</a>
+                    <a href="">Produtos</a>
+                    <a href="">Categoria</a>
+                    <a href="">Sobre nós</a>
+                </div>
+            </div>
+            <div class="col3">
+                <div class="title">
+                    <h1>Contato</h1>
+                </div>
+                <div class="contatos">
+                    <div class="email">
+                        <p>Email: contato@techstore.com</p>
+                    </div>
+                    <div class="telefone">
+                        <p>Telefone: (XX) XXXX-XXXX</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="barra"></div>
+        <div class="rotulo">
+            <p>© 2025 TechStore. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
 </html>
