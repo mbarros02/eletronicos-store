@@ -21,6 +21,7 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         String senha = req.getParameter("senha");
+        String status = req.getParameter("status");
 
         if (this.checarValorNulo(email, senha)) {
             req.setAttribute("erro", "Email e senha são obrigatórios!");
@@ -31,8 +32,12 @@ public class LoginController extends HttpServlet {
         UsuarioDao dao = new UsuarioDao();
         Usuario usuario = dao.buscarPorEmail(email);
 
-        if (usuario != null && ValidarSenha.verificarSenha(senha, usuario.getSenha1())) {
-            UsuarioAtual.setUsuarioAtual(req, usuario);
+        if (usuario != null && ValidarSenha.verificarSenha(senha,usuario.getSenha1())){
+            if (!usuario.isStatus()){
+                req.setAttribute("erro", "Usuário inativo!");
+                req.getRequestDispatcher("erro.jsp").forward(req, resp);
+                return;
+        }
 
             HttpSession session = req.getSession();
             session.setAttribute("usuarioAtual", usuario);
@@ -45,7 +50,7 @@ public class LoginController extends HttpServlet {
             } else if (idGrupo == 2) {
                 resp.sendRedirect("usuario?action=listarEstoquista&id=" + idUsuario);
             } else {
-                resp.sendRedirect("index.jsp");
+                resp.sendRedirect("erro.jsp");
             }
         } else {
             req.setAttribute("erro", "Email ou senha inválidos!");

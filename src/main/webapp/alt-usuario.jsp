@@ -60,13 +60,9 @@
                     <input type="text" name="cpf" required>
                 </div>
                 <div class="login">
-                    <label for="">E-mail</label>
-                    <input type="email" name="email" required>
+                    <label for="">ID Usuario</label>
+                    <input type="number" name="id" required>
                 </div>
-                                <div class="login">
-                                    <label for="">ID Usuario</label>
-                                    <input type="number" name="id" required>
-                                </div>
                 <div>
                     <label for="">Grupo</label>
                     <select  name="idGrupo" id="" required>

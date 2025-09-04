@@ -140,14 +140,17 @@ public class UsuarioDao implements Base<Usuario> {
             ResultSet rs = stmt.executeQuery();
 
             if(rs.next()) {
-                return new Usuario(
+                Usuario usuario = new Usuario(
                         rs.getInt("IDUSUARIO"),
                         rs.getString("NOME"),
                         rs.getString("CPF"),
                         rs.getString("EMAIL"),
                         rs.getString("SENHA"),
+                        rs.getString("STATUS"),
                         rs.getInt("ID_GRUPO_USUARIO")
                 );
+                usuario.setStatus(rs.getInt("STATUS") == 1);
+                return usuario;
             }
 
         } catch (SQLException e) {
