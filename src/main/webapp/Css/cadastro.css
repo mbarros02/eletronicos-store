@@ -63,21 +63,21 @@ header>.carrinho {
 
 #login{
     width: 100%;
-    height: 700px;
     display: flex;
     justify-content: center;
+    height: 112vh;
 }
 #login>div{
         box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
-    padding: 30px 0px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 30%;
-    height: 55vh;
-    border-radius: 20px;
+        -webkit-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
+        padding: 30px 0px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 55%;
+        border-radius: 20px;
+        height: 100vh;
 }
 #login>div>.title{
     display: flex;
@@ -102,9 +102,10 @@ header>.carrinho {
     display: flex;
     flex-direction: column;
     width: 90%;
+    margin-top: 15px;
 }
 #login>div>form>.login{
-    margin-top: 30px;
+    margin-top: 15px;
 }
 #login>div>form>div>label{
     margin-bottom: 10px;
@@ -126,6 +127,7 @@ header>.carrinho {
     width: 90%;
     align-items: center;
 }
+#login>div>form>div>select{border: none;border: 1px solid #3B82F6;border-radius: 5px;padding: 10px 3px; outline: none;}
 #login>div>form>.footer-card>.buton{}
 #login>div>form>.footer-card>.buton>button{
     background-color: #1F2937;
@@ -143,7 +145,7 @@ header>.carrinho {
 }
 #login>div>form>.footer-card>.link>a:hover{}
 .margem{
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 footer{

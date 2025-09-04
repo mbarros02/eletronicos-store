@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false" %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Css/cadastro.css?0000">
+    <link rel="stylesheet" href="Css/list-usuario.css?00000">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -43,52 +45,63 @@
             </div>
         </a>
     </header>
-
-    <section id="login">
-        <div class="card">
-            <div class="title">
-                <h1>TechStore</h1>
-            </div>
-            <form action="usuario" method="post">
-                <input type="hidden" name="action" value="cadastro">
-                <div class="login">
-                    <label for="">Nome</label>
-                    <input type="text" name="nome" required>
-                </div>
-                <div class="login">
-                    <label for="">CPF</label>
-                    <input type="text" name="cpf" required>
-                </div>
-                <div class="login">
-                    <label for="">E-mail</label>
-                    <input type="email" name="email" required>
+    <section>
+        <div class="navbar">
+            <div>
+                <div>
+                    <a href="">Usuario</a>
                 </div>
                 <div>
-                    <label for="">Grupo</label>
-                    <select  name="idGrupo" id="" required>
-                        <option value=""></option>
-                        <option value=1>Administrador</option>
-                        <option value=2>Estoquista</option>
-                    </select>
+                    <a href="">Produto</a>
                 </div>
-                <div class="login">
-                    <label for="">Senha</label>
-                    <input type="password" name="senha1" required>
+            </div>
+        </div>
+        <div class="barra"></div>
+        <div class="dashboard-container">
+            <div class="content-area">
+                <div class="content-header">
+                    <h1>Usuarios</h1>
+                    <a href="usuario?action=incluir" class="btn btn-primary">Novo Usuário
+                    </a>
                 </div>
-                <div class="login">
-                    <label for="">Confimar Senha</label>
-                    <input type="password" name="senha2" required>
+                <form method="get" action="usuario">
+                    <input type="hidden" name="action" value="listar" />
+                    <input type="text" name="filtroNome" placeholder="Filtrar por nome" value="${filtroNome}" />
+                    <button type="submit">Filtrar</button>
+                </form>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Status</th>
+                                <th>Grupo</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="usuario" items="${usuarios}">
+                                <tr>
+                                    <td>${usuario.nome}</td>
+                                    <td>${usuario.email}</td>
+                                    <td>${usuario.status ? 'Ativo' : 'Inativo'}</td>
+                                    <td>${usuario.nomeGrupo}</td>
+                                    <td>
+                                        <a href="usuario?action=alterarForm&id=${usuario.id}" class="button">Alterar</a>
+                                        <a href="usuario?action=trocarStatus&id=${usuario.id}"
+                                            class="button ${usuario.status ? 'danger' : ''}">
+                                            ${usuario.status ? 'Inativar' : 'Ativar'}
+                                        </a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="margem"></div>
-                <div class="footer-card">
-                    <div class="buton">
-                        <button type="submit" value="Cadastrar">Cadastrar</button>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
     </section>
-
     <footer>
         <div class="top">
             <div class="col1">

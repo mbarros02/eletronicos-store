@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import com.eletronicosstore.models.Usuario;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
@@ -31,7 +33,15 @@ public class LoginController extends HttpServlet {
 
         if (usuario != null && ValidarSenha.verificarSenha(senha, usuario.getSenha1())) {
             UsuarioAtual.setUsuarioAtual(req, usuario);
-            resp.sendRedirect("usuario?action=listar");
+            int idGrupo = usuario.getIdGrupo();
+
+            if (idGrupo == 1) {
+                resp.sendRedirect("usuario?action=listar");
+            } else if (idGrupo == 2) {
+                resp.sendRedirect("usuario?action=listarEstoquista");
+            } else {
+                resp.sendRedirect("index.jsp");
+            }
         } else {
             req.setAttribute("erro", "Email ou senha inválidos!");
             req.getRequestDispatcher("erro.jsp").forward(req, resp);

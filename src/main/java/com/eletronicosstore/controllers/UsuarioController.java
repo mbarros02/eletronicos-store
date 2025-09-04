@@ -65,7 +65,7 @@ public class UsuarioController extends HttpServlet {
             UsuarioDao dao = new UsuarioDao();
             dao.cadastrar(usuario);
 
-            resp.sendRedirect("list-usuario.jsp");
+            resp.sendRedirect("painel-administrador.jsp");
 
         } catch (IOException exception) {
             throw new ServletException(exception);
@@ -106,7 +106,7 @@ public class UsuarioController extends HttpServlet {
             UsuarioDao dao = new UsuarioDao();
             dao.alterar(usuario);
 
-            resp.sendRedirect("list-usuario.jsp");
+            resp.sendRedirect("painel-administrador.jsp");
 
         } catch (IOException exception) {
             throw new ServletException(exception);
@@ -137,6 +137,8 @@ public class UsuarioController extends HttpServlet {
                 req.getRequestDispatcher("cad-usuario.jsp").forward(req, resp);
             } else if ("alterarForm".equals(action)) {
                 alterarForm(req, resp);
+            }else if ("listarEstoquista".equals(action)) {
+                listarEstoquista(req, resp);
             }
         } catch (ClassNotFoundException ex) {
             throw new ServletException(ex);
@@ -153,7 +155,19 @@ public class UsuarioController extends HttpServlet {
 
         req.setAttribute("usuarios", usuarios);
         req.setAttribute("filtroNome", filtroNome);
-        req.getRequestDispatcher("list-usuario.jsp").forward(req, resp);
+        req.getRequestDispatcher("painel-administrador.jsp").forward(req, resp);
+    }
+    private void listarEstoquista(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException {
+        String filtroNome = req.getParameter("filtroNome");
+        UsuarioDao dao = new UsuarioDao();
+        if (filtroNome == null) {
+            filtroNome = "";
+        }
+        List<Usuario> usuarios = dao.listarTodos(filtroNome);
+
+        req.setAttribute("usuarios", usuarios);
+        req.setAttribute("filtroNome", filtroNome);
+        req.getRequestDispatcher("painel-estoquista.jsp").forward(req, resp);
     }
 
     private void trocarStatus(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException {

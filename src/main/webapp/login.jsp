@@ -1,41 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-  <meta charset="UTF-8">
-  <title>Login</title>
-</head>
-
-<body>
-
-  <div class="form-container">
-    <h2>Login</h2>
-    <form action="login" method="post">
-      <input type="hidden" name="action" value="login">
-      <input type="email" name="email" placeholder="E-mail" required>
-      <input type="password" name="senha" placeholder="Senha" required>
-      <input type="submit" value="Entrar">
-    </form>
-    <div class="mensagem">
-      <% if (request.getAttribute("erro") != null) { %>
-        <p><%= request.getAttribute("erro") %></p>
-      <% } %>
-    </div>
-  </div>
-
-</body>
-
-</html>
-
-
-
-<!DOCTYPE html>
 <html lang="en">
-
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Css/login.css">
+    <link rel="stylesheet" href="Css/login.css?0000">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -65,7 +34,7 @@
                 <a href="\" class="Sobre">Sobre Nós</a>
             </div>
             <div>
-                <a href="\" class="Login">Login</a>
+                <a href="" class="Login">Login</a>
             </div>
         </div>
         <a href="" class="carrinho">
@@ -84,19 +53,19 @@
             <input type="hidden" name="action" value="login">
                 <div class="login">
                     <label for="">login</label>
-                    <input type="email" name="email" placeholder="E-mail" required>
+                    <input type="email" name="email" required>
                 </div>
                 <div class="login">
                     <label for="">Senha</label>
-                    <input type="password" name="senha" placeholder="Senha" required>
+                    <input type="password" name="senha"  required>
                 </div>
                 <div class="margem"></div>
                 <div class="footer-card">
                     <div class="buton">
-                        <button>LOGIN</button>
+                        <button type="submit" value="Entrar">LOGIN</button>
                     </div>
                     <div class="link">
-                        <a href="">Já tem um cadastro? Cadastra-se</a>
+                        <a href="./cad-usuario.jsp">Já tem um cadastro? Cadastra-se</a>
                     </div>
                 </div>
             </form>
