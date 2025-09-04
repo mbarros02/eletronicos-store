@@ -65,7 +65,7 @@
                     </a>
                 </div>
                 <form method="get" action="usuario">
-                    <input type="hidden" name="action" value="listar" />
+                    <input type="hidden" name="action" value="listarEstoquista" />
                     <input type="text" name="filtroNome" placeholder="Filtrar por nome" value="${filtroNome}" />
                     <button type="submit">Filtrar</button>
                 </form>

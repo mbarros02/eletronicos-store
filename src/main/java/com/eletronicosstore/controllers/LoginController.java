@@ -33,12 +33,17 @@ public class LoginController extends HttpServlet {
 
         if (usuario != null && ValidarSenha.verificarSenha(senha, usuario.getSenha1())) {
             UsuarioAtual.setUsuarioAtual(req, usuario);
+
+            HttpSession session = req.getSession();
+            session.setAttribute("usuarioAtual", usuario);
+
             int idGrupo = usuario.getIdGrupo();
+            int idUsuario = usuario.getId();
 
             if (idGrupo == 1) {
-                resp.sendRedirect("usuario?action=listar");
+                resp.sendRedirect("usuario?action=listar&id=" + idUsuario);
             } else if (idGrupo == 2) {
-                resp.sendRedirect("usuario?action=listarEstoquista");
+                resp.sendRedirect("usuario?action=listarEstoquista&id=" + idUsuario);
             } else {
                 resp.sendRedirect("index.jsp");
             }

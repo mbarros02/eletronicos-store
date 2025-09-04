@@ -81,6 +81,9 @@ public class UsuarioController extends HttpServlet {
         int idGrupo = Integer.parseInt(req.getParameter("idGrupo"));
         int id = Integer.parseInt(req.getParameter("id"));
 
+        HttpSession session = req.getSession();
+        Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioAtual");
+
         try {
             if(this.ChecarValorNulo(nome, cpf, senha1, senha2)) {
                 req.setAttribute("erro", "Campos vazios!");
@@ -100,7 +103,11 @@ public class UsuarioController extends HttpServlet {
             usuario.setNome(nome);
             usuario.setCpf(cpf);
             usuario.setSenha1(hashSenha);
-            usuario.setIdGrupo(idGrupo);
+            if (usuarioLogado.getId() == id) {
+                usuario.setIdGrupo(usuarioLogado.getIdGrupo());
+            } else {
+                usuario.setIdGrupo(idGrupo);
+            }
             usuario.setId(id);
 
             UsuarioDao dao = new UsuarioDao();
