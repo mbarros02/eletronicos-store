@@ -39,7 +39,7 @@ public class UsuarioDao implements Base<Usuario> {
     @Override
     public Usuario alterar(Usuario input) {
 
-        String sql = "UPDATE usuarios SET nome=?, cpf=?, senha=?, id_grupo_usuario=?, status=? WHERE idUsuario=?;";
+        String sql = "UPDATE usuarios SET nome=?, cpf=?, senha=?, id_grupo_usuario=? WHERE idUsuario=?;";
 
         try(Connection conn = new Conexao().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -48,8 +48,7 @@ public class UsuarioDao implements Base<Usuario> {
             stmt.setString(2, input.getCpf());
             stmt.setString(3, input.getSenha1());
             stmt.setInt(4, input.getIdGrupo());
-            stmt.setInt(5, input.getStatus() ? 1 : 0);
-            stmt.setInt(6, input.getId());
+            stmt.setInt(5, input.getId());
 
             stmt.execute();
             stmt.close();
@@ -57,7 +56,24 @@ public class UsuarioDao implements Base<Usuario> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return input;
+    }
+    public Usuario alterarStatus(Usuario input) {
+
+        String sql = "UPDATE usuarios SET status=? WHERE idUsuario=?;";
+
+        try(Connection conn = new Conexao().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, input.getStatus() ? 1 : 0);
+            stmt.setInt(2, input.getId());
+
+            stmt.execute();
+            stmt.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return input;
     }
 
     @Override

@@ -64,9 +64,6 @@
                     <div class="buton">
                         <button type="submit" value="Entrar">LOGIN</button>
                     </div>
-                    <div class="link">
-                        <a href="./cad-usuario.jsp">Já tem um cadastro? Cadastra-se</a>
-                    </div>
                 </div>
             </form>
         </div>

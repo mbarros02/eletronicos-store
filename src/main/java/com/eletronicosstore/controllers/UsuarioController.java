@@ -65,7 +65,7 @@ public class UsuarioController extends HttpServlet {
             UsuarioDao dao = new UsuarioDao();
             dao.cadastrar(usuario);
 
-            resp.sendRedirect("painel-administrador.jsp");
+            resp.sendRedirect("usuario?action=listar");
 
         } catch (IOException exception) {
             throw new ServletException(exception);
@@ -113,7 +113,7 @@ public class UsuarioController extends HttpServlet {
             UsuarioDao dao = new UsuarioDao();
             dao.alterar(usuario);
 
-            resp.sendRedirect("painel-administrador.jsp");
+            resp.sendRedirect("usuario?action=listar");
 
         } catch (IOException exception) {
             throw new ServletException(exception);
@@ -144,8 +144,6 @@ public class UsuarioController extends HttpServlet {
                 req.getRequestDispatcher("cad-usuario.jsp").forward(req, resp);
             } else if ("alterarForm".equals(action)) {
                 alterarForm(req, resp);
-            }else if ("listarEstoquista".equals(action)) {
-                listarEstoquista(req, resp);
             }
         } catch (ClassNotFoundException ex) {
             throw new ServletException(ex);
@@ -164,38 +162,27 @@ public class UsuarioController extends HttpServlet {
         req.setAttribute("filtroNome", filtroNome);
         req.getRequestDispatcher("painel-administrador.jsp").forward(req, resp);
     }
-    private void listarEstoquista(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException {
-        String filtroNome = req.getParameter("filtroNome");
-        UsuarioDao dao = new UsuarioDao();
-        if (filtroNome == null) {
-            filtroNome = "";
-        }
-        List<Usuario> usuarios = dao.listarTodos(filtroNome);
-
-        req.setAttribute("usuarios", usuarios);
-        req.setAttribute("filtroNome", filtroNome);
-        req.getRequestDispatcher("painel-estoquista.jsp").forward(req, resp);
-    }
 
     private void trocarStatus(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException {
         int id = Integer.parseInt(req.getParameter("id"));
+
         UsuarioDao dao = new UsuarioDao();
         Usuario usuario = dao.buscarPorId(id);
+
         if(usuario != null) {
             usuario.setStatus(!usuario.getStatus());
-            dao.alterar(usuario);
+            dao.alterarStatus(usuario);
         }
         resp.sendRedirect("usuario?action=listar");
     }
 
     private void alterarForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException {
         int id = Integer.parseInt(req.getParameter("id"));
+
         UsuarioDao dao = new UsuarioDao();
         Usuario usuario = dao.buscarPorId(id);
+
         req.setAttribute("usuario", usuario);
         req.getRequestDispatcher("alt-usuario.jsp").forward(req, resp);
     }
-
-
-
 }
