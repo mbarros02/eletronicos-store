@@ -31,7 +31,7 @@ public class UsuarioController extends HttpServlet {
         }
     }
 
-    private void cadastrar (HttpServletRequest req, HttpServletResponse resp)
+    private void cadastrar(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, ClassNotFoundException, IOException {
         String nome = req.getParameter("nome");
         String cpf = req.getParameter("cpf");
@@ -41,7 +41,7 @@ public class UsuarioController extends HttpServlet {
         int idGrupo = Integer.parseInt(req.getParameter("idGrupo"));
 
         try {
-            if(this.ChecarValorNulo(nome, cpf, email, senha1, senha2)) {
+            if (this.ChecarValorNulo(nome, cpf, email, senha1, senha2)) {
                 req.setAttribute("erro", "Campos vazios!");
                 req.getRequestDispatcher("erro.jsp").forward(req, resp);
             }
@@ -50,7 +50,7 @@ public class UsuarioController extends HttpServlet {
                 req.getRequestDispatcher("erro.jsp").forward(req, resp);
                 return;
             }
-            if(!senha1.equals(senha2)) {
+            if (!senha1.equals(senha2)) {
                 throw new IllegalArgumentException("As senhas são diferentes!!");
             }
             String hashSenha = ValidarSenha.hashSenha(senha1);
@@ -85,7 +85,7 @@ public class UsuarioController extends HttpServlet {
         Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioAtual");
 
         try {
-            if(this.ChecarValorNulo(nome, cpf, senha1, senha2)) {
+            if (this.ChecarValorNulo(nome, cpf, senha1, senha2)) {
                 req.setAttribute("erro", "Campos vazios!");
                 req.getRequestDispatcher("erro.jsp").forward(req, resp);
             }
@@ -94,7 +94,7 @@ public class UsuarioController extends HttpServlet {
                 req.getRequestDispatcher("erro.jsp").forward(req, resp);
                 return;
             }
-            if(!senha1.equals(senha2)) {
+            if (!senha1.equals(senha2)) {
                 throw new IllegalArgumentException("As senhas são diferentes!!");
             }
             String hashSenha = ValidarSenha.hashSenha(senha1);
@@ -122,7 +122,7 @@ public class UsuarioController extends HttpServlet {
 
     private boolean ChecarValorNulo(String... valores) {
         for (String c : valores) {
-            if(c == null || c.isBlank()) {
+            if (c == null || c.isBlank()) {
                 return true;
             }
         }
@@ -169,7 +169,7 @@ public class UsuarioController extends HttpServlet {
         UsuarioDao dao = new UsuarioDao();
         Usuario usuario = dao.buscarPorId(id);
 
-        if(usuario != null) {
+        if (usuario != null) {
             usuario.setStatus(!usuario.getStatus());
             dao.alterarStatus(usuario);
         }
