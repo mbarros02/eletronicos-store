@@ -1,59 +1,58 @@
 package com.eletronicosstore.dao;
 
-public class ProdutoDao {
-    private String nome;
-    private double avaliacao;
-    private String descricao;
-    private double preco;
-    private int qtdEstoque;
-    private String imagem;
+import com.eletronicosstore.database.Conexao;
+import com.eletronicosstore.models.Produto;
 
-    public String getNome() {
-        return nome;
+import java.sql.*;
+import java.util.List;
+
+public class ProdutoDao implements Base<Produto>{
+
+    @Override
+    public Produto cadastrar(Produto input) {
+        String sql = "INSERT INTO produtos (NOME, AVALIACAO, DESCRICAO, PRECO, QTD_ESTOQUE) VALUES (?, ?, ?, ?, ?);";
+
+
+        try (Connection conn = new Conexao().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            stmt.setString(1, input.getNome());
+            stmt.setDouble(2, input.getAvaliacao());
+            stmt.setString(3, input.getDescricao());
+            stmt.setDouble(4, input.getPreco());
+            stmt.setInt(5, input.getQtdEstoque());
+
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                input.setId(rs.getInt(1));
+            }
+
+            rs.close();
+            stmt.close();
+            System.out.println("Produto cadastrado com sucesso!");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return input;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    @Override
+    public Produto alterar(Produto input) {
+        return null;
     }
 
-    public double getAvaliacao() {
-        return avaliacao;
+    @Override
+    public Produto buscarPorId(int id) {
+        return null;
     }
 
-    public void setAvaliacao(double avaliacao) {
-        this.avaliacao = avaliacao;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-
-    public int getQtdEstoque() {
-        return qtdEstoque;
-    }
-
-    public void setQtdEstoque(int qtdEstoque) {
-        this.qtdEstoque = qtdEstoque;
-    }
-
-    public String getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
+    @Override
+    public List<Produto> listarTodos(String filtro) {
+        return List.of();
     }
 }
 
