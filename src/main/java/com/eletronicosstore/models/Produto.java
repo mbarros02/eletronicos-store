@@ -1,0 +1,91 @@
+package com.eletronicosstore.models;
+
+import java.util.List;
+
+public class Produto {
+    private int id;
+    private String nome;
+    private double avaliacao;
+    private String descricao;
+    private double preco;
+    private int qtdEstoque;
+    private List<ImagemProduto> imagens;
+
+    public Produto() {}
+
+    public Produto(double avaliacao, String descricao, int id, List<ImagemProduto> imagens, String nome, double preco, int qtdEstoque) {
+        this.avaliacao = avaliacao;
+        this.descricao = descricao;
+        this.id = id;
+        this.imagens = imagens;
+        this.nome = nome;
+        this.preco = preco;
+        this.qtdEstoque = qtdEstoque;
+    }
+
+    public double getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(double avaliacao) {
+        this.avaliacao = avaliacao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<ImagemProduto> getImagens() {
+        return imagens;
+    }
+
+    public void setImagens(List<ImagemProduto> imagens) {
+        this.imagens = imagens;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public int getQtdEstoque() {
+        return qtdEstoque;
+    }
+
+    public void setQtdEstoque(int qtdEstoque) {
+        this.qtdEstoque = qtdEstoque;
+    }
+
+//    Usar no Listar
+    public ImagemProduto getImagemPrincipal() {
+        if (imagens == null) return null;
+        return imagens.stream()
+                .filter(ImagemProduto::isPrincipal)
+                .findFirst()
+                .orElse(null);
+    }
+}
+
