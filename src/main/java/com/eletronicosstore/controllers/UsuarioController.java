@@ -31,6 +31,27 @@ public class UsuarioController extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+        if (action == null || action.isBlank()) {
+            action = "listar";
+        }
+        try {
+            if ("listar".equals(action)) {
+                listar(req, resp);
+            } else if ("trocarStatus".equals(action)) {
+                trocarStatus(req, resp);
+            } else if ("incluir".equals(action)) {
+                req.getRequestDispatcher("cad-usuario.jsp").forward(req, resp);
+            } else if ("alterarForm".equals(action)) {
+                alterarForm(req, resp);
+            }
+        } catch (ClassNotFoundException ex) {
+            throw new ServletException(ex);
+        }
+    }
+
     private void cadastrar(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, ClassNotFoundException, IOException {
         String nome = req.getParameter("nome");
@@ -129,26 +150,6 @@ public class UsuarioController extends HttpServlet {
         return false;
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-        if (action == null || action.isBlank()) {
-            action = "listar";
-        }
-        try {
-            if ("listar".equals(action)) {
-                listar(req, resp);
-            } else if ("trocarStatus".equals(action)) {
-                trocarStatus(req, resp);
-            } else if ("incluir".equals(action)) {
-                req.getRequestDispatcher("cad-usuario.jsp").forward(req, resp);
-            } else if ("alterarForm".equals(action)) {
-                alterarForm(req, resp);
-            }
-        } catch (ClassNotFoundException ex) {
-            throw new ServletException(ex);
-        }
-    }
 
     private void listar(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException {
         String filtroNome = req.getParameter("filtroNome");

@@ -5,6 +5,7 @@ import com.eletronicosstore.dao.ImagemProdutoDao;
 import com.eletronicosstore.models.Produto;
 import com.eletronicosstore.models.ImagemProduto;
 import com.eletronicosstore.database.Conexao;
+import com.eletronicosstore.models.Usuario;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -105,7 +106,77 @@ public class ProdutoController extends HttpServlet {
 
     private void alterar(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, ClassNotFoundException {
+        String nome = req.getParameter("nome");
+        double avaliacao = Double.parseDouble(req.getParameter("avaliacao"));
+        String descricao = req.getParameter("descricao");
+        double preco = Double.parseDouble(req.getParameter("preco"));
+        int estoque = Integer.parseInt(req.getParameter("estoque"));
+        String imagemPrincipal = req.getParameter("imagemPrincipal");
+        int idproduto = Integer.parseInt(req.getParameter("idproduto"));
 
+        HttpSession session = req.getSession();
+        Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioAtual");
+
+        if (usuarioLogado.getIdGrupo() == 1) {
+
+            try {
+                Produto produto = new Produto();
+                produto.setNome(nome);
+                produto.setAvaliacao(avaliacao);
+                produto.setDescricao(descricao);
+                produto.setPreco(preco);
+                produto.setQtdEstoque(estoque);
+                produto.setId(idproduto);
+
+                ProdutoDao produtoDao = new ProdutoDao();
+                produtoDao.alterar(produto);
+
+                ImagemProdutoDao imagemDao = new ImagemProdutoDao();
+                Collection<Part> parts = req.getParts();
+                List<ImagemProduto> imagens = new ArrayList<>();
+
+                for (Part part : parts) {
+                    if (part.getName().equals("imagens") && part.getSize() > 0) {
+                        String nomeOriginal = Paths.get(getFileName(part)).getFileName().toString();
+                        String novoNome = UUID.randomUUID().toString() + "_" + nomeOriginal;
+
+                        String caminhoReal = getServletContext().getRealPath("/imagens");
+                        File diretorio = new File(caminhoReal);
+                        if (!diretorio.exists()) diretorio.mkdirs();
+
+                        String caminhoFinal = caminhoReal + File.separator + novoNome;
+                        part.write(caminhoFinal);
+
+                        ImagemProduto imagem = new ImagemProduto();
+                        imagem.setCaminho("imagens/" + novoNome);
+                        imagem.setPrincipal(nomeOriginal.equals(imagemPrincipal));
+                        imagem.setIdProduto(produto.getId());
+
+                        imagemDao.alterar(imagem);
+                        imagens.add(imagem);
+                    }
+                }
+                resp.sendRedirect(req.getContextPath() + "/list-produto.jsp");
+
+            } catch (IOException | NumberFormatException exception) {
+                throw new ServletException(exception);
+            }
+        } else if (usuarioLogado.getIdGrupo() == 2) {
+            try {
+
+                Produto produto = new Produto();
+                produto.setQtdEstoque(estoque);
+                produto.setId(idproduto);
+
+                ProdutoDao produtoDao = new ProdutoDao();
+                produtoDao.alterar(produto);
+
+                resp.sendRedirect(req.getContextPath() + "/list-produto.jsp");
+
+            } catch (IOException | NumberFormatException exception) {
+                throw new ServletException(exception);
+            }
+        }
     }
 
     private boolean ChecarValorNulo(String... valores) {

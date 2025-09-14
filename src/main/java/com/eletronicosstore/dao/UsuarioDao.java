@@ -78,11 +78,14 @@ public class UsuarioDao implements Base<Usuario> {
 
     @Override
     public Usuario buscarPorId(int id) {
+
         String sql = "SELECT * FROM usuarios WHERE idUsuario=?";
+
         try (Connection conn = new Conexao().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
+
             if(rs.next()) {
                 Usuario usuario = new Usuario(
                         rs.getInt("idUsuario"),

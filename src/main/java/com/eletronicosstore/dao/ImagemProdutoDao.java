@@ -5,6 +5,7 @@ import com.eletronicosstore.models.ImagemProduto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -40,7 +41,24 @@ public class ImagemProdutoDao implements Base<ImagemProduto>{
 
     @Override
     public ImagemProduto alterar(ImagemProduto input) {
-        return null;
+
+        String sql = "UPDATE imagem_Produto SET caminho=?, principal=? WHERE idimagem=?;";
+
+        try(Connection conn = new Conexao().getConnection()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, input.getCaminho());
+            stmt.setBoolean(2, input.isPrincipal());
+            stmt.setInt(3, input.getIdProduto());
+
+            stmt.executeUpdate();
+            stmt.close();
+            System.out.println("Imagem alterada com sucesso!!");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return input;
     }
 
     @Override
