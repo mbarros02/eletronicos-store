@@ -63,6 +63,7 @@
                     <h1>Usuarios</h1>
                     <a href="usuario?action=incluir" class="btn btn-primary">Novo Usuário
                     </a>
+                    <a href="produto?action=listar" class="btn btn-primary" style="margin-left: 10px;">Listar Produtos</a>
                 </div>
                 <form method="get" action="usuario">
                     <input type="hidden" name="action" value="listar" />

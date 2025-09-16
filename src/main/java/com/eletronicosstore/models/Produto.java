@@ -10,6 +10,7 @@ public class Produto {
     private double preco;
     private int qtdEstoque;
     private List<ImagemProduto> imagens;
+    private int status;
 
     public Produto() {}
 
@@ -78,6 +79,11 @@ public class Produto {
     public void setQtdEstoque(int qtdEstoque) {
         this.qtdEstoque = qtdEstoque;
     }
+
+    public int getStatus() { return status; }
+    public void setStatus(int status) { this.status = status; }
+    public boolean isAtivo() { return status == 1; }
+    public void setAtivo(boolean ativo) { this.status = ativo ? 1 : 0; }
 
 //    Usar no Listar
     public ImagemProduto getImagemPrincipal() {

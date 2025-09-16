@@ -60,7 +60,8 @@
         <div class="dashboard-container">
             <div class="content-area">
                 <div class="content-header">
-                    <h1>Usuarios</h1>
+                    <h1>Produtos</h1>
+                    <a href="produto?action=listar" class="btn btn-primary">Produtos</a>
                 </div>
                 <form method="get" action="usuario">
                     <input type="hidden" name="action" value="listarEstoquista" />

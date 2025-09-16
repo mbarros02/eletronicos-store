@@ -66,26 +66,53 @@ public class ProdutoDao implements Base<Produto>{
         return input;
     }
 
+    public void atualizarStatus(int id, boolean ativo) {
+        String sql = "UPDATE produtos SET status=? WHERE idproduto=?";
+        try (Connection conn = new Conexao().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, ativo ? 1 : 0);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Produto alterarStatus(Produto input) {
+        String sql = "UPDATE produtos SET status=? WHERE idproduto=?;";
+        try (Connection conn = new Conexao().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, input.getStatus());
+            stmt.setInt(2, input.getId());
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return input;
+    }
+
     @Override
     public Produto buscarPorId(int id) {
-
-        String sql = "SELECT * FROM produtos WHERE idproduto=?;";
-
+        String sql = "SELECT * FROM produtos WHERE idproduto=?";
         try (Connection conn = new Conexao().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
-
-            try (ResultSet rs = stmt.executeQuery()) {
+            ResultSet rs = stmt.executeQuery();
                 if (rs.next()) {
                     Produto produto = new Produto();
-                    rs.getInt("id");
-                    rs.getString("nome");
-                    rs.getDouble("avaliacao");
-                    rs.getString("descricao");
-                    rs.getDouble("preco");
-                    rs.getInt("qtd_estoque");
-                }
+                produto.setId(rs.getInt("idproduto"));
+                produto.setNome(rs.getString("nome"));
+                produto.setAvaliacao(rs.getDouble("avaliacao"));
+                produto.setDescricao(rs.getString("descricao"));
+                produto.setPreco(rs.getDouble("preco"));
+                produto.setQtdEstoque(rs.getInt("qtd_estoque"));
+                try { produto.setStatus(rs.getInt("status")); } catch(Exception ignored) {}
+                return produto;
             }
+            rs.close();
+            stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -94,7 +121,117 @@ public class ProdutoDao implements Base<Produto>{
 
     @Override
     public List<Produto> listarTodos(String filtro) {
-        return List.of();
+        return listarTodos(filtro, 0, 10);
+    }
+
+    public List<Produto> listarTodos(String filtro, int offset, int limit) {
+        List<Produto> produtos = new java.util.ArrayList<>();
+        boolean hasFilter = filtro != null && !filtro.isBlank();
+        Integer filtroId = null;
+        if (hasFilter) {
+            try { filtroId = Integer.valueOf(filtro.trim()); } catch (Exception ignored) {}
+        }
+        StringBuilder sql = new StringBuilder("SELECT * FROM produtos");
+        if (hasFilter) {
+            if (filtroId != null) {
+                sql.append(" WHERE idproduto = ? OR nome LIKE ?");
+            } else {
+                sql.append(" WHERE nome LIKE ?");
+            }
+        }
+        sql.append(" ORDER BY idproduto DESC LIMIT ? OFFSET ?");
+        try (Connection conn = new Conexao().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql.toString());
+            int idx = 1;
+            if (hasFilter) {
+                if (filtroId != null) {
+                    stmt.setInt(idx++, filtroId);
+                    stmt.setString(idx++, "%" + filtro + "%");
+                } else {
+                    stmt.setString(idx++, "%" + filtro + "%");
+                }
+            }
+            stmt.setInt(idx++, limit);
+            stmt.setInt(idx, offset);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Produto produto = new Produto();
+                produto.setId(rs.getInt("idproduto"));
+                produto.setNome(rs.getString("nome"));
+                produto.setAvaliacao(rs.getDouble("avaliacao"));
+                produto.setDescricao(rs.getString("descricao"));
+                produto.setPreco(rs.getDouble("preco"));
+                produto.setQtdEstoque(rs.getInt("qtd_estoque"));
+                produto.setStatus(rs.getInt("status"));
+                produtos.add(produto);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return produtos;
+    }
+
+    public int contarProdutos(String filtro) {
+        boolean hasFilter = filtro != null && !filtro.isBlank();
+        Integer filtroId = null;
+        if (hasFilter) {
+            try { filtroId = Integer.valueOf(filtro.trim()); } catch (Exception ignored) {}
+        }
+        StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM produtos");
+        if (hasFilter) {
+            if (filtroId != null) {
+                sql.append(" WHERE idproduto = ? OR nome LIKE ?");
+            } else {
+                sql.append(" WHERE nome LIKE ?");
+            }
+        }
+        try (Connection conn = new Conexao().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql.toString());
+            int idx = 1;
+            if (hasFilter) {
+                if (filtroId != null) {
+                    stmt.setInt(idx++, filtroId);
+                    stmt.setString(idx++, "%" + filtro + "%");
+                } else {
+                    stmt.setString(idx++, "%" + filtro + "%");
+                }
+            }
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
+
+    public void ativarTodos() {
+        String sql = "UPDATE produtos SET status=1";
+        try (Connection conn = new Conexao().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void atualizarEstoque(int id, int estoque) {
+        String sql = "UPDATE produtos SET qtd_estoque=? WHERE idproduto=?;";
+        try (Connection conn = new Conexao().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, estoque);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

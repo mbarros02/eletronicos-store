@@ -40,6 +40,56 @@ public class ProdutoController extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+        if (action == null || action.equals("listar")) {
+            listarProdutos(req, resp);
+        } else if (action.equals("incluir")) {
+            req.getRequestDispatcher("cad-produto.jsp").forward(req, resp);
+        } else if (action.equals("alterarForm")) {
+            String idStr = req.getParameter("id");
+            if (idStr != null) {
+                int id = Integer.parseInt(idStr);
+                ProdutoDao produtoDao = new ProdutoDao();
+                Produto produto = produtoDao.buscarPorId(id);
+                req.setAttribute("produto", produto);
+                req.getRequestDispatcher("alt-produto.jsp").forward(req, resp);
+            }
+        } else if (action.equals("inativar")) {
+            String idStr = req.getParameter("id");
+            if (idStr != null) {
+                int id = Integer.parseInt(idStr);
+                Produto produto = new Produto();
+                produto.setId(id);
+                produto.setStatus(0);
+                ProdutoDao produtoDao = new ProdutoDao();
+                produtoDao.alterarStatus(produto);
+                resp.sendRedirect("produto?action=listar");
+            }
+        } else if (action.equals("reativar")) {
+            String idStr = req.getParameter("id");
+            if (idStr != null) {
+                int id = Integer.parseInt(idStr);
+                Produto produto = new Produto();
+                produto.setId(id);
+                produto.setStatus(1);
+                ProdutoDao produtoDao = new ProdutoDao();
+                produtoDao.alterarStatus(produto);
+                resp.sendRedirect("produto?action=listar");
+            }
+        } else if (action.equals("visualizar")) {
+            String idStr = req.getParameter("id");
+            if (idStr != null) {
+                int id = Integer.parseInt(idStr);
+                ProdutoDao produtoDao = new ProdutoDao();
+                Produto produto = produtoDao.buscarPorId(id);
+                req.setAttribute("produto", produto);
+                req.getRequestDispatcher("visualizar-produto.jsp").forward(req, resp);
+            }
+        }
+    }
+
     private void cadastrar(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, ClassNotFoundException, IOException {
 
@@ -105,21 +155,29 @@ public class ProdutoController extends HttpServlet {
     }
 
     private void alterar(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, ClassNotFoundException {
-        String nome = req.getParameter("nome");
-        double avaliacao = Double.parseDouble(req.getParameter("avaliacao"));
-        String descricao = req.getParameter("descricao");
-        double preco = Double.parseDouble(req.getParameter("preco"));
-        int estoque = Integer.parseInt(req.getParameter("estoque"));
-        String imagemPrincipal = req.getParameter("imagemPrincipal");
-        int idproduto = Integer.parseInt(req.getParameter("idproduto"));
-
+            throws ServletException, ClassNotFoundException, IOException {
         HttpSession session = req.getSession();
         Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioAtual");
+        if (usuarioLogado == null) {
+            resp.sendRedirect("login.jsp");
+            return;
+        }
 
         if (usuarioLogado.getIdGrupo() == 1) {
+            String nome = req.getParameter("nome");
+            String avaliacaoStr = req.getParameter("avaliacao");
+            String descricao = req.getParameter("descricao");
+            String precoStr = req.getParameter("preco");
+            String estoqueStr = req.getParameter("estoque");
+            String imagemPrincipal = req.getParameter("imagemPrincipal");
+            String idStr = req.getParameter("idproduto");
 
             try {
+                double avaliacao = Double.parseDouble(avaliacaoStr);
+                double preco = Double.parseDouble(precoStr);
+                int estoque = Integer.parseInt(estoqueStr);
+                int idproduto = Integer.parseInt(idStr);
+
                 Produto produto = new Produto();
                 produto.setNome(nome);
                 produto.setAvaliacao(avaliacao);
@@ -156,27 +214,50 @@ public class ProdutoController extends HttpServlet {
                         imagens.add(imagem);
                     }
                 }
-                resp.sendRedirect(req.getContextPath() + "/list-produto.jsp");
+                resp.sendRedirect(req.getContextPath() + "/produto?action=listar");
 
             } catch (IOException | NumberFormatException exception) {
                 throw new ServletException(exception);
             }
         } else if (usuarioLogado.getIdGrupo() == 2) {
+            String estoqueStr = req.getParameter("estoque");
+            String idStr = req.getParameter("idproduto");
             try {
-
-                Produto produto = new Produto();
-                produto.setQtdEstoque(estoque);
-                produto.setId(idproduto);
-
+                int estoque = Integer.parseInt(estoqueStr);
+                int idproduto = Integer.parseInt(idStr);
                 ProdutoDao produtoDao = new ProdutoDao();
-                produtoDao.alterar(produto);
-
-                resp.sendRedirect(req.getContextPath() + "/list-produto.jsp");
-
+                produtoDao.atualizarEstoque(idproduto, estoque);
+                resp.sendRedirect(req.getContextPath() + "/produto?action=listar");
             } catch (IOException | NumberFormatException exception) {
                 throw new ServletException(exception);
             }
         }
+    }
+
+    private void listarProdutos(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String filtroNome = req.getParameter("filtroNome");
+        String filtroId = req.getParameter("filtroId");
+        String paginaStr = req.getParameter("pagina");
+        int pagina = 1;
+        int limite = 10;
+        if (paginaStr != null) {
+            try {
+                pagina = Integer.parseInt(paginaStr);
+            } catch (NumberFormatException ignored) {}
+        }
+        int offset = (pagina - 1) * limite;
+        ProdutoDao produtoDao = new ProdutoDao();
+        String filtroEfetivo = (filtroId != null && !filtroId.isBlank()) ? filtroId : filtroNome;
+        List<Produto> produtos = produtoDao.listarTodos(filtroEfetivo, offset, limite);
+        int totalProdutos = produtoDao.contarProdutos(filtroEfetivo);
+        int totalPaginas = (int) Math.ceil((double) totalProdutos / limite);
+        req.setAttribute("produtos", produtos);
+        req.setAttribute("pagina", Integer.valueOf(pagina));
+        req.setAttribute("totalPaginas", Integer.valueOf(totalPaginas));
+        req.setAttribute("totalProdutos", Integer.valueOf(totalProdutos));
+        req.setAttribute("filtroNome", filtroNome);
+        req.setAttribute("filtroId", filtroId);
+        req.getRequestDispatcher("list-produto.jsp").forward(req, resp);
     }
 
     private boolean ChecarValorNulo(String... valores) {

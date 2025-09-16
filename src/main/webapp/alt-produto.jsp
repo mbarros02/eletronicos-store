@@ -1,19 +1,22 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-br">
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/cadastro.css?0000">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
-
 <body>
+    <c:if test="${empty produto}">
+        Produto não encontrado.<br>
+        <a href="produto?action=listar">Voltar</a>
+    </c:if>
+    <c:if test="${not empty produto}">
     <header>
         <a href="/" class="Logo">
             <div class="img-logo">
@@ -21,21 +24,11 @@
             </div>
         </a>
         <div class="links">
-            <div>
-                <a href="\" class="Inicio">Inicio</a>
-            </div>
-            <div>
-                <a href="\" class="Produtos">Produtos</a>
-            </div>
-            <div>
-                <a href="\" class="Categoria">Categoria</a>
-            </div>
-            <div>
-                <a href="\" class="Sobre">Sobre Nós</a>
-            </div>
-            <div>
-                <a href="\" class="Login">Login</a>
-            </div>
+            <div><a href="\" class="Inicio">Inicio</a></div>
+            <div><a href="\" class="Produtos">Produtos</a></div>
+            <div><a href="\" class="Categoria">Categoria</a></div>
+            <div><a href="\" class="Sobre">Sobre Nós</a></div>
+            <div><a href="\" class="Login">Login</a></div>
         </div>
         <a href="" class="carrinho">
             <div class="img">
@@ -43,57 +36,58 @@
             </div>
         </a>
     </header>
-
     <section id="login">
         <div class="card">
             <div class="title">
                 <h1>TechStore</h1>
             </div>
+            <c:set var="isEstoquista" value="${sessionScope.usuarioAtual != null && sessionScope.usuarioAtual.idGrupo == 2}"/>
             <form action="produto" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="alterar">
-
-                <label>Nome:</label>
-                <input type="text" name="nome" maxlength="200" required>
-
-                <label>Avaliação:</label>
-                <select name="avaliacao" required>
-                    <option value=""></option>
-                    <option value="0.5">0.5</option>
-                    <option value="1">1.0</option>
-                    <option value="1.5">1.5</option>
-                    <option value="2">2.0</option>
-                    <option value="2.5">2.5</option>
-                    <option value="3">3.0</option>
-                    <option value="3.5">3.5</option>
-                    <option value="4">4.0</option>
-                    <option value="4.5">4.5</option>
-                    <option value="5">5.0</option>
-                </select>
-
-                <label>Descrição:</label>
-                <textarea name="descricao" maxlength="2000" required></textarea>
-
-                <label>Preço:</label>
-                <input type="number" name="preco" step="0.01" required>
-
-                <label>Estoque:</label>
-                <input type="number" name="estoque" required>
-
-                <label>Imagens:</label>
-                <input type="file" name="imagens" multiple required>
-
-                <label>Imagem Principal (nome do arquivo):</label>
-                <input type="text" name="imagemPrincipal" placeholder="ex: foto1.jpg">
-
-                <label>Id:</label>
-                <input type="number" name="idproduto" required>
-
-                <button type="submit">Salvar</button>
-                <button type="button" onclick="window.location.href='produto?action=listar'">Cancelar</button>
+                <c:choose>
+                    <c:when test="${isEstoquista}">
+                        <label>Estoque:</label>
+                        <input type="number" name="estoque" required value="${produto.qtdEstoque}">
+                        <input type="hidden" name="idproduto" value="${produto.id}">
+                        <button type="submit">Salvar</button>
+                        <button type="button" onclick="window.location.href='produto?action=listar'">Cancelar</button>
+                    </c:when>
+                    <c:otherwise>
+                        <label>Nome:</label>
+                        <input type="text" name="nome" maxlength="200" required value="${produto.nome}">
+                        <label>Avaliação:</label>
+                        <select name="avaliacao" required>
+                            <option value=""></option>
+                            <option value="0.5" ${produto.avaliacao == 0.5 ? 'selected' : ''}>0.5</option>
+                            <option value="1" ${produto.avaliacao == 1.0 ? 'selected' : ''}>1.0</option>
+                            <option value="1.5" ${produto.avaliacao == 1.5 ? 'selected' : ''}>1.5</option>
+                            <option value="2" ${produto.avaliacao == 2.0 ? 'selected' : ''}>2.0</option>
+                            <option value="2.5" ${produto.avaliacao == 2.5 ? 'selected' : ''}>2.5</option>
+                            <option value="3" ${produto.avaliacao == 3.0 ? 'selected' : ''}>3.0</option>
+                            <option value="3.5" ${produto.avaliacao == 3.5 ? 'selected' : ''}>3.5</option>
+                            <option value="4" ${produto.avaliacao == 4.0 ? 'selected' : ''}>4.0</option>
+                            <option value="4.5" ${produto.avaliacao == 4.5 ? 'selected' : ''}>4.5</option>
+                            <option value="5" ${produto.avaliacao == 5.0 ? 'selected' : ''}>5.0</option>
+                        </select>
+                        <label>Descrição:</label>
+                        <textarea name="descricao" maxlength="2000" required>${produto.descricao}</textarea>
+                        <label>Preço:</label>
+                        <input type="number" name="preco" step="0.01" required value="${produto.preco}">
+                        <label>Estoque:</label>
+                        <input type="number" name="estoque" required value="${produto.qtdEstoque}">
+                        <label>Imagens:</label>
+                        <input type="file" name="imagens" multiple>
+                        <label>Imagem Principal (nome do arquivo):</label>
+                        <input type="text" name="imagemPrincipal" placeholder="ex: foto1.jpg">
+                        <label>Id:</label>
+                        <input type="number" name="idproduto" required value="${produto.id}" readonly>
+                        <button type="submit">Salvar</button>
+                        <button type="button" onclick="window.location.href='produto?action=listar'">Cancelar</button>
+                    </c:otherwise>
+                </c:choose>
             </form>
         </div>
     </section>
-
     <footer>
         <div class="top">
             <div class="col1">
@@ -134,5 +128,6 @@
             <p>© 2025 TechStore. Todos os direitos reservados.</p>
         </div>
     </footer>
+    </c:if>
 </body>
 </html>

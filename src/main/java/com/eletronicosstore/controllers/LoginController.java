@@ -48,7 +48,7 @@ public class LoginController extends HttpServlet {
             if (idGrupo == 1) {
                 resp.sendRedirect("usuario?action=listar&id=" + idUsuario);
             } else if (idGrupo == 2) {
-                resp.sendRedirect("usuario?action=listarEstoquista&id=" + idUsuario);
+                resp.sendRedirect("produto?action=listar");
             } else {
                 resp.sendRedirect("erro.jsp");
             }
