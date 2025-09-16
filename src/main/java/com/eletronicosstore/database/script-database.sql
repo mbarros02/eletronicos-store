@@ -38,3 +38,12 @@ CREATE TABLE IF NOT EXISTS imagem_produto (
     ID_PRODUTO INT,
     FOREIGN KEY (ID_PRODUTO) REFERENCES produtos(IDPRODUTO)
 );
+
+-- Adiciona a coluna status se ainda não existir
+ALTER TABLE produtos ADD COLUMN status TINYINT(1) DEFAULT 1;
+
+-- Ativa todos os produtos
+UPDATE produtos SET status = 1;
+UPDATE produtos SET status=0 WHERE idproduto=1;
+UPDATE produtos SET status=1 WHERE idproduto=1;
+
