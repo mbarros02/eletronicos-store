@@ -49,10 +49,10 @@
         <div class="navbar">
             <div>
                 <div>
-                    <a href="">Usuario</a>
+                    <a href="./painel-administrador">Usuario</a>
                 </div>
                 <div>
-                    <a href="">Produto</a>
+                    <a href="./list-produto.jsp">Produto</a>
                 </div>
             </div>
         </div>

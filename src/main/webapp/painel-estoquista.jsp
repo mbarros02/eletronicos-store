@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,21 +72,35 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th>E-mail</th>
-                                <th>Status</th>
-                                <th>Grupo</th>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Estoque</th>
+                <th>Valor</th>
+                <th>Status</th>
+                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="usuario" items="${usuarios}">
-                                <tr>
-                                    <td>${usuario.nome}</td>
-                                    <td>${usuario.email}</td>
-                                    <td>${usuario.status ? 'Ativo' : 'Inativo'}</td>
-                                    <td>${usuario.nomeGrupo}</td>
-                                </tr>
-                            </c:forEach>
+                            <c:forEach var="produto" items="${produtos}">
+                                            <tr>
+                                                <td>${produto.id}</td>
+                                                <td>${produto.nome}</td>
+                                                <td>${produto.qtdEstoque}</td>
+                                                <td>R$ <fmt:formatNumber value="${produto.preco}" type="number" minFractionDigits="2" maxFractionDigits="2"/></td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${produto.status == 1}">Ativo</c:when>
+                                                        <c:otherwise>Inativo</c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <td class="actions">
+                                                    <a href="produto?action=alterarForm&id=${produto.id}" title="Alterar">Alterar</a>
+                                                    <c:if test="${sessionScope.usuarioAtual != null && sessionScope.usuarioAtual.idGrupo != 2}">
+                                                        <a href="produto?action=visualizar&id=${produto.id}" title="Visualizar">Visualizar</a>
+                                                    </c:if>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
