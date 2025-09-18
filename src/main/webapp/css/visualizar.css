@@ -1,0 +1,243 @@
+*{
+    margin: 0;
+}
+
+
+    section {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      width: 100%;
+      color: black;
+      margin-bottom: 30px!important;
+    }
+
+    section {
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .swiper {
+      width: 45%;
+      height: 50%;
+      margin: 0px 20px;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #444;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
+    padding: 30px 0px;
+    margin-bottom: 50px;
+}
+
+header>.links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 50%;
+    align-items: center;
+}
+
+header>.links>div {}
+
+header>.links>div>a {
+    color: #727986;
+    text-decoration: none;
+    font-family: inter;
+    font-size: 16px;
+}
+
+header>.links>div>a:hover {
+    color: black;
+}
+
+header>.Logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    text-decoration: none;
+}
+
+header>.Logo>div {}
+
+header>.Logo>div>h1 {
+    color: #3B82F6;
+    font-family: Inter;
+    font-size: 35px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+header>.carrinho {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+}
+
+.content-2{
+    width: 35%;
+    color: #1F2937;
+    height: 42vh;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+}
+.content-2>.title{
+    max-height: 0%;
+}
+.content-2>.title>h1{
+    height: 100%;
+    font-family: inter;
+}
+.content-2>.description{}
+.content-2>.description>p{}
+.content-2>.preco{}
+.content-2>.preco>h1{}
+.content-2>.avaliacao{}
+.content-2>.avaliacao>p{}
+.content-2>.buton{}
+.content-2>.buton>button{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #3B82F6;
+    color: white;
+    font-family: Inter;
+    cursor: pointer;
+    border-radius: 4px;
+}
+footer{
+    background-color: #1F2937;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+footer>.top{
+    display: flex;
+    justify-content: space-evenly;
+}
+footer>div>.col1{
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    width: 605px;
+}
+footer>div>.col1>.title{
+    padding: 40px 0px;
+    display: flex;
+    align-items: start;
+    width: 50%;
+}
+footer>div>.col1>.title>h1{
+    font-family: inter;
+    color: white;
+    font-size: 45px;
+}
+footer>div>.col1>.text{
+    width: 50%;
+}
+footer>div>.col1>.text>p{
+    color: white;
+    font-family: inter;
+    font-size: 20px;
+}
+footer>div>.col2{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 605px;
+}
+footer>div>.col2>.title{
+        padding: 40px 0px;
+}
+footer>div>.col2>.link-footer{
+    display: flex;
+    flex-direction: column;
+}
+footer>div>.col2>.link-footer>a{
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    padding: 10px 0px;
+    font-family: inter;
+}
+footer>div>.col2>.link-footer>a:hover{
+    color: #3B82F6;
+}
+footer>div>.col2>.title>h1{
+        font-family: inter;
+    color: white;
+    font-size: 45px;
+}
+footer>div>.col3{
+    width: 625px;
+    display: flex;
+    flex-direction: column;
+    width: 605px;
+}
+footer>div>.col3>.title{
+        padding: 40px 0px;
+}
+footer>div>.col3>.title>h1{
+        font-family: inter;
+    color: white;
+    font-size: 45px;
+}
+
+footer>div>.col3>.contatos{}
+footer>div>.col3>.contatos>.email{}
+footer>div>.col3>.contatos>.email>p{
+            font-family: inter;
+    color: white;
+    font-size: 25px;
+}
+footer>div>.col3>.contatos>.telefone{}
+footer>div>.col3>.contatos>.telefone>p{
+            font-family: inter;
+    color: white;
+    font-size: 25px;
+}
+
+footer>.barra{
+    width: 100%;
+    background-color: white;
+    height: 1px;
+    margin-top: 50px;
+}
+footer>.rotulo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0px;
+}
+footer>.rotulo>p{
+    color: white;
+    font-size: 13px;
+    font-family: inter;
+}
