@@ -134,7 +134,7 @@ public class ProdutoDao implements Base<Produto>{
         StringBuilder sql = new StringBuilder("SELECT * FROM produtos");
         if (hasFilter) {
             if (filtroId != null) {
-                sql.append(" WHERE idproduto = ? OR nome LIKE ?");
+                sql.append(" WHERE idproduto = ?");
             } else {
                 sql.append(" WHERE nome LIKE ?");
             }
@@ -146,7 +146,6 @@ public class ProdutoDao implements Base<Produto>{
             if (hasFilter) {
                 if (filtroId != null) {
                     stmt.setInt(idx++, filtroId);
-                    stmt.setString(idx++, "%" + filtro + "%");
                 } else {
                     stmt.setString(idx++, "%" + filtro + "%");
                 }
@@ -182,7 +181,7 @@ public class ProdutoDao implements Base<Produto>{
         StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM produtos");
         if (hasFilter) {
             if (filtroId != null) {
-                sql.append(" WHERE idproduto = ? OR nome LIKE ?");
+                sql.append(" WHERE idproduto = ?");
             } else {
                 sql.append(" WHERE nome LIKE ?");
             }
@@ -193,7 +192,6 @@ public class ProdutoDao implements Base<Produto>{
             if (hasFilter) {
                 if (filtroId != null) {
                     stmt.setInt(idx++, filtroId);
-                    stmt.setString(idx++, "%" + filtro + "%");
                 } else {
                     stmt.setString(idx++, "%" + filtro + "%");
                 }
@@ -232,6 +230,32 @@ public class ProdutoDao implements Base<Produto>{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Produto> listarPorId(int id) {
+        List<Produto> produtos = new java.util.ArrayList<>();
+        String sql = "SELECT * FROM produtos WHERE idproduto = ?";
+        try (Connection conn = new Conexao().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Produto produto = new Produto();
+                produto.setId(rs.getInt("idproduto"));
+                produto.setNome(rs.getString("nome"));
+                produto.setAvaliacao(rs.getDouble("avaliacao"));
+                produto.setDescricao(rs.getString("descricao"));
+                produto.setPreco(rs.getDouble("preco"));
+                produto.setQtdEstoque(rs.getInt("qtd_estoque"));
+                produto.setStatus(rs.getInt("status"));
+                produtos.add(produto);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return produtos;
     }
 }
 

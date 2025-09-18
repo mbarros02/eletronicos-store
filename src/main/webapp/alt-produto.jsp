@@ -125,6 +125,8 @@
                                             <button type="submit">Salvar</button>
                                         </div>
                                     </div>
+                                </c:otherwise>
+                            </c:choose>
                         </form>
                     </div>
                 </section>

@@ -247,10 +247,32 @@ public class ProdutoController extends HttpServlet {
         }
         int offset = (pagina - 1) * limite;
         ProdutoDao produtoDao = new ProdutoDao();
+        // Se ambos filtros estiverem preenchidos, prioriza filtroId e limpa filtroNome
+        if (filtroId != null && !filtroId.isBlank() && filtroNome != null && !filtroNome.isBlank()) {
+            filtroNome = "";
+        }
         String filtroEfetivo = (filtroId != null && !filtroId.isBlank()) ? filtroId : filtroNome;
-        List<Produto> produtos = produtoDao.listarTodos(filtroEfetivo, offset, limite);
-        int totalProdutos = produtoDao.contarProdutos(filtroEfetivo);
-        int totalPaginas = (int) Math.ceil((double) totalProdutos / limite);
+        List<Produto> produtos;
+        int totalProdutos;
+        int totalPaginas;
+        try {
+            if (filtroId != null && !filtroId.isBlank()) {
+                int idFiltro = Integer.parseInt(filtroId.trim());
+                produtos = produtoDao.listarPorId(idFiltro);
+                totalProdutos = produtos.size();
+                totalPaginas = 1;
+                req.setAttribute("filtroNome", "");
+                req.setAttribute("filtroId", filtroId);
+            } else {
+                produtos = produtoDao.listarTodos(filtroNome, offset, limite);
+                totalProdutos = produtoDao.contarProdutos(filtroNome);
+                totalPaginas = (int) Math.ceil((double) totalProdutos / limite);
+            }
+        } catch (NumberFormatException ex) {
+            produtos = produtoDao.listarTodos(filtroNome, offset, limite);
+            totalProdutos = produtoDao.contarProdutos(filtroNome);
+            totalPaginas = (int) Math.ceil((double) totalProdutos / limite);
+        }
         req.setAttribute("produtos", produtos);
         req.setAttribute("pagina", Integer.valueOf(pagina));
         req.setAttribute("totalPaginas", Integer.valueOf(totalPaginas));

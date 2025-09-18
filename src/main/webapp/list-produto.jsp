@@ -46,28 +46,43 @@
         </a>
     </header>
     <section>
-        <div class="navbar">
-            <div>
-                <div>
-                    <a href="./painel-administrador">Usuario</a>
+                <div class="navbar">
+                    <div>
+                        <div>
+                            <a href="usuario?action=listar">Usuario</a>
+                        </div>
+                        <div>
+                            <a href="produto?action=listar">Produto</a>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <a href="">Produto</a>
-                </div>
-            </div>
-        </div>
         <div class="barra"></div>
         <div class="dashboard-container">
             <div class="content-area">
                 <div class="content-header">
                     <h1>Produtos</h1>
-                    <a href="produto?action=listar" class="btn btn-primary">Produtos</a>
+                    <c:if test="${sessionScope.usuarioAtual == null || sessionScope.usuarioAtual.idGrupo != 2}">
+                        <a href="produto?action=incluir" class="btn btn-primary" title="Cadastrar Produto">+</a>
+                    </c:if>
                 </div>
-                <form  method="get" action="produto">
+                <form  method="get" action="produto" onsubmit="return unificarFiltro()">
                     <input type="hidden" name="action" value="listar"  />
                     <input  type="text" name="filtroNome" placeholder="Nome" value="${filtroNome}" />
+                    <input  type="text" name="filtroId" placeholder="ID" value="${filtroId}" />
                     <button type="submit">Filtrar</button>
                 </form>
+                <script>
+                    function unificarFiltro(){
+                        var nome = document.querySelector('input[name="filtroNome"]');
+                        var id = document.querySelector('input[name="filtroId"]');
+                        if (id && id.value && id.value.trim().length > 0){
+                            nome.value = '';
+                        } else if (nome && nome.value && nome.value.trim().length > 0) {
+                            id.value = '';
+                        }
+                        return true;
+                    }
+                </script>
                 <div class="table-container">
                     <table>
                         <thead>
@@ -112,6 +127,16 @@
                         </tbody>
                     </table>
                 </div>
+                <c:if test="${totalPaginas > 1}">
+                    <div class="pagination">
+                        <c:if test="${pagina > 1}">
+                            <a href="produto?action=listar&pagina=${pagina - 1}&filtroNome=${filtroNome}&filtroId=${filtroId}" class="btn btn-primary">Anterior</a>
+                        </c:if>
+                        <c:if test="${pagina < totalPaginas}">
+                            <a href="produto?action=listar&pagina=${pagina + 1}&filtroNome=${filtroNome}&filtroId=${filtroId}" class="btn btn-primary">Próxima</a>
+                        </c:if>
+                    </div>
+                </c:if>
             </div>
         </div>
     </section>

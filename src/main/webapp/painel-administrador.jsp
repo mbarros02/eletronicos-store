@@ -49,10 +49,10 @@
         <div class="navbar">
             <div>
                 <div>
-                    <a href="./painel-administrador">Usuario</a>
+                    <a href="usuario?action=listar">Usuario</a>
                 </div>
                 <div>
-                    <a href="./list-produto.jsp">Produto</a>
+                    <a href="produto?action=listar">Produto</a>
                 </div>
             </div>
         </div>
@@ -61,9 +61,11 @@
             <div class="content-area">
                 <div class="content-header">
                     <h1>Usuarios</h1>
-                    <a href="usuario?action=incluir" class="btn btn-primary">Novo Usuário
-                    </a>
-                    <a href="produto?action=listar" class="btn btn-primary" style="margin-left: 10px;">Listar Produtos</a>
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        
+                        <a href="usuario?action=incluir" class="btn btn-primary">Novo Usuário</a>
+                        
+                    </div>
                 </div>
                 <form method="get" action="usuario">
                     <input type="hidden" name="action" value="listar" />
