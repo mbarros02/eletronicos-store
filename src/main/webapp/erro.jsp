@@ -1,5 +1,0 @@
-<html>
-<body>
-<h2>Erro!</h2>
-</body>
-</html>
