@@ -21,7 +21,7 @@
 }
 
 #Produtos {
-    padding: 40px 0px;
+    padding: 58px 0px;
 }
 
 #Produtos>col {
@@ -264,7 +264,7 @@
 
 #Noticias {
     background-color: #3B82F6;
-    height: 360px;
+    height: 312px;
     border-radius: 5px;
 }
 
@@ -278,8 +278,8 @@
 #Noticias>.title>h1 {
     color: white;
     font-family: inter;
-    font-size: 60px;
-    padding: 40px 0px;
+    font-size: 45px;
+    padding: 26px 0px;
 }
 
 #Noticias>.description {
@@ -292,7 +292,7 @@
 #Noticias>.description>h2 {
     color: white;
     font-family: inter;
-    font-size: 45px;
+    font-size: 30px;
     font-weight: 300;
 }
 

@@ -81,18 +81,20 @@
                                                     </c:choose>
                                                 </td>
                                                 <td class="actions">
-                                                    <a href="produto?action=alterarForm&id=${produto.id}" title="Alterar">Alterar</a>
+                                                <div class="content-action">
+                                                    <a href="produto?action=alterarForm&id=${produto.id}" title="Alterar"><img src=".././assets/Img/icons8-pencil-30.png" alt="Alterar"/></a>
                                                     <c:if test="${sessionScope.usuarioAtual != null && sessionScope.usuarioAtual.idGrupo != 2}">
                                                         <c:choose>
                                                             <c:when test="${produto.status == 1}">
-                                                                <a href="produto?action=inativar&id=${produto.id}" title="Inativar">Inativar</a>
+                                                                <a class="inativar" href="produto?action=inativar&id=${produto.id}" title="Inativar">Inativar</a>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <a href="produto?action=reativar&id=${produto.id}" title="Reativar">Reativar</a>
+                                                                <a class="inativar" href="produto?action=reativar&id=${produto.id}" title="Reativar">Reativar</a>
                                                             </c:otherwise>
                                                         </c:choose>
-                                                        <a href="produto?action=visualizar&id=${produto.id}" title="Visualizar">Visualizar</a>
+                                                        <a class="inativar" href="produto?action=visualizar&id=${produto.id}" title="Visualizar">Visualizar</a>
                                                     </c:if>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </c:forEach>

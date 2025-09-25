@@ -60,11 +60,13 @@
                                     <td>${usuario.status ? 'Ativo' : 'Inativo'}</td>
                                     <td>${usuario.nomeGrupo}</td>
                                     <td>
-                                        <a href="usuario?action=alterarForm&id=${usuario.id}" class="button">Alterar</a>
-                                        <a href="usuario?action=trocarStatus&id=${usuario.id}"
-                                            class="button ${usuario.status ? 'danger' : ''}">
-                                            ${usuario.status ? 'Inativar' : 'Ativar'}
-                                        </a>
+                                        <div class="content-action">
+                                        <a href="usuario?action=alterarForm&id=${usuario.id}" class="button"><img src=".././assets/Img/icons8-pencil-30.png" alt="Alterar"/></a>
+                                                                                <a class="inativar" href="usuario?action=trocarStatus&id=${usuario.id}"
+                                                                                    class="button ${usuario.status ? 'danger' : ''}">
+                                                                                    ${usuario.status ? 'Inativar' : 'Ativar'}
+                                                                                </a>
+                                        </div>
                                     </td>
                                 </tr>
                             </c:forEach>

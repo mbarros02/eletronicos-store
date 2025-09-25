@@ -30,7 +30,7 @@
         <div class="content">
             <div class="card">
                 <div class="img">
-                    <img src="./Img/samsung-transparante-smartphone.avif" alt="">
+                    <img src=".././assets/Img/samsung-transparante-smartphone.avif" alt="">
                 </div>
                 <div class="content-card">
                     <div class="title-card">
@@ -48,7 +48,7 @@
             </div>
             <div class="card">
                 <div class="img">
-                    <img src="./Img/samsung-transparante-smartphone.avif" alt="">
+                    <img src=".././assets/Img/samsung-transparante-smartphone.avif" alt="">
                 </div>
                 <div class="content-card">
                     <div class="title-card">
@@ -66,7 +66,7 @@
             </div>
             <div class="card">
                 <div class="img">
-                    <img src="./Img/samsung-transparante-smartphone.avif" alt="">
+                    <img src=".././assets/Img/samsung-transparante-smartphone.avif" alt="">
                 </div>
                 <div class="content-card">
                     <div class="title-card">
@@ -93,7 +93,7 @@
         <div class="content">
             <div class="card">
                 <div class="img">
-                    <img src="./Img/samsung-transparante-smartphone.avif" alt="">
+                    <img src=".././assets/Img/samsung-transparante-smartphone.avif" alt="">
                 </div>
                 <div class="content-card">
                     <div class="title-card">
@@ -112,7 +112,7 @@
             </div>
             <div class="card">
                 <div class="img">
-                    <img src="./Img/samsung-transparante-smartphone.avif" alt="">
+                    <img src=".././assets/Img/samsung-transparante-smartphone.avif" alt="">
                 </div>
                 <div class="content-card">
                     <div class="title-card">
@@ -131,7 +131,7 @@
             </div>
             <div class="card">
                 <div class="img">
-                    <img src="./Img/samsung-transparante-smartphone.avif" alt="">
+                    <img src=".././assets/Img/samsung-transparante-smartphone.avif" alt="">
                 </div>
                 <div class="content-card">
                     <div class="title-card">

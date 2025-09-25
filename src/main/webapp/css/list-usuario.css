@@ -189,3 +189,15 @@ form>button{
     text-decoration: none;
     margin-left: 9px;
 }
+.inativar{
+    color: white;
+    text-decoration: none;
+    background: #3b82f6;
+    border-radius: 5px;
+    padding: 7px 11px;
+}
+
+.content-action{
+    display: flex;
+    justify-content: space-around;
+}

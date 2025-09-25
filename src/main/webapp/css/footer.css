@@ -27,7 +27,7 @@ footer>div>.col1>.title{
 footer>div>.col1>.title>h1{
     font-family: inter;
     color: white;
-    font-size: 45px;
+    font-size: 34px;
 }
 footer>div>.col1>.text{
     width: 50%;
@@ -35,7 +35,7 @@ footer>div>.col1>.text{
 footer>div>.col1>.text>p{
     color: white;
     font-family: inter;
-    font-size: 20px;
+    font-size: 19px;
 }
 footer>div>.col2{
     display: flex;
@@ -53,7 +53,7 @@ footer>div>.col2>.link-footer{
 footer>div>.col2>.link-footer>a{
     color: white;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 20px;
     padding: 10px 0px;
     font-family: inter;
 }
@@ -62,8 +62,8 @@ footer>div>.col2>.link-footer>a:hover{
 }
 footer>div>.col2>.title>h1{
         font-family: inter;
-    color: white;
-    font-size: 45px;
+        color: white;
+        font-size: 34px;
 }
 footer>div>.col3{
     width: 625px;
@@ -76,22 +76,22 @@ footer>div>.col3>.title{
 }
 footer>div>.col3>.title>h1{
         font-family: inter;
-    color: white;
-    font-size: 45px;
+        color: white;
+        font-size: 34px;
 }
 
 footer>div>.col3>.contatos{}
 footer>div>.col3>.contatos>.email{}
 footer>div>.col3>.contatos>.email>p{
             font-family: inter;
-    color: white;
-    font-size: 25px;
+            color: white;
+            font-size: 19px;
 }
 footer>div>.col3>.contatos>.telefone{}
 footer>div>.col3>.contatos>.telefone>p{
             font-family: inter;
-    color: white;
-    font-size: 25px;
+            color: white;
+            font-size: 19px;
 }
 
 footer>.barra{

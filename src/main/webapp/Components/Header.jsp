@@ -40,7 +40,7 @@
         </div>
         <a href="" class="carrinho">
             <div class="img">
-                <img src=".././assets/img/Shopping Cart.png" alt="">
+                <img src=".././assets/Img/Shopping Cart.png" alt="">
             </div>
         </a>
     </header>
