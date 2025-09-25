@@ -43,7 +43,7 @@ public class UsuarioController extends HttpServlet {
             } else if ("trocarStatus".equals(action)) {
                 trocarStatus(req, resp);
             } else if ("incluir".equals(action)) {
-                req.getRequestDispatcher("cad-usuario.jsp").forward(req, resp);
+                req.getRequestDispatcher("Sistema/cad-usuario.jsp").forward(req, resp);
             } else if ("alterarForm".equals(action)) {
                 alterarForm(req, resp);
             }
@@ -161,7 +161,7 @@ public class UsuarioController extends HttpServlet {
 
         req.setAttribute("usuarios", usuarios);
         req.setAttribute("filtroNome", filtroNome);
-        req.getRequestDispatcher("painel-administrador.jsp").forward(req, resp);
+        req.getRequestDispatcher("Sistema/painel-administrador.jsp").forward(req, resp);
     }
 
     private void trocarStatus(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException {
@@ -184,6 +184,6 @@ public class UsuarioController extends HttpServlet {
         Usuario usuario = dao.buscarPorId(id);
 
         req.setAttribute("usuario", usuario);
-        req.getRequestDispatcher("alt-usuario.jsp").forward(req, resp);
+        req.getRequestDispatcher("Sistema/alt-usuario.jsp").forward(req, resp);
     }
 }

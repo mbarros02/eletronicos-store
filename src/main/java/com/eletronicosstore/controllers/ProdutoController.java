@@ -46,7 +46,7 @@ public class ProdutoController extends HttpServlet {
         if (action == null || action.equals("listar")) {
             listarProdutos(req, resp);
         } else if (action.equals("incluir")) {
-            req.getRequestDispatcher("cad-produto.jsp").forward(req, resp);
+            req.getRequestDispatcher("Sistema/cad-produto.jsp").forward(req, resp);
         } else if (action.equals("alterarForm")) {
             String idStr = req.getParameter("id");
             if (idStr != null) {
@@ -54,7 +54,7 @@ public class ProdutoController extends HttpServlet {
                 ProdutoDao produtoDao = new ProdutoDao();
                 Produto produto = produtoDao.buscarPorId(id);
                 req.setAttribute("produto", produto);
-                req.getRequestDispatcher("alt-produto.jsp").forward(req, resp);
+                req.getRequestDispatcher("Sistema/alt-produto.jsp").forward(req, resp);
             }
         } else if (action.equals("inativar")) {
             String idStr = req.getParameter("id");
@@ -85,7 +85,7 @@ public class ProdutoController extends HttpServlet {
                 ProdutoDao produtoDao = new ProdutoDao();
                 Produto produto = produtoDao.buscarPorId(id);
                 req.setAttribute("produto", produto);
-                req.getRequestDispatcher("visualizar-produto.jsp").forward(req, resp);
+                req.getRequestDispatcher("Sistema/visualizar-produto.jsp").forward(req, resp);
             }
         }
     }
@@ -147,7 +147,7 @@ public class ProdutoController extends HttpServlet {
                     imagens.add(imagem);
                 }
             }
-            resp.sendRedirect(req.getContextPath() + "/list-produto.jsp");
+            resp.sendRedirect(req.getContextPath() + "/Sistema/list-produto.jsp");
 
         } catch (IOException | NumberFormatException exception) {
             throw new ServletException(exception);
@@ -279,7 +279,7 @@ public class ProdutoController extends HttpServlet {
         req.setAttribute("totalProdutos", Integer.valueOf(totalProdutos));
         req.setAttribute("filtroNome", filtroNome);
         req.setAttribute("filtroId", filtroId);
-        req.getRequestDispatcher("list-produto.jsp").forward(req, resp);
+        req.getRequestDispatcher("Sistema/list-produto.jsp").forward(req, resp);
     }
 
     private boolean ChecarValorNulo(String... valores) {

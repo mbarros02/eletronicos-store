@@ -1,6 +1,83 @@
 *{
     margin: 0;
 }
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #555;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.actions .btn-icon {
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    margin: 0 5px;
+    padding: 5px;
+}
+
+.actions .btn-icon .material-icons {
+    font-size: 20px;
+}
+
+.actions .btn-icon:hover {
+    color: #007bff;
+}
+
+.actions .btn-icon-delete:hover {
+    color: #dc3545;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.pagination span {
+    font-size: 14px;
+    color: #555;
+}
+
+.pagination .btn-icon {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+.pagination .btn-icon:hover {
+    background-color: #e0e0e0;
+}
 
 section{
     display: flex;
