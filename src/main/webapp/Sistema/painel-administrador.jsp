@@ -17,7 +17,7 @@
 
 <body>
     <%@ include file="/Components/Header.jsp" %>
-    <section>
+ <section>
         <div class="navbar">
             <div>
                 <div>
@@ -33,11 +33,8 @@
             <div class="content-area">
                 <div class="content-header">
                     <h1>Usuarios</h1>
-                    <div style="display:flex; gap:10px; align-items:center;">
-                        
-                        <a href="usuario?action=incluir" class="btn btn-primary">Novo Usuário</a>
-                        
-                    </div>
+                    <a href="usuario?action=incluir" class="btn btn-primary">Novo Usuário
+                    </a>
                 </div>
                 <form method="get" action="usuario">
                     <input type="hidden" name="action" value="listar" />

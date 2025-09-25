@@ -17,7 +17,9 @@
             <div class="swiper-wrapper">
                 <c:forEach var="imagem" items="${produto.imagens}">
                     <div class="swiper-slide">
+                     <c:forEach var="imagem" items="${imagem}">
                         <img src="../${imagem.caminho}" alt="Imagem do produto" />
+                     </c:forEach>
                     </div>
                 </c:forEach>
             </div>

@@ -34,7 +34,7 @@
                 <div class="content-header">
                     <h1>Produtos</h1>
                     <c:if test="${sessionScope.usuarioAtual == null || sessionScope.usuarioAtual.idGrupo != 2}">
-                        <a href="produto?action=incluir" class="btn btn-primary" title="Cadastrar Produto">+</a>
+                        <a href="produto?action=incluir" class="btn btn-primary" title="Cadastrar Produto">Novo Produto</a>
                     </c:if>
                 </div>
                 <form  method="get" action="produto" onsubmit="return unificarFiltro()">
