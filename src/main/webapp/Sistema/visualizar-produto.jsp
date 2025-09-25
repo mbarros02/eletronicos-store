@@ -17,9 +17,7 @@
             <div class="swiper-wrapper">
                 <c:forEach var="imagem" items="${produto.imagens}">
                     <div class="swiper-slide">
-                     <c:forEach var="imagem" items="${imagem}">
                         <img src="../${imagem.caminho}" alt="Imagem do produto" />
-                     </c:forEach>
                     </div>
                 </c:forEach>
             </div>
@@ -46,9 +44,8 @@
         </div>
     </section>
    <%@ include file=".././Components/footer.jsp" %>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-    <script src=".././assets/Js/script.js"></script>
+    <script src="../assets/js/script.js"></script>
 </body>
 
 </html>

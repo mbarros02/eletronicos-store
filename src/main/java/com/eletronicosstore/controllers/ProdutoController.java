@@ -196,7 +196,6 @@ public class ProdutoController extends HttpServlet {
 
                 ImagemProdutoDao imagemDao = new ImagemProdutoDao();
                 
-                imagemDao.removerPorProdutoId(produto.getId());
                 Collection<Part> parts = req.getParts();
                 List<ImagemProduto> imagens = new ArrayList<>();
 

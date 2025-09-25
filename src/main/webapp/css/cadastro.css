@@ -19,7 +19,7 @@
         flex-direction: column;
         width: 55%;
         border-radius: 20px;
-        height: 100vh;
+        height: 100%;
 }
 #login>div>.title{
     display: flex;

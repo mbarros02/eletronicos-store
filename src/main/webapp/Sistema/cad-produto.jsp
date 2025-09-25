@@ -39,7 +39,7 @@
                                 <input type="number" name="preco" step="0.01" required>
                             </div>
                             <div>
-                                <label for="">Grupo</label>
+                                <label for="">Avaliação</label>
                                 <select name="avaliacao" required>
                                     <option value=""></option>
                                     <option value="0.5">0.5</option>

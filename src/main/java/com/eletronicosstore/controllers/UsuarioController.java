@@ -19,6 +19,12 @@ public class UsuarioController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
+        Usuario usuarioAtual = (session != null) ? (Usuario) session.getAttribute("usuarioAtual") : null;
+        if (usuarioAtual == null || usuarioAtual.getIdGrupo() != 1) {
+            resp.sendError(HttpServletResponse.SC_FORBIDDEN, "Acesso não autorizado");
+            return;
+        }
         String action = req.getParameter("action");
         try {
             if ("cadastro".equals(action)) {
@@ -33,18 +39,37 @@ public class UsuarioController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
+        Usuario usuarioAtual = (session != null) ? (Usuario) session.getAttribute("usuarioAtual") : null;
         String action = req.getParameter("action");
         if (action == null || action.isBlank()) {
             action = "listar";
         }
         try {
             if ("listar".equals(action)) {
+                // Somente administradores podem listar/gerenciar usuários
+                if (usuarioAtual == null || usuarioAtual.getIdGrupo() != 1) {
+                    resp.sendError(HttpServletResponse.SC_FORBIDDEN, "Acesso não autorizado");
+                    return;
+                }
                 listar(req, resp);
             } else if ("trocarStatus".equals(action)) {
+                if (usuarioAtual == null || usuarioAtual.getIdGrupo() != 1) {
+                    resp.sendError(HttpServletResponse.SC_FORBIDDEN, "Acesso não autorizado");
+                    return;
+                }
                 trocarStatus(req, resp);
             } else if ("incluir".equals(action)) {
+                if (usuarioAtual == null || usuarioAtual.getIdGrupo() != 1) {
+                    resp.sendError(HttpServletResponse.SC_FORBIDDEN, "Acesso não autorizado");
+                    return;
+                }
                 req.getRequestDispatcher("Sistema/cad-usuario.jsp").forward(req, resp);
             } else if ("alterarForm".equals(action)) {
+                if (usuarioAtual == null || usuarioAtual.getIdGrupo() != 1) {
+                    resp.sendError(HttpServletResponse.SC_FORBIDDEN, "Acesso não autorizado");
+                    return;
+                }
                 alterarForm(req, resp);
             }
         } catch (ClassNotFoundException ex) {

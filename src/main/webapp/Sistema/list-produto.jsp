@@ -20,10 +20,12 @@
     <section>
                 <div class="navbar">
                     <div>
-                        <div>
-                        <img class="img" src=".././assets/Img/icons8-user-48.png" alt="Alterar"/>
-                            <a href="usuario?action=listar">Usuario</a>
-                        </div>
+                        <c:if test="${sessionScope.usuarioAtual != null && sessionScope.usuarioAtual.idGrupo == 1}">
+                            <div>
+                            <img class="img" src=".././assets/Img/icons8-user-48.png" alt="Alterar"/>
+                                <a href="usuario?action=listar">Usuario</a>
+                            </div>
+                        </c:if>
                         <div>
                         <img class="img" src=".././assets/Img/icons8-product-30.png" alt="Alterar"/>
                             <a href="produto?action=listar">Produto</a>
