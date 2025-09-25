@@ -138,16 +138,14 @@ section{
 }
 .navbar{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 5%;
+    /* align-items: center; */
+    width: 9%;
+    height: 52vh;
 }
-.navbar>div{display: flex;flex-direction: column;justify-content: space-around;align-items: center;}
+.navbar>div{display: flex;flex-direction: column;align-items: center;}
 .navbar>div>div{
     display: flex;
-    align-items: start;
-    justify-content: start;
+    align-items: center;
     width: 100%;
     padding: 11px 0px;
 }
@@ -200,4 +198,9 @@ form>button{
 .content-action{
     display: flex;
     justify-content: space-around;
+}
+.img{
+    width: 30px;
+    height: auto;
+    margin-right: 5px;
 }

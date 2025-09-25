@@ -21,9 +21,11 @@
                 <div class="navbar">
                     <div>
                         <div>
+                        <img class="img" src=".././assets/Img/icons8-user-48.png" alt="Alterar"/>
                             <a href="usuario?action=listar">Usuario</a>
                         </div>
                         <div>
+                        <img class="img" src=".././assets/Img/icons8-product-30.png" alt="Alterar"/>
                             <a href="produto?action=listar">Produto</a>
                         </div>
                     </div>
