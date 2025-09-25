@@ -195,7 +195,7 @@ public class ProdutoController extends HttpServlet {
                 produtoDao.alterar(produto);
 
                 ImagemProdutoDao imagemDao = new ImagemProdutoDao();
-                // Remove imagens antigas antes de adicionar as novas
+                
                 imagemDao.removerPorProdutoId(produto.getId());
                 Collection<Part> parts = req.getParts();
                 List<ImagemProduto> imagens = new ArrayList<>();
