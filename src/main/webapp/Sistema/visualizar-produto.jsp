@@ -15,14 +15,11 @@
     <section>
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img
-                        src="closeup-tiro-de-uma-linda-borboleta-com-texturas-interessantes-em-uma-flor-de-petalas-de-laranja_181624-7640.jpg"
-                        alt=""></div>
-                <div class="swiper-slide">
-                <%--aqui é para fazer o forech--%>
-                <img src="closeup-tiro-de-uma-linda-borboleta-com-texturas-interessantes-em-uma-flor-de-petalas-de-laranja_181624-7640.jpg" alt="">
-                <%--aqui é para fazer o forech--%>
-                </div>
+                <c:forEach var="imagem" items="${produto.imagens}">
+                    <div class="swiper-slide">
+                        <img src="../${imagem.caminho}" alt="Imagem do produto" />
+                    </div>
+                </c:forEach>
             </div>
             <div class="swiper-pagination"></div>
         </div>

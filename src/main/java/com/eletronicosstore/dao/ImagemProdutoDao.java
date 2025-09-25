@@ -70,4 +70,39 @@ public class ImagemProdutoDao implements Base<ImagemProduto>{
     public List<ImagemProduto> listarTodos(String filtro) {
         return List.of();
     }
+
+    public List<ImagemProduto> listarPorProdutoId(int idProduto) {
+        List<ImagemProduto> imagens = new java.util.ArrayList<>();
+        String sql = "SELECT * FROM imagem_produto WHERE id_produto = ?";
+        try (Connection conn = new Conexao().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idProduto);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                ImagemProduto imagem = new ImagemProduto();
+                imagem.setId(rs.getInt("idimagem"));
+                imagem.setCaminho(rs.getString("caminho"));
+                imagem.setPrincipal(rs.getBoolean("principal"));
+                imagem.setIdProduto(rs.getInt("id_produto"));
+                imagens.add(imagem);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return imagens;
+    }
+
+    public void removerPorProdutoId(int idProduto) {
+        String sql = "DELETE FROM imagem_produto WHERE id_produto = ?";
+        try (Connection conn = new Conexao().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idProduto);
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

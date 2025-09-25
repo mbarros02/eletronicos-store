@@ -84,6 +84,11 @@ public class ProdutoController extends HttpServlet {
                 int id = Integer.parseInt(idStr);
                 ProdutoDao produtoDao = new ProdutoDao();
                 Produto produto = produtoDao.buscarPorId(id);
+                if (produto != null) {
+                    ImagemProdutoDao imagemDao = new ImagemProdutoDao();
+                    List<ImagemProduto> imagens = imagemDao.listarPorProdutoId(id);
+                    produto.setImagens(imagens);
+                }
                 req.setAttribute("produto", produto);
                 req.getRequestDispatcher("Sistema/visualizar-produto.jsp").forward(req, resp);
             }
@@ -147,7 +152,7 @@ public class ProdutoController extends HttpServlet {
                     imagens.add(imagem);
                 }
             }
-            resp.sendRedirect(req.getContextPath() + "/Sistema/list-produto.jsp");
+            resp.sendRedirect(req.getContextPath() + "/produto?action=listar");
 
         } catch (IOException | NumberFormatException exception) {
             throw new ServletException(exception);
@@ -190,6 +195,8 @@ public class ProdutoController extends HttpServlet {
                 produtoDao.alterar(produto);
 
                 ImagemProdutoDao imagemDao = new ImagemProdutoDao();
+                // Remove imagens antigas antes de adicionar as novas
+                imagemDao.removerPorProdutoId(produto.getId());
                 Collection<Part> parts = req.getParts();
                 List<ImagemProduto> imagens = new ArrayList<>();
 
@@ -210,7 +217,7 @@ public class ProdutoController extends HttpServlet {
                         imagem.setPrincipal(nomeOriginal.equals(imagemPrincipal));
                         imagem.setIdProduto(produto.getId());
 
-                        imagemDao.alterar(imagem);
+                        imagemDao.cadastrar(imagem);
                         imagens.add(imagem);
                     }
                 }
