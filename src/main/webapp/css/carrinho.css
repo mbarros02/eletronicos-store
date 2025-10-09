@@ -117,3 +117,125 @@ section .resumo{
     font-family: inter;
 }
 .cardbutton>div>div>a:hover {}
+
+/* Estilos para carrinho vazio */
+.carrinho-vazio {
+    text-align: center;
+    padding: 50px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.carrinho-vazio h2 {
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+.carrinho-vazio p {
+    color: #6c757d;
+    font-size: 16px;
+}
+
+/* Controles de quantidade */
+.quantidade-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-quantidade {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn-quantidade:hover {
+    background-color: #2563eb;
+}
+
+.quantidade {
+    font-size: 18px;
+    font-weight: bold;
+    min-width: 30px;
+    text-align: center;
+}
+
+.btn-remover {
+    background-color: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-remover:hover {
+    background-color: #b91c1c;
+}
+
+/* Seção de frete */
+.frete-section {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.frete-section h3 {
+    margin-bottom: 15px;
+    color: #374151;
+    font-size: 18px;
+}
+
+.frete-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.frete-options label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.frete-options label:hover {
+    background-color: #e5e7eb;
+}
+
+.frete-options input[type="radio"] {
+    margin: 0;
+}
+
+.frete-valor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 10px;
+}
+
+.frete-valor .description {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.frete-valor .valor {
+    font-size: 16px;
+    font-weight: bold;
+    color: #3b82f6;
+}

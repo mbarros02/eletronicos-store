@@ -41,6 +41,7 @@
             </div>
             <div class="buton">
                 <form action="${pageContext.request.contextPath}/carrinho" method="post">
+                    <input type="hidden" name="action" value="adicionar" />
                     <input type="hidden" name="idProduto" value="${produto.id}" />
                     <button type="submit">Comprar</button>
                 </form>

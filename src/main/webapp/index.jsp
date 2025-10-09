@@ -67,6 +67,7 @@
                                 <button>Ver detalhes</button>
                             </a>
                             <form action="${pageContext.request.contextPath}/carrinho" method="post" style="display:inline;">
+                                <input type="hidden" name="action" value="adicionar" />
                                 <input type="hidden" name="idProduto" value="${produto.id}" />
                                 <button type="submit">Adicionar ao Carrinho</button>
                             </form>
