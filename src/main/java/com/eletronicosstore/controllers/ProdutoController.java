@@ -43,41 +43,43 @@ public class ProdutoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+
         if (action == null || action.equals("listar")) {
-            listarProdutos(req, resp);
+            ProdutoDao produtoDao = new ProdutoDao();
+            ImagemProdutoDao imagemDao = new ImagemProdutoDao();
+
+            List<Produto> produtos = produtoDao.listarTodos("", 0, 10);
+            for (Produto p : produtos) {
+                List<ImagemProduto> imagens = imagemDao.listarPorProdutoId(p.getId());
+                p.setImagens(imagens);
+            }
+
+            req.setAttribute("produtos", produtos);
+            req.getRequestDispatcher("index.jsp").forward(req, resp);
+
         } else if (action.equals("incluir")) {
             req.getRequestDispatcher("Sistema/cad-produto.jsp").forward(req, resp);
+
         } else if (action.equals("alterarForm")) {
             String idStr = req.getParameter("id");
             if (idStr != null) {
                 int id = Integer.parseInt(idStr);
-                ProdutoDao produtoDao = new ProdutoDao();
-                Produto produto = produtoDao.buscarPorId(id);
+                Produto produto = new ProdutoDao().buscarPorId(id);
                 req.setAttribute("produto", produto);
                 req.getRequestDispatcher("Sistema/alt-produto.jsp").forward(req, resp);
             }
-        } else if (action.equals("inativar")) {
+
+        } else if (action.equals("inativar") || action.equals("reativar")) {
             String idStr = req.getParameter("id");
             if (idStr != null) {
                 int id = Integer.parseInt(idStr);
                 Produto produto = new Produto();
                 produto.setId(id);
-                produto.setStatus(0);
-                ProdutoDao produtoDao = new ProdutoDao();
-                produtoDao.alterarStatus(produto);
+                produto.setStatus(action.equals("reativar") ? 1 : 0);
+                new ProdutoDao().alterarStatus(produto);
                 resp.sendRedirect("produto?action=listar");
             }
-        } else if (action.equals("reativar")) {
-            String idStr = req.getParameter("id");
-            if (idStr != null) {
-                int id = Integer.parseInt(idStr);
-                Produto produto = new Produto();
-                produto.setId(id);
-                produto.setStatus(1);
-                ProdutoDao produtoDao = new ProdutoDao();
-                produtoDao.alterarStatus(produto);
-                resp.sendRedirect("produto?action=listar");
-            }
+
         } else if (action.equals("visualizar")) {
             String idStr = req.getParameter("id");
             if (idStr != null) {
