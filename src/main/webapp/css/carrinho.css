@@ -1,0 +1,119 @@
+section{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 30px;
+}
+section .card-content {
+    width: 70%;
+    height: 100%;
+    flex-direction: column;
+    display: flex;
+}
+.card-content .card-produto {
+    display: flex;
+    box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
+    padding: 23px;
+}
+.card-produto .img{
+    width: 30%;
+    height: auto;
+}
+.card-produto .img img {
+    width: 100%;
+}
+.card-produto .titulo-produto{
+    width: 70%;
+}
+.card-produto .titulo-produto>div{
+    margin: 10px;
+}
+.card-produto .titulo-produto>div>h1 {
+    font-size: 20px;
+    font-family: inter;
+}
+.card-produto .preco{
+    width: 20%;
+}
+.card-produto .preco>div{}
+.card-produto .preco>div>div{
+    margin-bottom: 10px;
+    font-family: inter;
+}
+.card-produto .preco>div>div>p {}
+.card-produto .preco>div>div>h2 {
+    color: #3b82f6;
+    font-family: inter;
+}
+section .resumo{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+}
+.resumo .card1 {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
+    padding: 50px;
+}
+.resumo .card1 .valor-produto{
+    display: flex;
+    padding-bottom: 15px;
+}
+.valor-produto .description {margin-right: 80px;font-size: 18px;font-family: inter;}
+.valor-produto .valor {
+    font-family: inter;
+    color: #3b82f6;
+}
+.total-produto{
+    display: flex;
+    padding-top: 15px;
+}
+.total-produto .description {
+    margin-right: 107px;
+    font-size: 18px;
+    font-family: inter;
+}
+.total-produto .total {
+    font-family: inter;
+    color: #3b82f6;
+}
+.cardbutton{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
+    padding: 35px;
+    margin-top: 40px;
+}
+.cardbutton>div{
+    display: flex;
+    flex-direction: column;
+}
+.cardbutton>div>div{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.cardbutton>div>div>a {
+    color: white;
+    background-color: #3b82f6;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: inter;
+}
+.cardbutton>div>div>a:hover {}

@@ -38,7 +38,7 @@
                 <a href="login.jsp" class="Login">Login</a>
             </div>
         </div>
-        <a href="" class="carrinho">
+        <a href="Carrinho.jsp" class="carrinho">
             <div class="img">
                 <img src=".././assets/Img/Shopping Cart.png" alt="">
             </div>
