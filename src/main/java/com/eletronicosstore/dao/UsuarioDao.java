@@ -165,7 +165,6 @@ public class UsuarioDao implements Base<Usuario> {
                         rs.getString("CPF"),
                         rs.getString("EMAIL"),
                         rs.getString("SENHA"),
-                        rs.getString("STATUS"),
                         rs.getInt("ID_GRUPO_USUARIO")
                 );
                 usuario.setStatus(rs.getInt("STATUS") == 1);
