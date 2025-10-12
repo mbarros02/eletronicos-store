@@ -21,6 +21,16 @@
             <div class="title">
                 <h1>TechStore</h1>
             </div>
+            
+            <% 
+                String erro = (String) request.getAttribute("erro");
+                if (erro != null && !erro.isEmpty()) {
+            %>
+                <div style="background: #ffebee; color: #c62828; padding: 10px; border-radius: 5px; margin-bottom: 15px; border-left: 4px solid #c62828;">
+                    <strong>⚠️ Erro:</strong> <%= erro %>
+                </div>
+            <% } %>
+            
             <form action="login" method="post">
             <input type="hidden" name="action" value="login">
                 <div class="login">

@@ -2,7 +2,6 @@ package com.eletronicosstore.controllers;
 
 import com.eletronicosstore.dao.UsuarioDao;
 import com.eletronicosstore.models.Usuario;
-import com.eletronicosstore.models.UsuarioAtual;
 import com.eletronicosstore.utils.ValidarSenha;
 
 import javax.servlet.ServletException;
@@ -20,11 +19,10 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         String senha = req.getParameter("senha");
-        String status = req.getParameter("status");
 
         if (this.checarValorNulo(email, senha)) {
             req.setAttribute("erro", "Email e senha são obrigatórios!");
-            req.getRequestDispatcher("erro.jsp").forward(req, resp);
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
             return;
         }
 
@@ -34,7 +32,7 @@ public class LoginController extends HttpServlet {
         if (usuario != null && ValidarSenha.verificarSenha(senha,usuario.getSenha1())){
             if (!usuario.isStatus()){
                 req.setAttribute("erro", "Usuário inativo!");
-                req.getRequestDispatcher("erro.jsp").forward(req, resp);
+                req.getRequestDispatcher("login.jsp").forward(req, resp);
                 return;
         }
 
@@ -49,11 +47,11 @@ public class LoginController extends HttpServlet {
             } else if (idGrupo == 2) {
                 resp.sendRedirect("produto?action=listar");
             } else {
-                resp.sendRedirect("erro.jsp");
+                resp.sendRedirect("login.jsp");
             }
         } else {
             req.setAttribute("erro", "Email ou senha inválidos!");
-            req.getRequestDispatcher("erro.jsp").forward(req, resp);
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
     }
 

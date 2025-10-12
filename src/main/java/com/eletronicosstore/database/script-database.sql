@@ -39,3 +39,20 @@ CREATE TABLE imagem_produto (
     ID_PRODUTO INT,
     FOREIGN KEY (ID_PRODUTO) REFERENCES produtos(IDPRODUTO)
 );
+
+-- Inserção de dados de exemplo
+INSERT INTO grupo_usuario (NOME) VALUES ('ADMINISTRADOR');
+INSERT INTO grupo_usuario (NOME) VALUES ('ESTOQUISTA');
+
+-- Inserção de usuário admin de exemplo (senha: 1234)
+INSERT INTO usuarios (NOME, CPF, EMAIL, SENHA, STATUS, ID_GRUPO_USUARIO) VALUES 
+('Administrador Global', '711.572.280-38', 'admin@global.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/4.8K.2K', 1, 1);
+
+-- ============================================
+-- INSTRUÇÕES DE USO:
+-- ============================================
+-- 1. Execute este script no MySQL
+-- 2. Use as credenciais: admin@global.com / 1234
+-- 3. Este usuário tem acesso completo ao sistema (grupo ADMINISTRADOR)
+-- 4. Todos os colegas podem usar essas mesmas credenciais
+-- 5. Para segurança, considere alterar a senha periodicamente
