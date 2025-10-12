@@ -45,17 +45,10 @@ public class ProdutoController extends HttpServlet {
         String action = req.getParameter("action");
 
         if (action == null || action.equals("listar")) {
-            ProdutoDao produtoDao = new ProdutoDao();
-            ImagemProdutoDao imagemDao = new ImagemProdutoDao();
+            this.listarProdutos(req, resp);
 
-            List<Produto> produtos = produtoDao.listarTodos("", 0, 10);
-            for (Produto p : produtos) {
-                List<ImagemProduto> imagens = imagemDao.listarPorProdutoId(p.getId());
-                p.setImagens(imagens);
-            }
-
-            req.setAttribute("produtos", produtos);
-            req.getRequestDispatcher("index.jsp").forward(req, resp);
+        } else if (action.equals("listarPublico")) {
+            this.listarProdutosPublico(req, resp);
 
         } else if (action.equals("incluir")) {
             req.getRequestDispatcher("Sistema/cad-produto.jsp").forward(req, resp);
@@ -288,6 +281,13 @@ public class ProdutoController extends HttpServlet {
         req.setAttribute("filtroNome", filtroNome);
         req.setAttribute("filtroId", filtroId);
         req.getRequestDispatcher("Sistema/list-produto.jsp").forward(req, resp);
+    }
+
+    private void listarProdutosPublico(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ProdutoDao produtoDao = new ProdutoDao();
+        List<Produto> produtos = produtoDao.listarAtivos();
+        req.setAttribute("produtos", produtos);
+        req.getRequestDispatcher("list-produto-publico.jsp").forward(req, resp);
     }
 
     private boolean ChecarValorNulo(String... valores) {

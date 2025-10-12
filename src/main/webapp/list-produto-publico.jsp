@@ -10,42 +10,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <title>Eletronic Store</title>
+    <title>Produtos - Eletronic Store</title>
 </head>
 
 <body>
     <%@ include file="Components/Header.jsp" %>
 
-    <section id="Categoria">
-        <div class="col">
-            <div class="title">
-                <h1>Explore nossas categorias</h1>
-            </div>
-        </div>
-        <div class="content">
-            <div class="card">
-                <div class="img">
-                    <img src="${pageContext.request.contextPath}/assets/Img/smartphones.jpg" alt="Smartphones">
-                </div>
-                <div class="content-card">
-                    <div class="title-card">
-                        <h3>Smartphones</h3>
-                    </div>
-                    <div class="description">
-                        <p>Dispositivos modernos e potentes</p>
-                        <div class="link-categoria">
-                            <a href="${pageContext.request.contextPath}/produto?action=listarPublico">Ver produtos</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="Produtos">
         <div class="col">
             <div class="title">
-                <h1>Produtos em Destaque</h1>
+                <h1>Produtos Disponíveis</h1>
             </div>
         </div>
         <div class="content">
@@ -75,19 +49,6 @@
                     </div>
                 </div>
             </c:forEach>
-        </div>
-    </section>
-
-    <section id="Noticias">
-        <div class="title">
-            <h1>Receba as Últimas Novidades e Ofertas!</h1>
-        </div>
-        <div class="description">
-            <h2>Inscreva-se em nossa newsletter para descontos exclusivos e lançamentos.</h2>
-        </div>
-        <div class="enviar">
-            <input type="text" placeholder="Seu e-mail">
-            <button>Inscrever</button>
         </div>
     </section>
 

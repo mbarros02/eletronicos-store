@@ -1,8 +1,9 @@
 package com.eletronicosstore.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Produto {
+public class Produto implements Serializable {
     private int id;
     private String nome;
     private double avaliacao;

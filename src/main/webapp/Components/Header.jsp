@@ -26,7 +26,7 @@
                 <a href="\" class="Inicio">Inicio</a>
             </div>
             <div>
-                <a href="\" class="Produtos">Produtos</a>
+                <a href="${pageContext.request.contextPath}/produto?action=listarPublico" class="Produtos">Produtos</a>
             </div>
             <div>
                 <a href="\" class="Categoria">Categoria</a>

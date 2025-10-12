@@ -257,5 +257,30 @@ public class ProdutoDao implements Base<Produto>{
         }
         return produtos;
     }
+
+    public List<Produto> listarAtivos() {
+        List<Produto> produtos = new java.util.ArrayList<>();
+        String sql = "SELECT * FROM produtos WHERE status = 1 ORDER BY idproduto DESC";
+        try (Connection conn = new Conexao().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Produto produto = new Produto();
+                produto.setId(rs.getInt("idproduto"));
+                produto.setNome(rs.getString("nome"));
+                produto.setAvaliacao(rs.getDouble("avaliacao"));
+                produto.setDescricao(rs.getString("descricao"));
+                produto.setPreco(rs.getDouble("preco"));
+                produto.setQtdEstoque(rs.getInt("qtd_estoque"));
+                produto.setStatus(rs.getInt("status"));
+                produtos.add(produto);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return produtos;
+    }
 }
 
