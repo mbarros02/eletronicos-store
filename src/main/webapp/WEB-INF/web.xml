@@ -4,5 +4,4 @@
 
 <web-app>
     <display-name>Archetype Created Web Application</display-name>
-    <!-- Removido servlet incorreto - Conexao não é um Servlet -->
 </web-app>
