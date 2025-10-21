@@ -31,7 +31,7 @@ public class UsuarioDao implements Base<Usuario> {
             stmt.close();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erro ao cadastrar usuário!");
         }
         return null;
     }

@@ -26,23 +26,23 @@ public class ClienteController extends HttpServlet {
         } catch (IOException ex) {
             throw new ServletException(ex);
         }
-        
-    }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
-
     private void cadastrar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String nome = request.getParameter("nome");
         String cpf = request.getParameter("cpf");
         String sexo = request.getParameter("sexo");
-        String dataNasc = request.getParameter("dataNascimento");
+        String dataNasc = request.getParameter("dataNasc");
         String email = request.getParameter("email");
         String senha1 = request.getParameter("senha1");
         String senha2 = request.getParameter("senha2");
 
         LocalDate dataNascimento = LocalDate.parse(dataNasc);
+        System.out.println("Data recebida: " + dataNascimento);
+        if(dataNascimento == null) {
+            throw new IllegalArgumentException("Campo de data vazio.");
+        }
 
         try {
             if(ChecarNulo.checarValorNulo(nome, cpf, email, senha1)) {
@@ -50,9 +50,8 @@ public class ClienteController extends HttpServlet {
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
             if(!ValidarCpf.valido(cpf)) {
-                request.setAttribute("Erro", "CPF inválido!");
-                request.getRequestDispatcher("erro.jsp").forward(request, response);
-                return;
+                request.setAttribute("CPF Inválido!", "Erro!");
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
             if(!senha1.equals(senha2)) {
                 throw new IllegalArgumentException("As senhas são diferentes!!");
@@ -70,7 +69,7 @@ public class ClienteController extends HttpServlet {
             ClienteDao dao = new ClienteDao();
             dao.cadastrar(cliente);
 
-            response.sendRedirect("cliente?id=" + cliente.getId());
+            response.sendRedirect("index.jsp");
 
         } catch (IOException e) {
             throw new ServletException(e);
