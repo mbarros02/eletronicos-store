@@ -51,9 +51,6 @@ public class UsuarioController extends HttpServlet {
         if (action == null || action.isBlank()) {
             action = "listar";
         }
-        if ("login".equals(action)) {
-            req.getRequestDispatcher("/WEB-INF/views/usuario/login.jsp").forward(req, resp);
-        }
         try {
             if ("listar".equals(action)) {
                 if (usuarioAtual == null || usuarioAtual.getIdGrupo() != 1) {
