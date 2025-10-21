@@ -15,8 +15,7 @@ public class EnderecoCliente {
     private String tipoEndereco;
     private int idCliente;
 
-    public EnderecoCliente(String cep, String logradouro, String complemento, String bairro,
-                           String localidade, String uf, String regiao, String ibge, String gia, String ddd, String siafi, String tipoEndereco, int idCliente) {
+    public EnderecoCliente() {
         this.cep = cep;
         this.logradouro = logradouro;
         this.complemento = complemento;

@@ -20,38 +20,38 @@
             <div class="title">
                 <h1>TechStore</h1>
             </div>
-            <form action="cliente" method="post">
+            <form action="endereco" method="post">
                 <input type="hidden" name="action" value="cadastro">
                 <div class="login">
-                    <label for="">Nome</label>
-                    <input type="text" name="nome" required>
+                    <label for="">CEP</label>
+                    <input type="text" name="cep" required>
                 </div>
                 <div class="login">
-                    <label for="">CPF</label>
-                    <input type="text" name="cpf" required>
+                    <label for="">Logradouro</label>
+                    <input type="text" name="logradouro" required>
                 </div>
-                <div class="sexo">
-                    <label for="">Sexo</label>
-                    <select name="sexo">
-                        <option value="Masculino">Masculino</option>
-                        <option value="Feminino">Feminino</option>
+                <div class="complemento">
+                    <label>Complemento</label>
+                    <input type="text" name="complemento" required>
+                </div>
+                <div class="login">
+                    <label for="">Bairro</label>
+                    <input type="text" name="bairro" required>
+                </div>
+                <div class="login">
+                    <label for="">Localidade</label>
+                    <input type="text" name="localidade" required>
+                </div>
+                <div class="login">
+                    <label for="">Id Cliente</label>
+                    <input type="number" name="id_cliente" required>
+                </div>
+                <div class="tipo">
+                    <label for="">Tipo Endereço</label>
+                    <select name="tipo_endereco">
+                        <option value="F">Faturamento</option>
+                        <option value="E">Entrega</option>
                     </select>
-                </div>
-                <div class="dataNascimento">
-                    <label>Data de Nascimento:</label>
-                    <input type="date" name="dataNasc" required>
-                </div>
-                <div class="login">
-                    <label for="">E-mail</label>
-                    <input type="email" name="email" required>
-                </div>
-                <div class="login">
-                    <label for="">Senha</label>
-                    <input type="password" name="senha1" required>
-                </div>
-                <div class="login">
-                    <label for="">Confimar Senha</label>
-                    <input type="password" name="senha2" required>
                 </div>
                 <div class="margem"></div>
                 <div class="footer-card">

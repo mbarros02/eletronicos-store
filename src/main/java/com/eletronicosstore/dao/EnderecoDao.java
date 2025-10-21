@@ -1,5 +1,6 @@
 package com.eletronicosstore.dao;
 
+import com.eletronicosstore.dto.EnderecoDto;
 import com.eletronicosstore.models.EnderecoCliente;
 import com.eletronicosstore.util.Conexao;
 
@@ -14,7 +15,7 @@ public class EnderecoDao implements Base<EnderecoCliente>{
     @Override
     public EnderecoCliente cadastrar(EnderecoCliente endereco) {
 
-        String sql = "INSERT INTO enderecos_clientes (CEP, LOGRADOURO, COMPLEMENTO, BAIRRO, LOCALIDADE, UF, REGIAO, TIPO_ENDERECO, ID_CLIENTE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO enderecos_clientes (CEP, LOGRADOURO, COMPLEMENTO, BAIRRO, LOCALIDADE, UF, ID_CLIENTE, TIPO_ENDERECO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try(Connection conn = new Conexao().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -25,16 +26,15 @@ public class EnderecoDao implements Base<EnderecoCliente>{
             stmt.setString(4, endereco.getBairro());
             stmt.setString(5, endereco.getLocalidade());
             stmt.setString(6, endereco.getUf());
-            stmt.setString(7, endereco.getRegiao());
+            stmt.setInt(7, endereco.getIdCliente());
             stmt.setString(8, endereco.getTipoEndereco());
-            stmt.setInt(9, endereco.getIdCliente());
 
-            stmt.executeUpdate();
+            stmt.execute();
             System.out.println("Cadastro de endereço realizado com sucesso!");
             stmt.close();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao cadastrar Endereco de um cliente!");
+            throw new RuntimeException("Erro ao cadastrar um endereço!");
         }
         return null;
     }

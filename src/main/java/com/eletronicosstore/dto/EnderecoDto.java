@@ -11,8 +11,13 @@ public class EnderecoDto {
     private String gia;
     private String ddd;
     private String siafi;
+    private String tipoEndereco;
+    private int idCliente;
 
-    // Getters e Setters
+
+    public EnderecoDto() {
+    }
+
     public String getCep() { return cep; }
     public void setCep(String cep) { this.cep = cep; }
 
@@ -42,4 +47,20 @@ public class EnderecoDto {
 
     public String getSiafi() { return siafi; }
     public void setSiafi(String siafi) { this.siafi = siafi; }
+
+    public String getTipoEndereco() {
+        return tipoEndereco;
+    }
+
+    public void setTipoEndereco(String tipoEndereco) {
+        this.tipoEndereco = tipoEndereco;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
 }
