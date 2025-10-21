@@ -1,7 +1,7 @@
 package com.eletronicosstore.dao;
 
-import com.eletronicosstore.database.Conexao;
-import com.eletronicosstore.models.ImagemProduto;
+import com.eletronicosstore.model.ImagemProduto;
+import com.eletronicosstore.util.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -69,6 +69,11 @@ public class ImagemProdutoDao implements Base<ImagemProduto>{
     @Override
     public List<ImagemProduto> listarTodos(String filtro) {
         return List.of();
+    }
+
+    @Override
+    public ImagemProduto alterarStatus(ImagemProduto input) {
+        return null;
     }
 
     public List<ImagemProduto> listarPorProdutoId(int idProduto) {

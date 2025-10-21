@@ -1,12 +1,14 @@
 package com.eletronicosstore.dao;
 
-import com.eletronicosstore.database.Conexao;
-import com.eletronicosstore.models.Produto;
+import com.eletronicosstore.model.ImagemProduto;
+import com.eletronicosstore.model.Produto;
+import com.eletronicosstore.util.Conexao;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ProdutoDao implements Base<Produto>{
+public class ProdutoDao implements Base<Produto> {
 
     @Override
     public Produto cadastrar(Produto input) {
@@ -42,7 +44,6 @@ public class ProdutoDao implements Base<Produto>{
 
     @Override
     public Produto alterar(Produto input) {
-
         String sql = "UPDATE produtos SET nome=?, avaliacao=?, descricao=?, preco=?, qtd_estoque=? WHERE idproduto=?;";
 
         try (Connection conn = new Conexao().getConnection()) {
@@ -66,20 +67,7 @@ public class ProdutoDao implements Base<Produto>{
         return input;
     }
 
-    public void atualizarStatus(int id, boolean ativo) {
-        String sql = "UPDATE produtos SET STATUS=? WHERE idproduto=?";
-        try (Connection conn = new Conexao().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, ativo ? 1 : 0);
-            stmt.setInt(2, id);
-            stmt.executeUpdate();
-            stmt.close();
-        } catch (SQLException e) {
-            
-            System.out.println("Aviso: Não foi possível atualizar status (coluna pode não existir): " + e.getMessage());
-        }
-    }
-
+    @Override
     public Produto alterarStatus(Produto input) {
         String sql = "UPDATE produtos SET STATUS=? WHERE idproduto=?;";
         try (Connection conn = new Conexao().getConnection()) {
@@ -89,7 +77,6 @@ public class ProdutoDao implements Base<Produto>{
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
-            // Ignora se coluna status não existir; produto permanece ativo por padrão
             System.out.println("Aviso: Não foi possível alterar status (coluna pode não existir): " + e.getMessage());
         }
         return input;
@@ -102,15 +89,18 @@ public class ProdutoDao implements Base<Produto>{
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
-                if (rs.next()) {
-                    Produto produto = new Produto();
+            if (rs.next()) {
+                Produto produto = new Produto();
                 produto.setId(rs.getInt("idproduto"));
                 produto.setNome(rs.getString("nome"));
                 produto.setAvaliacao(rs.getDouble("avaliacao"));
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setPreco(rs.getDouble("preco"));
                 produto.setQtdEstoque(rs.getInt("qtd_estoque"));
-                try { produto.setStatus(rs.getInt("STATUS")); } catch(Exception ignored) {}
+                try {
+                    produto.setStatus(rs.getInt("STATUS"));
+                } catch (Exception ignored) {
+                }
                 return produto;
             }
             rs.close();
@@ -127,11 +117,14 @@ public class ProdutoDao implements Base<Produto>{
     }
 
     public List<Produto> listarTodos(String filtro, int offset, int limit) {
-        List<Produto> produtos = new java.util.ArrayList<>();
+        List<Produto> produtos = new ArrayList<>();
         boolean hasFilter = filtro != null && !filtro.isBlank();
         Integer filtroId = null;
         if (hasFilter) {
-            try { filtroId = Integer.valueOf(filtro.trim()); } catch (Exception ignored) {}
+            try {
+                filtroId = Integer.valueOf(filtro.trim());
+            } catch (Exception ignored) {
+            }
         }
         StringBuilder sql = new StringBuilder("SELECT * FROM produtos");
         if (hasFilter) {
@@ -163,7 +156,11 @@ public class ProdutoDao implements Base<Produto>{
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setPreco(rs.getDouble("preco"));
                 produto.setQtdEstoque(rs.getInt("qtd_estoque"));
-                try { produto.setStatus(rs.getInt("STATUS")); } catch(Exception ignored) { produto.setStatus(1); }
+                try {
+                    produto.setStatus(rs.getInt("STATUS"));
+                } catch (Exception ignored) {
+                    produto.setStatus(1);
+                }
                 produtos.add(produto);
             }
             rs.close();
@@ -178,7 +175,10 @@ public class ProdutoDao implements Base<Produto>{
         boolean hasFilter = filtro != null && !filtro.isBlank();
         Integer filtroId = null;
         if (hasFilter) {
-            try { filtroId = Integer.valueOf(filtro.trim()); } catch (Exception ignored) {}
+            try {
+                filtroId = Integer.valueOf(filtro.trim());
+            } catch (Exception ignored) {
+            }
         }
         StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM produtos");
         if (hasFilter) {
@@ -210,18 +210,6 @@ public class ProdutoDao implements Base<Produto>{
         return 0;
     }
 
-    public void ativarTodos() {
-        String sql = "UPDATE produtos SET STATUS=1";
-        try (Connection conn = new Conexao().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.executeUpdate();
-            stmt.close();
-        } catch (SQLException e) {
-            // Ignora se coluna status não existir; produtos permanecem ativos por padrão
-            System.out.println("Aviso: Não foi possível ativar todos (coluna pode não existir): " + e.getMessage());
-        }
-    }
-
     public void atualizarEstoque(int id, int estoque) {
         String sql = "UPDATE produtos SET qtd_estoque=? WHERE idproduto=?;";
         try (Connection conn = new Conexao().getConnection()) {
@@ -236,7 +224,7 @@ public class ProdutoDao implements Base<Produto>{
     }
 
     public List<Produto> listarPorId(int id) {
-        List<Produto> produtos = new java.util.ArrayList<>();
+        List<Produto> produtos = new ArrayList<>();
         String sql = "SELECT * FROM produtos WHERE idproduto = ?";
         try (Connection conn = new Conexao().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -250,7 +238,11 @@ public class ProdutoDao implements Base<Produto>{
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setPreco(rs.getDouble("preco"));
                 produto.setQtdEstoque(rs.getInt("qtd_estoque"));
-                try { produto.setStatus(rs.getInt("STATUS")); } catch(Exception ignored) { produto.setStatus(1); }
+                try {
+                    produto.setStatus(rs.getInt("STATUS"));
+                } catch (Exception ignored) {
+                    produto.setStatus(1);
+                }
                 produtos.add(produto);
             }
             rs.close();
@@ -261,49 +253,38 @@ public class ProdutoDao implements Base<Produto>{
         return produtos;
     }
 
+
     public List<Produto> listarAtivos() {
-        List<Produto> produtos = new java.util.ArrayList<>();
-        // Primeiro tenta com STATUS, se falhar, lista todos os produtos
-        String sql = "SELECT * FROM produtos WHERE STATUS = 1 ORDER BY idproduto DESC";
+        List<Produto> produtos = new ArrayList<>();
+        String sql = "SELECT * FROM produtos p INNER JOIN imagem_produto i ON p.IDPRODUTO = i.ID_PRODUTO  WHERE STATUS = 1 AND i.PRINCIPAL = 1 ORDER BY idproduto DESC";
+
         try (Connection conn = new Conexao().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Produto produto = new Produto();
-                produto.setId(rs.getInt("idproduto"));
-                produto.setNome(rs.getString("nome"));
-                produto.setAvaliacao(rs.getDouble("avaliacao"));
-                produto.setDescricao(rs.getString("descricao"));
-                produto.setPreco(rs.getDouble("preco"));
-                produto.setQtdEstoque(rs.getInt("qtd_estoque"));
-                try { produto.setStatus(rs.getInt("STATUS")); } catch(Exception ignored) { produto.setStatus(1); }
+                produto.setId(rs.getInt("IDPRODUTO"));
+                produto.setNome(rs.getString("NOME"));
+                produto.setAvaliacao(rs.getDouble("AVALIACAO"));
+                produto.setDescricao(rs.getString("DESCRICAO"));
+                produto.setPreco(rs.getDouble("PRECO"));
+                produto.setQtdEstoque(rs.getInt("QTD_ESTOQUE"));
+                produto.setStatus(rs.getInt("STATUS"));
+
+                ImagemProduto imagem = new ImagemProduto();
+                imagem.setId(rs.getInt("idimagem"));
+                imagem.setCaminho(rs.getString("caminho"));
+                imagem.setPrincipal(rs.getBoolean("principal"));
+                imagem.setIdProduto(rs.getInt("id_produto"));
+
+                produto.setImagens(List.of(imagem));
+                System.out.println(produto);
                 produtos.add(produto);
             }
             rs.close();
             stmt.close();
         } catch (SQLException e) {
-            // Se falhar por causa da coluna STATUS, lista todos os produtos
-            System.out.println("Aviso: Coluna STATUS não encontrada, listando todos os produtos: " + e.getMessage());
-            try (Connection conn = new Conexao().getConnection()) {
-                String sqlFallback = "SELECT * FROM produtos ORDER BY idproduto DESC";
-                PreparedStatement stmt = conn.prepareStatement(sqlFallback);
-                ResultSet rs = stmt.executeQuery();
-                while (rs.next()) {
-                    Produto produto = new Produto();
-                    produto.setId(rs.getInt("idproduto"));
-                    produto.setNome(rs.getString("nome"));
-                    produto.setAvaliacao(rs.getDouble("avaliacao"));
-                    produto.setDescricao(rs.getString("descricao"));
-                    produto.setPreco(rs.getDouble("preco"));
-                    produto.setQtdEstoque(rs.getInt("qtd_estoque"));
-                    produto.setStatus(1); // Define como ativo por padrão
-                    produtos.add(produto);
-                }
-                rs.close();
-                stmt.close();
-            } catch (SQLException e2) {
-                throw new RuntimeException(e2);
-            }
+            throw new RuntimeException(e);
         }
         return produtos;
     }

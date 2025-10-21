@@ -1,7 +1,7 @@
 package com.eletronicosstore.dao;
 
-import com.eletronicosstore.database.Conexao;
-import com.eletronicosstore.models.Usuario;
+import com.eletronicosstore.model.Usuario;
+import com.eletronicosstore.util.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -58,13 +58,15 @@ public class UsuarioDao implements Base<Usuario> {
         }
         return input;
     }
+
+    @Override
     public Usuario alterarStatus(Usuario input) {
 
         String sql = "UPDATE usuarios SET status=? WHERE idUsuario=?;";
 
         try(Connection conn = new Conexao().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, input.getStatus() ? 1 : 0);
+            stmt.setInt(1, input.isStatus() ? 1 : 0);
             stmt.setInt(2, input.getId());
 
             stmt.execute();
