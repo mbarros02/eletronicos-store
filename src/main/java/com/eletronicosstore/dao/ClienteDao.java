@@ -13,7 +13,7 @@ public class ClienteDao implements Base<Cliente>{
     @Override
     public Cliente cadastrar(Cliente cliente) {
 
-        String sql = "INSERT INTO clientes (NOME_CLIENTE, CPF, SEXO, DATA_NASC, EMAIL, SENHA) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO clientes (NOME, CPF, SEXO, DATA_NASC, EMAIL, SENHA) VALUES (?, ?, ?, ?, ?, ?)";
 
         try(Connection conn = new Conexao().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
