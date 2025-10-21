@@ -59,3 +59,18 @@ header>.carrinho {
     justify-content: center;
     width: 25%;
 }
+
+  .opcoes {
+    display: none;
+  }
+  .Login {
+    display: block;
+    margin: 5px 0;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    width: 150px;
+    text-align: center;
+  }

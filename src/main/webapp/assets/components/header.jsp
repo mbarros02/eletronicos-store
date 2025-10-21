@@ -31,7 +31,11 @@
                 <a href="\" class="Sobre">Sobre Nós</a>
             </div>
             <div>
-                <a href="${pageContext.request.contextPath}/usuario?action=login" class="Login">Login</a>
+                <button id="btnLogin" class="Login">Login</button>
+            </div>
+            <div id="opcoesLogin" class="opcoes">
+                <a href="${pageContext.request.contextPath}/login?action=login" class="Login">Login Colaborador</a>
+                <a href="${pageContext.request.contextPath}/login?action=login-cliente" class="Login">Login Cliente</a>
             </div>
         </div>
         <a href="Carrinho.jsp" class="carrinho">
@@ -40,4 +44,6 @@
             </div>
         </a>
     </header>
+    <script src="${pageContext.request.contextPath}/assets/js/logins.js"></script>
 </body>
+</html>
