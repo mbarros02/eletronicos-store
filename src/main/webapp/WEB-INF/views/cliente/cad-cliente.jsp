@@ -33,6 +33,7 @@
                 <div class="sexo">
                     <label for="">Sexo</label>
                     <select name="sexo">
+                        <option value=""></option>
                         <option value="Masculino">Masculino</option>
                         <option value="Feminino">Feminino</option>
                     </select>
