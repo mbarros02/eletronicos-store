@@ -1,4 +1,4 @@
-package com.eletronicosstore.controller;
+package com.eletronicosstore.controllers;
 
 import com.eletronicosstore.dao.ProdutoDao;
 import com.eletronicosstore.models.ItemCarrinho;

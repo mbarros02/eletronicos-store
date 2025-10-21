@@ -1,4 +1,4 @@
-package com.eletronicosstore.model;
+package com.eletronicosstore.models;
 
 public class ImagemProduto {
     private int id;

@@ -1,4 +1,4 @@
-package com.eletronicosstore.model;
+package com.eletronicosstore.models;
 
 import java.io.Serializable;
 import java.util.List;

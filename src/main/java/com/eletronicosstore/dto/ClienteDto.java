@@ -1,5 +1,5 @@
 package com.eletronicosstore.dto;
 
-public class ClineteDto {
+public class ClienteDto {
 
 }

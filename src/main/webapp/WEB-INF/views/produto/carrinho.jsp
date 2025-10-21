@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page isELIgnored="false" %>
 <%@ page import="com.eletronicosstore.dao.ProdutoDao" %>
-<%@ page import="com.eletronicosstore.model.Produto" %>
+<%@ page import="com.eletronicosstore.models.Produto" %>
 <%@ page import="java.util.List" %>
 <%
    ProdutoDao produtoDao = new ProdutoDao();

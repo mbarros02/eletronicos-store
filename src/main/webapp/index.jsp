@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page import="com.eletronicosstore.dao.ProdutoDao" %>
-<%@ page import="com.eletronicosstore.model.Produto" %>
+<%@ page import="com.eletronicosstore.models.Produto" %>
 <%@ page import="java.util.List" %>
 <%
    ProdutoDao produtoDao = new ProdutoDao();

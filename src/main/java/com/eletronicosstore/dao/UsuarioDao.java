@@ -1,6 +1,6 @@
 package com.eletronicosstore.dao;
 
-import com.eletronicosstore.model.Usuario;
+import com.eletronicosstore.models.Usuario;
 import com.eletronicosstore.util.Conexao;
 
 import java.sql.Connection;

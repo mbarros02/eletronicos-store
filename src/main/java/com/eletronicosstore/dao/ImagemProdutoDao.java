@@ -1,6 +1,6 @@
 package com.eletronicosstore.dao;
 
-import com.eletronicosstore.model.ImagemProduto;
+import com.eletronicosstore.models.ImagemProduto;
 import com.eletronicosstore.util.Conexao;
 
 import java.sql.Connection;

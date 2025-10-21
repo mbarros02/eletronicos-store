@@ -1,6 +1,6 @@
 package com.eletronicosstore.util;
 
-import com.eletronicosstore.model.Usuario;
+import com.eletronicosstore.models.Usuario;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
