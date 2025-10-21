@@ -2,9 +2,9 @@ package com.eletronicosstore.controller;
 
 import com.eletronicosstore.dao.ImagemProdutoDao;
 import com.eletronicosstore.dao.ProdutoDao;
-import com.eletronicosstore.model.ImagemProduto;
-import com.eletronicosstore.model.Produto;
-import com.eletronicosstore.model.Usuario;
+import com.eletronicosstore.models.ImagemProduto;
+import com.eletronicosstore.models.Produto;
+import com.eletronicosstore.models.Usuario;
 import com.eletronicosstore.util.Conexao;
 
 import javax.servlet.ServletException;

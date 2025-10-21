@@ -1,8 +1,8 @@
 package com.eletronicosstore.controller;
 
 import com.eletronicosstore.dao.ProdutoDao;
-import com.eletronicosstore.model.ItemCarrinho;
-import com.eletronicosstore.model.Produto;
+import com.eletronicosstore.models.ItemCarrinho;
+import com.eletronicosstore.models.Produto;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,7 +1,7 @@
 package com.eletronicosstore.controller;
 
 import com.eletronicosstore.dao.UsuarioDao;
-import com.eletronicosstore.model.Usuario;
+import com.eletronicosstore.models.Usuario;
 import com.eletronicosstore.service.ValidarSenha;
 import com.eletronicosstore.util.ValidarCpf;
 
