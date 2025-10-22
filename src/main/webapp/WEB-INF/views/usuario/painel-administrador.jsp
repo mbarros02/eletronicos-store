@@ -19,11 +19,11 @@
         <div class="navbar">
             <div>
                 <div>
-                    <img class="img" src="${pageContext.request.contextPath}/../assets/img/icons8-user-48.png" alt="Alterar"/>
+                    <img class="img" src="${pageContext.request.contextPath}/../assets/img/usuario.png" alt="Usuario"/>
                     <a href="usuario?action=listar">Usuario</a>
                 </div>
                 <div>
-                    <img class="img" src="${pageContext.request.contextPath}/../assets/img/icons8-product-30.png" alt="Alterar"/>
+                    <img class="img" src="${pageContext.request.contextPath}/../assets/img/produto.png" alt="Produto"/>
                     <a href="${pageContext.request.contextPath}/produto?action=listar">Produto</a>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                                     <td>
                                         <div class="content-action">
                                             <a href="usuario?action=alterarForm&id=${usuario.id}" class="button">
-                                                <img src="${pageContext.request.contextPath}/../assets/img/icons8-pencil-30.png" alt="Alterar"/>
+                                                <img src="${pageContext.request.contextPath}/../assets/img/alterar.png" alt="Alterar"/>
                                             </a>
                                             <a class="inativar" href="usuario?action=trocarStatus&id=${usuario.id}" class="button ${usuario.status ? 'danger' : ''}">
                                                 ${usuario.status ? 'Inativar' : 'Ativar'}

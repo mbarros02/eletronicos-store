@@ -1,6 +1,7 @@
 * {
     margin: 0;
 }
+
 #pincipal {
     background-color: #3B82F6;
     min-height: 100vh;
@@ -100,7 +101,9 @@
     font-size: 30px;
 }
 
-#Produtos>.content>.card>.content-card>.description {}
+#Produtos>.content>.card>.content-card>.description {
+
+}
 
 #Produtos>.content>.card>.content-card>.description>.link-categoria {
     width: 100%;

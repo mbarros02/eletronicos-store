@@ -32,7 +32,7 @@
             <c:forEach var="produto" items="${produtos}">
                 <div class="card">
                     <div class="img">
-                      <img src="${pageContext.request.contextPath}/${produto.imagens[0].caminho}">
+                      <img src="${pageContext.request.contextPath}/${produto.imagens[0].caminho}" alt="Imagem Produto">
                     </div>
                     <div class="content-card">
                         <div class="title-card">
@@ -40,7 +40,9 @@
                         </div>
                         <div class="description">
                             <p>${produto.descricao}</p>
-                            <div>R$ <fmt:formatNumber value="${produto.preco}" type="currency" currencySymbol="R$" /></div>
+                            <div>
+                                <h2>R$ <fmt:formatNumber value="${produto.preco}" type="currency" currencySymbol="R$"/></h2>
+                            </div>
                         </div>
                         <div class="buton">
                             <a href="${pageContext.request.contextPath}/produto?action=visualizar&id=${produto.id}">

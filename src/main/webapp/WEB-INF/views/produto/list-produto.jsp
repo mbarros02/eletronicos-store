@@ -20,12 +20,12 @@
             <div>
                 <c:if test="${sessionScope.usuarioAtual != null && sessionScope.usuarioAtual.idGrupo == 1}">
                     <div>
-                        <img class="img" src="${pageContext.request.contextPath}/../assets/img/icons8-user-48.png" alt="Alterar"/>
+                        <img class="img" src="${pageContext.request.contextPath}/../assets/img/usuario.png" alt="Usuário"/>
                         <a href="usuario?action=listar">Usuario</a>
                     </div>
                 </c:if>
                 <div>
-                    <img class="img" src="${pageContext.request.contextPath}/../assets/img/icons8-product-30.png" alt="Alterar"/>
+                    <img class="img" src="${pageContext.request.contextPath}/../assets/img/produto.png" alt="Produto"/>
                     <a href="produto?action=listar">Produto</a>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                                     <td class="actions">
                                         <div class="content-action">
                                             <a href="produto?action=alterarForm&id=${produto.id}" title="Alterar">
-                                                <img src="${pageContext.request.contextPath}/../assets/img/icons8-pencil-30.png" alt="Alterar"/>
+                                                <img src="${pageContext.request.contextPath}/../assets/img/alterar.png" alt="Alterar"/>
                                             </a>
                                             <c:if test="${sessionScope.usuarioAtual != null && sessionScope.usuarioAtual.idGrupo != 2}">
                                                 <c:choose>

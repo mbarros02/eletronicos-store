@@ -21,7 +21,7 @@
             <div class="swiper-wrapper">
                 <c:forEach var="imagem" items="${produto.imagens}">
                     <div class="swiper-slide">
-                        <img src="${pageContext.request.contextPath}/${imagem.caminho}" alt="Imagem do produto" />
+                        <img src="${pageContext.request.contextPath}/${imagem.caminho}" alt="Imagem do produto"/>
                     </div>
                 </c:forEach>
             </div>

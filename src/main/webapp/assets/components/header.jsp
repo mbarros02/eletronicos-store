@@ -31,16 +31,17 @@
                 <a href="\" class="Sobre">Sobre Nós</a>
             </div>
             <div>
-                <button id="btnLogin" class="Login">Login</button>
+                <button id="btnLogin" class="Login"><img class="img" src="${pageContext.request.contextPath}/../assets/img/usuario.png" alt="Login"/></button>
+            </div>
             </div>
             <div id="opcoesLogin" class="opcoes">
-                <a href="${pageContext.request.contextPath}/login?action=login" class="Login">Login Colaborador</a>
-                <a href="${pageContext.request.contextPath}/login?action=login-cliente" class="Login">Login Cliente</a>
+                <a href="${pageContext.request.contextPath}/login?action=login" class="Login">Colaborador</a>
+                <a href="${pageContext.request.contextPath}/login?action=login-cliente" class="Login">Cliente</a>
             </div>
         </div>
-        <a href="Carrinho.jsp" class="carrinho">
+        <a href="${pageContext.request.contextPath}/carrinho" class="carrinho">
             <div class="img">
-                <img src=".././assets/Img/Shopping Cart.png" alt="">
+                <img src="${pageContext.request.contextPath}/../assets/img/carrinho.png" alt="carrinho">
             </div>
         </a>
     </header>
