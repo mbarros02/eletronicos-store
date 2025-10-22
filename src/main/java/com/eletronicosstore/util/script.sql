@@ -20,6 +20,10 @@ CREATE TABLE usuarios (
     FOREIGN KEY (ID_GRUPO_USUARIO) REFERENCES grupo_usuario(IDGRUPO)
 );
 
+-- Inserção de Gupos de Usuários
+INSERT INTO grupo_usuario (NOME) VALUES ('ADMINISTRADOR');
+INSERT INTO grupo_usuario (NOME) VALUES ('ESTOQUISTA');
+
 -- Criação da tabela de produtos
 CREATE TABLE produtos (
     IDPRODUTO INT PRIMARY KEY AUTO_INCREMENT,
