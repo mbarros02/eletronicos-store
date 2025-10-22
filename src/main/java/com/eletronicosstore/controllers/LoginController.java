@@ -64,7 +64,7 @@ public class LoginController extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/views/usuario/login.jsp").forward(req, resp);
         } else if ("login-cliente".equals(action)) {
             req.getRequestDispatcher("/WEB-INF/views/cliente/login-cliente.jsp").forward(req, resp);
-        } else if ("cadastrte-se".equals(action)) {
+        } else if ("cadastre-se".equals(action)) {
             req.getRequestDispatcher("/WEB-INF/views/cliente/cad-cliente.jsp").forward(req, resp);
         }
     }
