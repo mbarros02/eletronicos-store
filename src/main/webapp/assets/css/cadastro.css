@@ -9,6 +9,7 @@
     height: 100%;
     margin: 40px 0px;
 }
+
 #login>div{
         box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
         -webkit-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
@@ -21,17 +22,20 @@
         border-radius: 20px;
         height: 100%;
 }
+
 #login>div>.title{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 20%;
 }
+
 #login>div>.title>h1{
     color: #3B82F6;
     font-family: Inter;
     font-size: 60px;
 }
+
 #login>div>form{
     display: flex;
     flex-direction: column;
@@ -40,20 +44,24 @@
     width: 100%;
     height: 80%;
 }
+
 #login>div>form>div{
     display: flex;
     flex-direction: column;
     width: 90%;
     margin-top: 15px;
 }
+
 #login>div>form>.login{
     margin-top: 15px;
 }
+
 #login>div>form>div>label{
     margin-bottom: 10px;
     font-family: inter;
 
 }
+
 #login>div>form>div>input{
     border: none;
     border: 1px solid #3B82F6;
@@ -61,6 +69,7 @@
     border-radius: 5px;
     padding: 10px 0px;
 }
+
 #login>div>form>.footer-card{
     height: 20%;
     display: flex;
@@ -69,6 +78,7 @@
     width: 90%;
     align-items: center;
 }
+
 #login>div>form>div>select{border: none;border: 1px solid #3B82F6;border-radius: 5px;padding: 10px 3px; outline: none;}
 #login>div>form>.footer-card>.buton{}
 #login>div>form>.footer-card>.buton>button{
@@ -80,6 +90,7 @@
     padding: 5px 30px;
     border-radius: 5px;
 }
+
 #login>div>form>.footer-card>.link{}
 #login>div>form>.footer-card>.link>a{
     color: #3B82F6;
@@ -88,4 +99,15 @@
 #login>div>form>.footer-card>.link>a:hover{}
 .margem{
     margin-bottom: 20px;
+}
+
+.buton>button{
+    margin-top: 10px;
+    background-color: #1F2937;
+    color: white;
+    font-family: inter;
+    border: none;
+    font-size: 20px;
+    padding: 5px 30px;
+    border-radius: 5px;
 }

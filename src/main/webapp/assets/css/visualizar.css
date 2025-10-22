@@ -2,6 +2,7 @@
     margin: 0;
 }
 
+
     section {
       height: 100%;
       display: flex;
@@ -14,14 +15,13 @@
 
     section {
       color: #fff;
-      margin: 0;
       padding: 0;
+      margin: 76px 0px;
     }
 
     .swiper {
       width: 45%;
-      height: 50%;
-      margin: 0px 20px;
+      margin: 20px 20px;
     }
 
     .swiper-slide {
@@ -34,12 +34,13 @@
     }
 
     .swiper-slide img {
-      display: block;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
     }
-
 .content-2{
     width: 35%;
     color: #1F2937;
@@ -49,26 +50,44 @@
     flex-direction: column;
 }
 .content-2>.title{
-    max-height: 0%;
 }
 .content-2>.title>h1{
     height: 100%;
     font-family: inter;
 }
 .content-2>.description{}
-.content-2>.description>p{}
-.content-2>.preco{}
+.content-2>.description>p{
+    font-size: 24px;
+}
+.content-2>.preco{
+    font-family: 'Inter';
+}
 .content-2>.preco>h1{}
 .content-2>.avaliacao{}
-.content-2>.avaliacao>p{}
-.content-2>.buton{}
-.content-2>.buton>button{
+.content-2>.avaliacao>p{
+    font-family: 'Inter';
+    font-size: 23px;
+}
+
+.buton>form{
     width: 100%;
-    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+.content-2>.buton{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.buton  button{
+    width: 92%;
     border: none;
     background-color: #3B82F6;
     color: white;
     font-family: Inter;
     cursor: pointer;
     border-radius: 4px;
+    padding: 17px;
+    font-size: 23px;
 }
