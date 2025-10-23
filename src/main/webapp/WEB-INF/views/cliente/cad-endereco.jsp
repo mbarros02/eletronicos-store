@@ -65,7 +65,7 @@
 
                 <div class="login">
                     <label for="id_cliente">ID Cliente</label>
-                    <input type="number" id="id_cliente" name="id_cliente" required>
+                    <input type="number" id="id_cliente" name="id_cliente" value="${cliente.id}" readonly>
                 </div>
 
                 <div class="margem"></div>
@@ -73,6 +73,11 @@
                     <div class="buton">
                         <button type="submit">Cadastrar</button>
                     </div>
+                    <c:if test="${totalEnderecos > 0}">
+                        <div class="buton">
+                            <a href="${pageContext.request.contextPath}/login?action=login-cliente" class="Login">Finalizar</a>
+                        </div>
+                    </c:if>
                 </div>
             </form>
         </div>

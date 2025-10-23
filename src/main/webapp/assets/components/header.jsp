@@ -33,7 +33,6 @@
             <div>
                 <button id="btnLogin" class="Login"><img class="img" src="${pageContext.request.contextPath}/../assets/img/usuario.png" alt="Login"/></button>
             </div>
-            </div>
             <div id="opcoesLogin" class="opcoes">
                 <a href="${pageContext.request.contextPath}/login?action=login" class="Login">Colaborador</a>
                 <a href="${pageContext.request.contextPath}/login?action=login-cliente" class="Login">Cliente</a>
