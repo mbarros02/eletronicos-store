@@ -16,8 +16,24 @@ import static com.eletronicosstore.service.ChecarNulo.checarValorNulo;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+
+        if ("login".equals(action)) {
+            req.getRequestDispatcher("/WEB-INF/views/usuario/login.jsp").forward(req, resp);
+        } else if ("login-cliente".equals(action)) {
+            req.getRequestDispatcher("/WEB-INF/views/cliente/login-cliente.jsp").forward(req, resp);
+        } else if ("cadastre-se".equals(action)) {
+            req.getRequestDispatcher("/WEB-INF/views/cliente/cad-cliente.jsp").forward(req, resp);
+        }
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+
         String email = req.getParameter("email");
         String senha = req.getParameter("senha");
 
@@ -30,8 +46,8 @@ public class LoginController extends HttpServlet {
         UsuarioDao dao = new UsuarioDao();
         Usuario usuario = dao.buscarPorEmail(email);
 
-        if (usuario != null && ValidarSenha.verificarSenha(senha,usuario.getSenha1())) {
-            if (!usuario.isStatus()){
+        if (usuario != null && ValidarSenha.verificarSenha(senha, usuario.getSenha1())) {
+            if (!usuario.isStatus()) {
                 req.setAttribute("erro", "Usuário inativo!");
                 req.getRequestDispatcher("/WEB-INF/views/usuario/login.jsp").forward(req, resp);
                 return;
@@ -56,16 +72,4 @@ public class LoginController extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-
-        if ("login".equals(action)) {
-            req.getRequestDispatcher("/WEB-INF/views/usuario/login.jsp").forward(req, resp);
-        } else if ("login-cliente".equals(action)) {
-            req.getRequestDispatcher("/WEB-INF/views/cliente/login-cliente.jsp").forward(req, resp);
-        } else if ("cadastre-se".equals(action)) {
-            req.getRequestDispatcher("/WEB-INF/views/cliente/cad-cliente.jsp").forward(req, resp);
-        }
-    }
 }

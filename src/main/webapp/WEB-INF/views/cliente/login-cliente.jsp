@@ -27,8 +27,8 @@
                 </div>
             <% } %>
 
-            <form action="login" method="post">
-            <input type="hidden" name="action" value="login">
+            <form action="login-cliente" method="post">
+            <input type="hidden" name="action" value="login-cliente">
                 <div class="login">
                     <label for="">login</label>
                     <input type="email" name="email" required>
