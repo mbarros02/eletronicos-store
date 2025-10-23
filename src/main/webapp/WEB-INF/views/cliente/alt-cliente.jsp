@@ -30,7 +30,7 @@
                 </div>
                 <div class="dataNascimento">
                     <label>Data de Nascimento:</label>
-                    <input type="date" name="dataNasc" value="${cliente.dataNascimento}" required>
+                    <input type="date" name="dataNasc" value="<fmt:formatDate value="${cliente.dataNascimento}" pattern="yyyy-MM-dd"/>" required>
                 </div>
                 <div class="sexo">
                     <label for="">Sexo</label>

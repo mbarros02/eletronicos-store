@@ -79,4 +79,39 @@ public class EnderecoDao implements Base<EnderecoCliente>{
 
         return quantidade;
     }
+
+    public void alterarTipoEndereco(int idEndereco, String novoTipo, int idCliente) throws Exception {
+        Connection conn = new Conexao().getConnection();
+
+        try {
+            if (novoTipo.contains("F")) {
+                String verificaSql = "SELECT IDENDERECO FROM enderecos_clientes WHERE ID_CLIENTE = ? AND TIPO_ENDERECO LIKE '%F%' AND IDENDERECO <> ?";
+                PreparedStatement verificaStmt = conn.prepareStatement(verificaSql);
+                verificaStmt.setInt(1, idCliente);
+                verificaStmt.setInt(2, idEndereco);
+                ResultSet rs = verificaStmt.executeQuery();
+
+                if (rs.next()) {
+                    int idAnterior = rs.getInt("IDENDERECO");
+                    String removeF = "UPDATE enderecos_clientes SET TIPO_ENDERECO = REPLACE(TIPO_ENDERECO, 'F', '') WHERE IDENDERECO = ?";
+                    PreparedStatement updateAnterior = conn.prepareStatement(removeF);
+                    updateAnterior.setInt(1, idAnterior);
+                    updateAnterior.executeUpdate();
+                }
+            }
+
+            String sql = "UPDATE enderecos_clientes SET TIPO_ENDERECO = ? WHERE IDENDERECO = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, novoTipo);
+            stmt.setInt(2, idEndereco);
+            stmt.executeUpdate();
+
+            conn.close();
+
+        } catch (Exception e) {
+            conn.close();
+            throw e;
+        }
+    }
+
 }

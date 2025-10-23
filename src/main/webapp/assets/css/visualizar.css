@@ -55,9 +55,19 @@
     height: 100%;
     font-family: inter;
 }
-.content-2>.description{}
+.content-2>.description{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+}
 .content-2>.description>p{
     font-size: 24px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    word-break: break-all;
 }
 .content-2>.preco{
     font-family: 'Inter';

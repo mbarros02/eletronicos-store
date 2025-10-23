@@ -19,7 +19,7 @@
     <section id="login">
         <div class="card">
             <div class="title">
-                <h1>TechStore</h1>
+                <h1>Endereço</h1>
             </div>
 
             <form action="endereco" method="post">
@@ -64,8 +64,7 @@
                 </div>
 
                 <div class="login">
-                    <label for="id_cliente">ID Cliente</label>
-                    <input type="number" id="id_cliente" name="id_cliente" value="${cliente.id}" readonly>
+                    <input type="hidden" id="id_cliente" name="id_cliente" value="${cliente.id}" readonly>
                 </div>
 
                 <div class="margem"></div>

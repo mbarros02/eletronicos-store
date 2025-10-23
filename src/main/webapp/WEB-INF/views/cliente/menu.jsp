@@ -57,43 +57,115 @@
             </a>
         </header>
         <script src="${pageContext.request.contextPath}/assets/js/logins.js"></script>
-    <section id="Produtos">
-        <div class="col">
-            <div class="title">
-                <h1>Confira os Produtos</h1>
-            </div>
-        </div>
-        <div class="content">
-            <c:forEach var="produto" items="${produtos}">
-                <div class="card">
-                    <div class="img">
-                      <img src="${pageContext.request.contextPath}/${produto.imagens[0].caminho}" alt="Imagem Produto">
-                    </div>
-                    <div class="content-card">
-                        <div class="title-card">
-                            <h3>${produto.nome}</h3>
+    <section>
+            <div class="navbar">
+                <div>
+                    <c:if test="${sessionScope.usuarioAtual != null && sessionScope.usuarioAtual.idGrupo == 1}">
+                        <div>
+                            <img class="img" src="${pageContext.request.contextPath}/../assets/img/usuario.png" alt="Usuário"/>
+                            <a href="usuario?action=listar">Usuario</a>
                         </div>
-                        <div class="description">
-                            <p>${produto.descricao}</p>
-                            <div>
-                                <h2>R$ <fmt:formatNumber value="${produto.preco}" type="currency" currencySymbol="R$"/></h2>
-                            </div>
-                        </div>
-                        <div class="buton">
-                            <a href="${pageContext.request.contextPath}/produto?action=visualizar&id=${produto.id}">
-                                <button>Ver detalhes</button>
-                            </a>
-                            <form action="${pageContext.request.contextPath}/carrinho" method="post" style="display:inline;">
-                                <input type="hidden" name="action" value="adicionar" />
-                                <input type="hidden" name="idProduto" value="${produto.id}" />
-                                <button type="submit">Adicionar ao Carrinho</button>
-                            </form>
-                        </div>
+                    </c:if>
+                    <div>
+                        <img class="img" src="${pageContext.request.contextPath}/../assets/img/produto.png" alt="Produto"/>
+                        <a href="produto?action=listar">Produto</a>
                     </div>
                 </div>
-            </c:forEach>
-        </div>
-    </section>
+            </div>
+
+            <div class="barra"></div>
+
+            <div class="dashboard-container">
+                <div class="content-area">
+                    <div class="content-header">
+                        <h1>Produtos</h1>
+                        <c:if test="${sessionScope.usuarioAtual == null || sessionScope.usuarioAtual.idGrupo != 2}">
+                            <a href="produto?action=incluir" class="btn btn-primary" title="Cadastrar Produto">Novo Produto</a>
+                        </c:if>
+                    </div>
+
+                    <form method="get" action="produto" onsubmit="return unificarFiltro()">
+                        <input type="hidden" name="action" value="listar" />
+                        <input type="text" name="filtroNome" placeholder="Nome" value="${filtroNome}" />
+                        <input type="text" name="filtroId" placeholder="ID" value="${filtroId}" />
+                        <button type="submit">Filtrar</button>
+                    </form>
+
+                    <script>
+                        function unificarFiltro() {
+                            var nome = document.querySelector('input[name="filtroNome"]');
+                            var id = document.querySelector('input[name="filtroId"]');
+                            if (id && id.value && id.value.trim().length > 0) {
+                                nome.value = '';
+                            } else if (nome && nome.value && nome.value.trim().length > 0) {
+                                id.value = '';
+                            }
+                            return true;
+                        }
+                    </script>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nome</th>
+                                    <th>Estoque</th>
+                                    <th>Valor</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="produto" items="${produtos}">
+                                    <tr>
+                                        <td>${produto.id}</td>
+                                        <td>${produto.nome}</td>
+                                        <td>${produto.qtdEstoque}</td>
+                                        <td>R$ <fmt:formatNumber value="${produto.preco}" type="number" minFractionDigits="2" maxFractionDigits="2"/></td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${produto.status == 1}">Ativo</c:when>
+                                                <c:otherwise>Inativo</c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td class="actions">
+                                            <div class="content-action">
+                                                <a href="produto?action=alterarForm&id=${produto.id}" title="Alterar">
+                                                    <img src="${pageContext.request.contextPath}/../assets/img/alterar.png" alt="Alterar"/>
+                                                </a>
+                                                <c:if test="${sessionScope.usuarioAtual != null && sessionScope.usuarioAtual.idGrupo != 2}">
+                                                    <c:choose>
+                                                        <c:when test="${produto.status == 1}">
+                                                            <a class="inativar" href="produto?action=inativar&id=${produto.id}" title="Inativar">Inativar</a>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <a class="inativar" href="produto?action=reativar&id=${produto.id}" title="Reativar">Reativar</a>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <a class="inativar" href="produto?action=visualizar&id=${produto.id}" title="Visualizar">Visualizar</a>
+                                                </c:if>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <c:if test="${totalPaginas > 1}">
+                        <div class="pagination">
+                            <c:if test="${pagina > 1}">
+                                <a href="produto?action=listar&pagina=${pagina - 1}&filtroNome=${filtroNome}&filtroId=${filtroId}" class="btn btn-primary">Anterior</a>
+                            </c:if>
+                            <c:if test="${pagina < totalPaginas}">
+                                <a href="produto?action=listar&pagina=${pagina + 1}&filtroNome=${filtroNome}&filtroId=${filtroId}" class="btn btn-primary">Próxima</a>
+                            </c:if>
+                        </div>
+                    </c:if>
+                </div>
+            </div>
+        </section>
     <%@ include file="/assets/components/footer.jsp" %>
 </body>
 </html>

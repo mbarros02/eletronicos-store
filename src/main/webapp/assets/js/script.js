@@ -9,3 +9,15 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    var swiper = new Swiper(".muSwiper", {
+        slidesPerView: 3,
+        spaceBetween: 10,
+        grabCursor: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        }
+    });
+});

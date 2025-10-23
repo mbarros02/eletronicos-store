@@ -18,7 +18,7 @@
     <section id="login">
         <div class="card">
             <div class="title">
-                <h1>TechStore</h1>
+                <h1>Dados Pessoais</h1>
             </div>
             <form action="cliente" method="post">
                 <input type="hidden" name="action" value="cadastro">
