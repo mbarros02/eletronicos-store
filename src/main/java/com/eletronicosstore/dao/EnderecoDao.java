@@ -51,6 +51,7 @@ public class EnderecoDao implements Base<EnderecoCliente>{
 
     @Override
     public List<EnderecoCliente> listarTodos(String filtro) {
+
         return List.of();
     }
 

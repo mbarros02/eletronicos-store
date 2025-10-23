@@ -68,6 +68,7 @@ header>.carrinho {
     justify-content: center;
     margin: 39px 0px;
 }
+
 #login>div{
         box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
@@ -147,6 +148,12 @@ header>.carrinho {
     margin-bottom: 50px;
 }
 
+.link {
+    color: #727986;
+    text-decoration: none;
+    font-family: inter;
+    font-size: 16px;
+}
 footer{
     background-color: #1F2937;
     display: flex;

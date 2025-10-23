@@ -33,7 +33,9 @@ public class EnderecoController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
-        if ("cadastro".equals(action)) {
+        if ("listar".equals(action)) {
+            request.getRequestDispatcher("/WEB-INF/views/cliente/list-endereco.jsp").forward(request, response);
+        } else if ("cadastro".equals(action)) {
             String idClienteParam = request.getParameter("id_cliente");
             int id_cliente = 0;
 
@@ -73,7 +75,8 @@ public class EnderecoController extends HttpServlet {
             EnderecoDao dao = new EnderecoDao();
             dao.cadastrar(endereco);
 
-            response.sendRedirect(request.getContextPath() + "/menu?action=cadastro&id_cliente=" + id_cliente);
+            request.getSession().setAttribute("enderecos", endereco);
+            response.sendRedirect(request.getContextPath() + "/endereco?action=cadastro&id_cliente=" + id_cliente);
             return;
         } catch (IllegalArgumentException e) {
             request.setAttribute("erro", e.getMessage());
@@ -94,7 +97,7 @@ public class EnderecoController extends HttpServlet {
         EnderecoDao dao = new EnderecoDao();
         try {
             dao.alterarTipoEndereco(idEndereco, tipoEndereco, idCliente);
-            response.sendRedirect("listar-enderecos.jsp?id_cliente=" + idCliente);
+            request.getRequestDispatcher("/WEB-INF/views/cliente/menu.jsp").forward(request, response);
         } catch (Exception e) {
             throw new ServletException(e);
         }

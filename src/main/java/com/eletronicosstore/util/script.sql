@@ -43,7 +43,6 @@ CREATE TABLE imagem_produto (
     ID_PRODUTO INT,
     FOREIGN KEY (ID_PRODUTO) REFERENCES produtos(IDPRODUTO)
 );
-
 -- Criação da tabela de clientes
 CREATE TABLE clientes (
     IDCLIENTE INT PRIMARY KEY AUTO_INCREMENT,

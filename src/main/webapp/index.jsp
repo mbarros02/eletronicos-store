@@ -33,108 +33,76 @@
                                             <h1>Eletronicos</h1>
                                         </div>
                                     </section>
-                                    <section id="Categoria">
-                                        <div class="col">
-                                            <div class="title">
-                                                <h1>Produtos Gerais</h1>
+<section id="Produtos">
+                                            <div class="col">
+                                                <div class="title">
+                                                    <h1>Produtos Gerais</h1>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="swiper muSwiper">
-                                            <div class="swiper-wrapper">
+                                            <div class="content">
                                                 <c:forEach var="produto" items="${produtos}">
-                                                    <div class="swiper-slide">
-                                                        <a href="${pageContext.request.contextPath}/produto?action=visualizar&id=${produto.id}"
-                                                            class="card">
-                                                            <div class="img">
-                                                                <img src="${pageContext.request.contextPath}/${produto.imagens[0].caminho}"
-                                                                    alt="">
+                                                    <div class="card">
+                                                        <div class="img">
+                                                          <img src="${pageContext.request.contextPath}/${produto.imagens[0].caminho}">
+                                                        </div>
+                                                        <div class="content-card">
+                                                            <div class="title-card">
+                                                                <h3>${produto.nome}</h3>
                                                             </div>
-                                                            <div class="content-card">
-                                                                <div class="title-card">
-                                                                    <h3>${produto.nome}</h3>
-                                                                </div>
-                                                                <div class="description">
-                                                                    <div class="text">
-                                                                        <p>${produto.descricao}</p>
-                                                                        <div>
-                                                                            <fmt:formatNumber value="${produto.preco}"
-                                                                                type="currency" currencySymbol="R$" />
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="buton">
-                                                                        <form
-                                                                            action="${pageContext.request.contextPath}/carrinho"
-                                                                            method="post" style="display:inline;">
-                                                                            <input type="hidden" name="action"
-                                                                                value="adicionar" />
-                                                                            <input type="hidden" name="idProduto"
-                                                                                value="${produto.id}" />
-                                                                            <button type="submit">Adicionar ao
-                                                                                Carrinho</button>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
+                                                            <div class="description">
+                                                                <p>${produto.descricao}</p>
+                                                                <div>R$ <fmt:formatNumber value="${produto.preco}" type="currency" currencySymbol="R$" /></div>
                                                             </div>
-                                                        </a>
+                                                            <div class="buton">
+                                                                <a href="${pageContext.request.contextPath}/produto?action=visualizar&id=${produto.id}">
+                                                                    <button>Ver detalhes</button>
+                                                                </a>
+                                                                <form action="${pageContext.request.contextPath}/carrinho" method="post" style="display:inline;">
+                                                                    <input type="hidden" name="action" value="adicionar" />
+                                                                    <input type="hidden" name="idProduto" value="${produto.id}" />
+                                                                    <button type="submit">Adicionar ao Carrinho</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </c:forEach>
                                             </div>
-                                            <div class="swiper-pagination"></div>
-                                        </div>
-                                    </section>
+                                        </section>
                                     <section id="Produtos">
-                                        <div class="col">
-                                            <div class="title">
-                                                <h1>Nossos Produtos Mais Populares</h1>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <div class="swiper muSwiper">
-                                                <div class="swiper-wrapper">
-                                                    <c:forEach var="produto" items="${produtos}">
-                                                        <div class="swiper-slide">
-                                                            <a href="${pageContext.request.contextPath}/produto?action=visualizar&id=${produto.id}"
-                                                                class="card">
-                                                                <div class="img">
-                                                                    <img src="${pageContext.request.contextPath}/${produto.imagens[0].caminho}"
-                                                                        alt="">
-                                                                </div>
-                                                                <div class="content-card">
-                                                                    <div class="title-card">
-                                                                        <h3>${produto.nome}</h3>
-                                                                    </div>
-                                                                    <div class="description">
-                                                                        <div class="text">
-                                                                            <p>${produto.descricao}</p>
-                                                                            <div>
-                                                                                <fmt:formatNumber
-                                                                                    value="${produto.preco}"
-                                                                                    type="currency"
-                                                                                    currencySymbol="R$" />
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="buton">
-                                                                            <form
-                                                                                action="${pageContext.request.contextPath}/carrinho"
-                                                                                method="post" style="display:inline;">
-                                                                                <input type="hidden" name="action"
-                                                                                    value="adicionar" />
-                                                                                <input type="hidden" name="idProduto"
-                                                                                    value="${produto.id}" />
-                                                                                <button type="submit">Adicionar ao
-                                                                                    Carrinho</button>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    </c:forEach>
+                                            <div class="col">
+                                                <div class="title">
+                                                    <h1>Produtos em Destaque</h1>
                                                 </div>
-                                                <div class="swiper-pagination"></div>
                                             </div>
-                                        </div>
-                                    </section>
+                                            <div class="content">
+                                                <c:forEach var="produto" items="${produtos}">
+                                                    <div class="card">
+                                                        <div class="img">
+                                                          <img src="${pageContext.request.contextPath}/${produto.imagens[0].caminho}">
+                                                        </div>
+                                                        <div class="content-card">
+                                                            <div class="title-card">
+                                                                <h3>${produto.nome}</h3>
+                                                            </div>
+                                                            <div class="description">
+                                                                <p>${produto.descricao}</p>
+                                                                <div>R$ <fmt:formatNumber value="${produto.preco}" type="currency" currencySymbol="R$" /></div>
+                                                            </div>
+                                                            <div class="buton">
+                                                                <a href="${pageContext.request.contextPath}/produto?action=visualizar&id=${produto.id}">
+                                                                    <button>Ver detalhes</button>
+                                                                </a>
+                                                                <form action="${pageContext.request.contextPath}/carrinho" method="post" style="display:inline;">
+                                                                    <input type="hidden" name="action" value="adicionar" />
+                                                                    <input type="hidden" name="idProduto" value="${produto.id}" />
+                                                                    <button type="submit">Adicionar ao Carrinho</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </c:forEach>
+                                            </div>
+                                        </section>
                                     <section id="Noticias">
                                         <div class="title">
                                             <h1>Receba as Últimas Novidades e Ofertas!</h1>

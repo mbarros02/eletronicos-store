@@ -43,7 +43,7 @@
                         <button type="submit" value="Entrar">LOGIN</button>
                     </div>
                     <div>
-                        <a href="${pageContext.request.contextPath}/login?action=cadastre-se" class="Login">Cadastre-se</a>
+                        <a href="${pageContext.request.contextPath}/login?action=cadastre-se" class="link">Cadastre-se</a>
                     </div>
                 </div>
             </form>

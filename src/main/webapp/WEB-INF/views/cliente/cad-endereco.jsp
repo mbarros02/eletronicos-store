@@ -74,7 +74,7 @@
                     </div>
                     <c:if test="${totalEnderecos > 0}">
                         <div class="buton">
-                            <a href="${pageContext.request.contextPath}/login?action=login-cliente" class="Login">Finalizar</a>
+                            <a href="${pageContext.request.contextPath}/login?action=login-cliente" class="link">Finalizar</a>
                         </div>
                     </c:if>
                 </div>
