@@ -11,9 +11,18 @@ public class Cliente {
     private String cpf;
     private String senha1;
     private String senha2;
-    private String status;
+    private boolean status;
 
     public Cliente() {}
+
+    public Cliente(int id, String nome, String sexo, String email, String cpf, String senha1) {
+        this.id = id;
+        this.nome = nome;
+        this.sexo = sexo;
+        this.email = email;
+        this.cpf = cpf;
+        this.senha1 = senha1;
+    }
 
     public Cliente(int id, String nome, String sexo, LocalDate dataNascimento, String email, String cpf, String senha1, String senha2) {
         this.id = id;
@@ -90,11 +99,11 @@ public class Cliente {
         this.senha2 = senha2;
     }
 
-    public String getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 }

@@ -1,10 +1,12 @@
 package com.eletronicosstore.dao;
 
 import com.eletronicosstore.models.Cliente;
+import com.eletronicosstore.models.Usuario;
 import com.eletronicosstore.util.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -54,4 +56,34 @@ public class ClienteDao implements Base<Cliente>{
     public Cliente alterarStatus(Cliente input) {
         return null;
     }
+
+    public Cliente buscarPorEmail(String email) {
+
+        String sql = "SELECT * FROM CLIENTES WHERE EMAIL=?";
+
+        try (Connection conn = new Conexao().getConnection()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, email);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()) {
+                Cliente cliente = new Cliente(
+                        rs.getInt("IDCLIENTE"),
+                        rs.getString("NOME"),
+                        rs.getString("CPF"),
+                        rs.getString("SEXO"),
+                        rs.getString("EMAIL"),
+                        rs.getString("SENHA")
+                );
+                return cliente;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
 }
