@@ -15,18 +15,14 @@ public class EnderecoCliente {
     private String tipoEndereco;
     private int idCliente;
 
-    public EnderecoCliente() {
+    public EnderecoCliente(String cep, String logradouro, String complemento, String bairro,
+                           String localidade, String regiao, String tipoEndereco, int idCliente) {
         this.cep = cep;
         this.logradouro = logradouro;
         this.complemento = complemento;
         this.bairro = bairro;
         this.localidade = localidade;
-        this.uf = uf;
         this.regiao = regiao;
-        this.ibge = ibge;
-        this.gia = gia;
-        this.ddd = ddd;
-        this.siafi = siafi;
         this.tipoEndereco = tipoEndereco;
         this.idCliente = idCliente;
     }

@@ -1,13 +1,11 @@
 package com.eletronicosstore.dao;
 
-import com.eletronicosstore.dto.EnderecoDto;
 import com.eletronicosstore.models.EnderecoCliente;
 import com.eletronicosstore.util.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 public class EnderecoDao implements Base<EnderecoCliente>{
@@ -15,7 +13,7 @@ public class EnderecoDao implements Base<EnderecoCliente>{
     @Override
     public EnderecoCliente cadastrar(EnderecoCliente endereco) {
 
-        String sql = "INSERT INTO enderecos_clientes (CEP, LOGRADOURO, COMPLEMENTO, BAIRRO, LOCALIDADE, UF, ID_CLIENTE, TIPO_ENDERECO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO enderecos_clientes (CEP, LOGRADOURO, COMPLEMENTO, BAIRRO, LOCALIDADE, UF, TIPO_ENDERECO, ID_CLIENTE) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try(Connection conn = new Conexao().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -26,15 +24,16 @@ public class EnderecoDao implements Base<EnderecoCliente>{
             stmt.setString(4, endereco.getBairro());
             stmt.setString(5, endereco.getLocalidade());
             stmt.setString(6, endereco.getUf());
-            stmt.setInt(7, endereco.getIdCliente());
-            stmt.setString(8, endereco.getTipoEndereco());
+            stmt.setString(7, endereco.getTipoEndereco());
+            stmt.setInt(8, endereco.getIdCliente());
 
             stmt.execute();
             System.out.println("Cadastro de endereço realizado com sucesso!");
             stmt.close();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao cadastrar um endereço!");
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao cadastrar um endereço!", e);
         }
         return null;
     }

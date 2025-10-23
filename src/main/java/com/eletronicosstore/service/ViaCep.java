@@ -1,6 +1,5 @@
 package com.eletronicosstore.service;
 
-import com.eletronicosstore.dto.EnderecoDto;
 import com.eletronicosstore.models.EnderecoCliente;
 import com.google.gson.Gson;
 
@@ -11,9 +10,14 @@ import java.net.URL;
 
 public class ViaCep {
 
-    public EnderecoDto buscarEnderecoPorCep(String cep) throws Exception {
-        String url = "https://viacep.com.br/ws/" + cep + "/json/";
+    public EnderecoCliente buscarEnderecoPorCep(String cep) throws Exception {
+        cep = cep.replaceAll("\\D", ""); // remove hífens e espaços
 
+        if (!cep.matches("\\d{8}")) {
+            throw new IllegalArgumentException("Formato de CEP inválido!");
+        }
+
+        String url = "https://viacep.com.br/ws/" + cep + "/json/";
         URL obj = new URL(url);
         HttpURLConnection conexao = (HttpURLConnection) obj.openConnection();
         conexao.setRequestMethod("GET");
@@ -26,7 +30,14 @@ public class ViaCep {
         }
         in.close();
 
+        System.out.println("JSON recebido do ViaCep: " + resposta);
+
+        if (resposta.toString().contains("\"erro\": true")) {
+            throw new IllegalArgumentException("CEP inválido ou não encontrado!");
+        }
+
         Gson gson = new Gson();
-        return gson.fromJson(resposta.toString(), EnderecoDto.class);
+        return gson.fromJson(resposta.toString(), EnderecoCliente.class);
     }
 }
+	

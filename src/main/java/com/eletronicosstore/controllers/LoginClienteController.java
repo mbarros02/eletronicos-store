@@ -39,5 +39,4 @@ public class LoginClienteController extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/views/usuario/login.jsp").forward(req, resp);
         }
     }
-
 }

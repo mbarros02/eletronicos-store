@@ -1,7 +1,6 @@
 package com.eletronicosstore.controllers;
 
 import com.eletronicosstore.dao.EnderecoDao;
-import com.eletronicosstore.dto.EnderecoDto;
 import com.eletronicosstore.models.EnderecoCliente;
 import com.eletronicosstore.service.ViaCep;
 
@@ -37,7 +36,7 @@ public class EnderecoController extends HttpServlet {
 
         String cep = request.getParameter("cep");
         String logradouro = request.getParameter("logradouro");
-        String complemento = request.getParameter("Complemento");
+        String complemento = request.getParameter("complemento");
         String bairro = request.getParameter("bairro");
         String localidade = request.getParameter("localidade");
         String uf = request.getParameter("uf");
@@ -45,31 +44,23 @@ public class EnderecoController extends HttpServlet {
         String tipo_endereco = request.getParameter("tipo_endereco");
 
         try {
+            EnderecoCliente endereco = viaCep.buscarEnderecoPorCep(cep);
 
-            try {
-                EnderecoDto endereco = viaCep.buscarEnderecoPorCep(cep);
-                request.setAttribute("endereco", endereco);
-            } catch (Exception e) {
-                request.setAttribute("erro", "Erro ao buscar o CEP: " + e.getMessage());
-            }
+            endereco.setComplemento(request.getParameter("complemento"));
+            endereco.setTipoEndereco(request.getParameter("tipo_endereco"));
+            endereco.setIdCliente(Integer.parseInt(request.getParameter("id_cliente")));
 
-            EnderecoCliente endereco = new EnderecoCliente();
-            endereco.setCep(cep);
-            endereco.setLogradouro(logradouro);
-            endereco.setComplemento(complemento);
-            endereco.setBairro(bairro);
-            endereco.setLocalidade(localidade);
-            endereco.setUf(uf);
-            endereco.setIdCliente(id_cliente);
-            endereco.setTipoEndereco(tipo_endereco);
-
-
-            EnderecoDao enderecoDao = new EnderecoDao();
-            enderecoDao.cadastrar(endereco);
+            EnderecoDao dao = new EnderecoDao();
+            dao.cadastrar(endereco);
 
             response.sendRedirect("index.jsp");
+            return;
 
-        } catch (IOException e) {
+        } catch (IllegalArgumentException e) {
+            request.setAttribute("erro", e.getMessage());
+            request.getRequestDispatcher("erro.jsp").forward(request, response);
+            return;
+        } catch (Exception e) {
             throw new ServletException(e);
         }
     }
