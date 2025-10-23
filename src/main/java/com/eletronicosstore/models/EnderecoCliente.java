@@ -1,6 +1,7 @@
 package com.eletronicosstore.models;
 
 public class EnderecoCliente {
+    private int id;
     private String cep;
     private String logradouro;
     private String complemento;
@@ -15,6 +16,9 @@ public class EnderecoCliente {
     private String tipoEndereco;
     private int idCliente;
 
+    public EnderecoCliente() {
+    }
+
     public EnderecoCliente(String cep, String logradouro, String complemento, String bairro,
                            String localidade, String regiao, String tipoEndereco, int idCliente) {
         this.cep = cep;
@@ -26,6 +30,15 @@ public class EnderecoCliente {
         this.tipoEndereco = tipoEndereco;
         this.idCliente = idCliente;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     public String getCep() { return cep; }
     public void setCep(String cep) { this.cep = cep; }

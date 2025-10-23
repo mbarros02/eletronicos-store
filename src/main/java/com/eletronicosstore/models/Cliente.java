@@ -11,7 +11,6 @@ public class Cliente {
     private String cpf;
     private String senha1;
     private String senha2;
-    private boolean status;
 
     public Cliente() {}
 
@@ -97,13 +96,5 @@ public class Cliente {
 
     public void setSenha2(String senha2) {
         this.senha2 = senha2;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 }

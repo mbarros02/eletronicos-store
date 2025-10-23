@@ -14,8 +14,8 @@ import java.io.IOException;
 @WebServlet("/endereco")
 public class EnderecoController extends HttpServlet {
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String action = request.getParameter("action");
         try {
             if ("cadastro".equals(action)) {
@@ -26,9 +26,27 @@ public class EnderecoController extends HttpServlet {
         }
 
     }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+
+        if ("cadastro".equals(action)) {
+            String idClienteParam = request.getParameter("id_cliente");
+            int id_cliente = 0;
+
+            if (idClienteParam != null && !idClienteParam.isEmpty()) {
+                id_cliente = Integer.parseInt(idClienteParam);
+            }
+
+            EnderecoDao dao = new EnderecoDao();
+            int totalEnderecos = dao.contarEnderecos(id_cliente);
+            request.setAttribute("totalEnderecos", totalEnderecos);
+
+            request.getRequestDispatcher("/WEB-INF/views/cliente/cad-endereco.jsp").forward(request, response);
+        }
     }
+
 
     private void cadastrar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -53,9 +71,8 @@ public class EnderecoController extends HttpServlet {
             EnderecoDao dao = new EnderecoDao();
             dao.cadastrar(endereco);
 
-            response.sendRedirect("index.jsp");
+            response.sendRedirect(request.getContextPath() + "/endereco?action=cadastro&id_cliente=" + id_cliente);
             return;
-
         } catch (IllegalArgumentException e) {
             request.setAttribute("erro", e.getMessage());
             request.getRequestDispatcher("erro.jsp").forward(request, response);

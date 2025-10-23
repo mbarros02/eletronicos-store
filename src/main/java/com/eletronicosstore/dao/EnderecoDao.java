@@ -5,6 +5,7 @@ import com.eletronicosstore.util.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -56,5 +57,26 @@ public class EnderecoDao implements Base<EnderecoCliente>{
     @Override
     public EnderecoCliente alterarStatus(EnderecoCliente input) {
         return null;
+    }
+
+    public int contarEnderecos(int idCliente) {
+        int quantidade = 0;
+        String sql = "SELECT IDENDERECO FROM ENDERECOS_CLIENTES WHERE ID_CLIENTE = ?";
+
+        try (Connection conn = new Conexao().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idCliente);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                quantidade = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return quantidade;
     }
 }

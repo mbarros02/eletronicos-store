@@ -1,24 +1,20 @@
 package com.eletronicosstore.dao;
 
 import com.eletronicosstore.models.Cliente;
-import com.eletronicosstore.models.Usuario;
 import com.eletronicosstore.util.Conexao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
-public class ClienteDao implements Base<Cliente>{
+public class ClienteDao implements Base<Cliente> {
 
     @Override
     public Cliente cadastrar(Cliente cliente) {
 
         String sql = "INSERT INTO clientes (NOME, CPF, SEXO, DATA_NASC, EMAIL, SENHA) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try(Connection conn = new Conexao().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement(sql);
+        try (Connection conn = new Conexao().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             stmt.setString(1, cliente.getNome());
             stmt.setString(2, cliente.getCpf());
@@ -27,19 +23,42 @@ public class ClienteDao implements Base<Cliente>{
             stmt.setString(5, cliente.getEmail());
             stmt.setString(6, cliente.getSenha1());
 
-            stmt.execute();
-            System.out.println("Cliente cadastrado com  sucesso!");
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                cliente.setId(rs.getInt(1));
+                System.out.println("ID gerado: " + cliente.getId());
+            }
+
+            System.out.println("Cliente cadastrado com sucesso!");
             stmt.close();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao cadastrar Cliente!");
+            throw new RuntimeException("Erro ao cadastrar Cliente! " + e.getMessage());
         }
-        return null;
+
+        return cliente;
     }
 
     @Override
-    public Cliente alterar(Cliente input) {
-        return null;
+    public Cliente alterar(Cliente cliente) {
+        String sql = "UPDATE clientes SET nome=?, data_nasc=?, sexo=?, senha=? WHERE idcliente=?";
+
+        try (Connection conn = new Conexao().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, cliente.getNome());
+            stmt.setDate(2, java.sql.Date.valueOf(cliente.getDataNascimento()));
+            stmt.setString(3, cliente.getSexo());
+            stmt.setString(4, cliente.getSenha1());
+            stmt.setInt(5, cliente.getId());
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return cliente;
     }
 
     @Override
@@ -61,14 +80,14 @@ public class ClienteDao implements Base<Cliente>{
 
         String sql = "SELECT * FROM CLIENTES WHERE EMAIL=?";
 
-        try (Connection conn = new Conexao().getConnection()){
+        try (Connection conn = new Conexao().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, email);
 
             ResultSet rs = stmt.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 Cliente cliente = new Cliente(
                         rs.getInt("IDCLIENTE"),
                         rs.getString("NOME"),

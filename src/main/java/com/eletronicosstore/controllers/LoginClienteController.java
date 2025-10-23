@@ -15,7 +15,6 @@ import static com.eletronicosstore.service.ChecarNulo.checarValorNulo;
 
 @WebServlet("/login-cliente")
 public class LoginClienteController extends HttpServlet {
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -33,10 +32,12 @@ public class LoginClienteController extends HttpServlet {
         Cliente cliente = dao.buscarPorEmail(email);
 
         if (cliente != null && ValidarSenha.verificarSenha(senha, cliente.getSenha1())) {
+            req.getSession().setAttribute("cliente", cliente);
             req.getRequestDispatcher("/WEB-INF/views/cliente/menu.jsp").forward(req, resp);
         } else {
             req.setAttribute("erro", "Email ou senha inválidos!");
-            req.getRequestDispatcher("/WEB-INF/views/usuario/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/cliente/login.jsp").forward(req, resp);
         }
     }
+
 }
