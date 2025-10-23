@@ -22,7 +22,7 @@
                 <a href="\" class="Inicio">Inicio</a>
             </div>
             <div>
-                <a href="${pageContext.request.contextPath}/produto?action=listarPublico" class="Produtos">Produtos</a>
+                <a href="\" class="Produtos">Produtos</a>
             </div>
             <div>
                 <a href="\" class="Categoria">Categoria</a>
@@ -31,16 +31,12 @@
                 <a href="\" class="Sobre">Sobre Nós</a>
             </div>
             <div>
-                <button id="btnLogin" class="Login"><img class="img" src="${pageContext.request.contextPath}/../assets/img/usuario.png" alt="Login"/></button>
-            </div>
-            <div id="opcoesLogin" class="opcoes">
-                <a href="${pageContext.request.contextPath}/login?action=login" class="Login">Colaborador</a>
-                <a href="${pageContext.request.contextPath}/login?action=login-cliente" class="Login">Cliente</a>
+                <a href="${pageContext.request.contextPath}/login?action=login-cliente" class="Login">Login</a>
             </div>
         </div>
         <a href="${pageContext.request.contextPath}/carrinho" class="carrinho">
             <div class="img">
-                <img src="${pageContext.request.contextPath}/../assets/img/carrinho.png" alt="carrinho">
+                <img src="${pageContext.request.contextPath}/../assets/img/carrinho.png" alt="">
             </div>
         </a>
     </header>

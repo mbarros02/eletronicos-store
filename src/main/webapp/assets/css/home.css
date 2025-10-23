@@ -63,6 +63,7 @@
     padding: 30px 0px;
     border-radius: 10px;
     padding: 0;
+    text-decoration: none;
 }
 
 #Produtos>.content>.card>.img {
@@ -144,8 +145,22 @@
     width: 100%;
     padding: 20px 0px;
 }
-
+.buton {
+    width: 100%;
+    padding: 20px 0px;
+}
 #Produtos>.content>.card>.content-card>.description>.buton>button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #3B82F6;
+    color: white;
+    font-family: Inter;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.buton>button {
     width: 100%;
     padding: 10px;
     border: none;

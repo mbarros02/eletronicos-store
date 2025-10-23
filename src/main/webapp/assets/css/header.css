@@ -7,11 +7,10 @@ header {
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    height: 75px;
     box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
-    padding: 30px 0px;
+    padding: 19px 0px;
 }
 
 header>.links {
@@ -59,35 +58,4 @@ header>.carrinho {
     align-items: center;
     justify-content: center;
     width: 25%;
-}
-
-.opcoes {
-    display: none;
-}
-
-.Login {
-    display: block;
-    text-decoration: none;
-    color: #727986;
-    padding: 8px 12px;
-    text-align: center;
-    font-family: inter;
-    font-size: 16px;
-}
-
-#btnLogin {
-    background: none;
-    border: none;
-    padding: 0;
-    outline: none;
-}
-
-#btnLogin .img {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-#btnLogin:focus {
-    outline: none;
 }

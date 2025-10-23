@@ -111,8 +111,12 @@
 
             <div class="cardbutton">
                 <div>
+                    <div>
                     <a href="">Finalizar Compra</a>
+                    </div>
+                    <div>
                     <a href="index.jsp">Continuar Comprando</a>
+                    </div>
                 </div>
             </div>
         </div>
