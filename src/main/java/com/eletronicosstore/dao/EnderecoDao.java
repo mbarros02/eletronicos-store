@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EnderecoDao implements Base<EnderecoCliente>{
@@ -40,22 +41,6 @@ public class EnderecoDao implements Base<EnderecoCliente>{
     }
 
     @Override
-    public EnderecoCliente alterar(EnderecoCliente input) {
-        return null;
-    }
-
-    @Override
-    public EnderecoCliente buscarPorId(int id) {
-        return null;
-    }
-
-    @Override
-    public List<EnderecoCliente> listarTodos(String filtro) {
-
-        return List.of();
-    }
-
-    @Override
     public EnderecoCliente alterarStatus(EnderecoCliente input) {
         return null;
     }
@@ -81,38 +66,72 @@ public class EnderecoDao implements Base<EnderecoCliente>{
         return quantidade;
     }
 
-    public void alterarTipoEndereco(int idEndereco, String novoTipo, int idCliente) throws Exception {
-        Connection conn = new Conexao().getConnection();
+    public List<EnderecoCliente> listarPorCliente(int idCliente) {
+        String sql = "SELECT * FROM enderecos_clientes WHERE ID_CLIENTE = ?";
+        List<EnderecoCliente> enderecos = new ArrayList<>();
 
-        try {
-            if (novoTipo.contains("F")) {
-                String verificaSql = "SELECT IDENDERECO FROM enderecos_clientes WHERE ID_CLIENTE = ? AND TIPO_ENDERECO LIKE '%F%' AND IDENDERECO <> ?";
-                PreparedStatement verificaStmt = conn.prepareStatement(verificaSql);
-                verificaStmt.setInt(1, idCliente);
-                verificaStmt.setInt(2, idEndereco);
-                ResultSet rs = verificaStmt.executeQuery();
+        try (Connection conn = new Conexao().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-                if (rs.next()) {
-                    int idAnterior = rs.getInt("IDENDERECO");
-                    String removeF = "UPDATE enderecos_clientes SET TIPO_ENDERECO = REPLACE(TIPO_ENDERECO, 'F', '') WHERE IDENDERECO = ?";
-                    PreparedStatement updateAnterior = conn.prepareStatement(removeF);
-                    updateAnterior.setInt(1, idAnterior);
-                    updateAnterior.executeUpdate();
-                }
+            stmt.setInt(1, idCliente);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                EnderecoCliente e = new EnderecoCliente();
+                e.setId(rs.getInt("IDENDERECO"));
+                e.setCep(rs.getString("CEP"));
+                e.setLogradouro(rs.getString("LOGRADOURO"));
+                e.setComplemento(rs.getString("COMPLEMENTO"));
+                e.setBairro(rs.getString("BAIRRO"));
+                e.setLocalidade(rs.getString("LOCALIDADE"));
+                e.setUf(rs.getString("UF"));
+                e.setTipoEndereco(rs.getString("TIPO_ENDERECO"));
+                e.setIdCliente(rs.getInt("ID_CLIENTE"));
+                e.setStatus(rs.getInt("STATUS"));
+                enderecos.add(e);
             }
-
-            String sql = "UPDATE enderecos_clientes SET TIPO_ENDERECO = ? WHERE IDENDERECO = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, novoTipo);
-            stmt.setInt(2, idEndereco);
-            stmt.executeUpdate();
-
-            conn.close();
-
-        } catch (Exception e) {
-            conn.close();
-            throw e;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return enderecos;
+    }
+
+    public void inativar(int id) {
+        String sql = "UPDATE enderecos_clientes SET STATUS = 0 WHERE IDENDERECO = ?";
+        try (Connection conn = new Conexao().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void reativar(int id) {
+        String sql = "UPDATE enderecos_clientes SET STATUS = 1 WHERE IDENDERECO = ?";
+        try (Connection conn = new Conexao().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
+    public EnderecoCliente alterar(EnderecoCliente input) {
+        return null;
+    }
+
+    @Override
+    public EnderecoCliente buscarPorId(int id) {
+        return null;
+    }
+
+    @Override
+    public List<EnderecoCliente> listarTodos(String filtro) {
+        return List.of();
     }
 
 }

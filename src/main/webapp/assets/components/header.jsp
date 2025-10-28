@@ -41,6 +41,5 @@
             </div>
         </a>
     </header>
-    <script src="${pageContext.request.contextPath}/assets/js/logins.js"></script>
 </body>
 </html>

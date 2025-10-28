@@ -55,13 +55,13 @@
                     <input type="text" id="uf" name="uf">
                 </div>
 
-                <div class="tipo">
-                    <label for="tipo_endereco">Tipo Endereço</label>
-                    <select id="tipo_endereco" name="tipo_endereco">
-                        <option value="F">Faturamento</option>
-                        <option value="E">Entrega</option>
-                    </select>
-                </div>
+               <div class="tipo">
+                   <label for="tipo_endereco">Tipo Endereço</label>
+                   <select id="tipo_endereco" name="tipo_endereco" style="pointer-events: none;">
+                       <option value="F" <c:if test="${totalEnderecos == 0}">selected</c:if>>Faturamento</option>
+                       <option value="E" <c:if test="${totalEnderecos > 0}">selected</c:if>>Entrega</option>
+                   </select>
+               </div>
 
                 <div class="login">
                     <input type="hidden" id="id_cliente" name="id_cliente" value="${cliente.id}" readonly>

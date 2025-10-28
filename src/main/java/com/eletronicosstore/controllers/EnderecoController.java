@@ -20,8 +20,6 @@ public class EnderecoController extends HttpServlet {
         try {
             if ("cadastro".equals(action)) {
                 this.cadastrar(request, response);
-            } else if ("alterar".equals(action)) {
-                this.atualizarTipo(request, response);
             }
         } catch (IOException ex) {
             throw new ServletException(ex);
@@ -33,9 +31,7 @@ public class EnderecoController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
-        if ("listar".equals(action)) {
-            request.getRequestDispatcher("/WEB-INF/views/cliente/list-endereco.jsp").forward(request, response);
-        } else if ("cadastro".equals(action)) {
+        if ("cadastro".equals(action)) {
             String idClienteParam = request.getParameter("id_cliente");
             int id_cliente = 0;
 
@@ -48,6 +44,23 @@ public class EnderecoController extends HttpServlet {
             request.setAttribute("totalEnderecos", totalEnderecos);
 
             request.getRequestDispatcher("/WEB-INF/views/cliente/cad-endereco.jsp").forward(request, response);
+        } else if ("listar".equals(action)) {
+            int idCliente = Integer.parseInt(request.getParameter("id_cliente"));
+            EnderecoDao dao = new EnderecoDao();
+            request.setAttribute("enderecos", dao.listarPorCliente(idCliente));
+            request.getRequestDispatcher("/WEB-INF/views/cliente/list-endereco.jsp").forward(request, response);
+        } else if ("inativar".equals(action)) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            int idCliente = Integer.parseInt(request.getParameter("id_cliente"));
+            EnderecoDao dao = new EnderecoDao();
+            dao.inativar(id);
+            response.sendRedirect("endereco?action=listar&id_cliente=" + idCliente);
+        } else if ("reativar".equals(action)) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            int idCliente = Integer.parseInt(request.getParameter("id_cliente"));
+            EnderecoDao dao = new EnderecoDao();
+            dao.reativar(id);
+            response.sendRedirect("endereco?action=listar&id_cliente=" + idCliente);
         }
     }
 
@@ -82,22 +95,6 @@ public class EnderecoController extends HttpServlet {
             request.setAttribute("erro", e.getMessage());
             request.getRequestDispatcher("erro.jsp").forward(request, response);
             return;
-        } catch (Exception e) {
-            throw new ServletException(e);
-        }
-    }
-
-    private void atualizarTipo(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        int idEndereco = Integer.parseInt(request.getParameter("id_endereco"));
-        String tipoEndereco = request.getParameter("tipo_endereco");
-        int idCliente = Integer.parseInt(request.getParameter("id_cliente"));
-
-        EnderecoDao dao = new EnderecoDao();
-        try {
-            dao.alterarTipoEndereco(idEndereco, tipoEndereco, idCliente);
-            request.getRequestDispatcher("/WEB-INF/views/cliente/menu.jsp").forward(request, response);
         } catch (Exception e) {
             throw new ServletException(e);
         }

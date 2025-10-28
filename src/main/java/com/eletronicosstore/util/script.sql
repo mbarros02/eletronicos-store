@@ -1,14 +1,21 @@
--- Criação do banco de dados
-CREATE DATABASE IF NOT EXISTS eletronicos_store;
+-- ============================================================
+-- CRIAÇÃO DO BANCO DE DADOS
+-- ============================================================
+DROP DATABASE IF EXISTS eletronicos_store;
+CREATE DATABASE eletronicos_store;
 USE eletronicos_store;
 
--- Criação da tabela de grupos de usuários
+-- ============================================================
+-- TABELA: grupo_usuario
+-- ============================================================
 CREATE TABLE grupo_usuario (
     IDGRUPO INT PRIMARY KEY AUTO_INCREMENT,
     NOME ENUM('ADMINISTRADOR', 'ESTOQUISTA') NOT NULL
 );
 
--- Criação da tabela de usuários
+-- ============================================================
+-- TABELA: usuarios
+-- ============================================================
 CREATE TABLE usuarios (
     IDUSUARIO INT PRIMARY KEY AUTO_INCREMENT,
     NOME VARCHAR(255) NOT NULL,
@@ -20,11 +27,14 @@ CREATE TABLE usuarios (
     FOREIGN KEY (ID_GRUPO_USUARIO) REFERENCES grupo_usuario(IDGRUPO)
 );
 
--- Inserção de Gupos de Usuários
-INSERT INTO grupo_usuario (NOME) VALUES ('ADMINISTRADOR');
-INSERT INTO grupo_usuario (NOME) VALUES ('ESTOQUISTA');
+-- ============================================================
+-- INSERÇÃO DOS GRUPOS DE USUÁRIOS PADRÃO
+-- ============================================================
+INSERT INTO grupo_usuario (NOME) VALUES ('ADMINISTRADOR'), ('ESTOQUISTA');
 
--- Criação da tabela de produtos
+-- ============================================================
+-- TABELA: produtos
+-- ============================================================
 CREATE TABLE produtos (
     IDPRODUTO INT PRIMARY KEY AUTO_INCREMENT,
     NOME VARCHAR(200) NOT NULL,
@@ -35,7 +45,9 @@ CREATE TABLE produtos (
     STATUS TINYINT(1) DEFAULT 1
 );
 
--- Criação da tabela de imagens dos produtos
+-- ============================================================
+-- TABELA: imagem_produto
+-- ============================================================
 CREATE TABLE imagem_produto (
     IDIMAGEM INT PRIMARY KEY AUTO_INCREMENT,
     CAMINHO VARCHAR(255) NOT NULL,
@@ -43,7 +55,10 @@ CREATE TABLE imagem_produto (
     ID_PRODUTO INT,
     FOREIGN KEY (ID_PRODUTO) REFERENCES produtos(IDPRODUTO)
 );
--- Criação da tabela de clientes
+
+-- ============================================================
+-- TABELA: clientes
+-- ============================================================
 CREATE TABLE clientes (
     IDCLIENTE INT PRIMARY KEY AUTO_INCREMENT,
     NOME VARCHAR(255) NOT NULL,
@@ -54,7 +69,9 @@ CREATE TABLE clientes (
     SENHA VARCHAR(100) NOT NULL
 );
 
--- Criação da tabela de endereço de clientes
+-- ============================================================
+-- TABELA: enderecos_clientes
+-- ============================================================
 CREATE TABLE enderecos_clientes (
     IDENDERECO INT PRIMARY KEY AUTO_INCREMENT,
     CEP VARCHAR(255) NOT NULL,
@@ -69,7 +86,8 @@ CREATE TABLE enderecos_clientes (
     GIA VARCHAR(100),
     DDD VARCHAR(10),
     SIAFI VARCHAR(10),
-    TIPO_ENDERECO ENUM("F", "E") NOT NULL,
+    TIPO_ENDERECO ENUM('F', 'E') NOT NULL,
+    STATUS TINYINT(1) DEFAULT 1,
     ID_CLIENTE INT NOT NULL,
-    FOREIGN KEY (ID_CLIENTE) REFERENCES CLIENTES(IDCLIENTE)
+    FOREIGN KEY (ID_CLIENTE) REFERENCES clientes(IDCLIENTE)
 );

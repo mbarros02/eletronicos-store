@@ -56,7 +56,7 @@
                         <button type="submit" value="Atualizar">Atualizar</button>
                     </div>
                     <div class="buton">
-                        <a href="${pageContext.request.contextPath}/endereco?action=cadastro" class="link">Adicionar Endereço</a>
+                        <a href="endereco?action=cadastro&id_cliente=${sessionScope.cliente.id}" class="link">Adicionar Endereço</a>
                     </div>
                 </div>
             </form>

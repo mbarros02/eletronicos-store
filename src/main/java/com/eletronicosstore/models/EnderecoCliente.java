@@ -14,6 +14,7 @@ public class EnderecoCliente {
     private String ddd;
     private String siafi;
     private String tipoEndereco;
+    private int status;
     private int idCliente;
 
     public EnderecoCliente() {
@@ -79,4 +80,12 @@ public class EnderecoCliente {
 
     public int getIdCliente() { return idCliente;}
     public void setIdCliente(int idCliente) { this.idCliente = idCliente; }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }
