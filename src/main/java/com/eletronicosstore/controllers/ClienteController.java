@@ -125,7 +125,7 @@ public class ClienteController extends HttpServlet {
             ClienteDao dao = new ClienteDao();
             dao.alterar(cliente);
 
-            req.getRequestDispatcher("/WEB-INF/views/cliente/menu.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/cliente/home.jsp").forward(req, resp);
 
         } catch (IOException exception) {
             throw new ServletException(exception);
