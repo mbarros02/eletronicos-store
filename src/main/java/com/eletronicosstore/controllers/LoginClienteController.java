@@ -33,10 +33,11 @@ public class LoginClienteController extends HttpServlet {
 
         if (cliente != null && ValidarSenha.verificarSenha(senha, cliente.getSenha1())) {
             req.getSession().setAttribute("cliente", cliente);
+            req.getSession().setAttribute("id_cliente", cliente.getId());
             req.getRequestDispatcher("/WEB-INF/views/cliente/home.jsp").forward(req, resp);
         } else {
             req.setAttribute("erro", "Email ou senha inválidos!");
-            req.getRequestDispatcher("/WEB-INF/views/cliente/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/cliente/login-cliente.jsp").forward(req, resp);
         }
     }
 
