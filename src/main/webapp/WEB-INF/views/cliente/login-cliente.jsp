@@ -8,13 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/../assets/img/favicon.png">
     <title>Login</title>
 </head>
 
 <body>
     <%@ include file="/assets/components/header.jsp" %>
     <section id="login">
-        <div class="card">
+        <div class="card" style="height: 100%;">
             <div class="title">
                 <h1>TechStore</h1>
             </div>
@@ -30,7 +31,7 @@
             <form action="login-cliente" method="post">
             <input type="hidden" name="action" value="login-cliente">
                 <div class="login">
-                    <label for="">login</label>
+                    <label for="">Login</label>
                     <input type="email" name="email" required>
                 </div>
                 <div class="login">

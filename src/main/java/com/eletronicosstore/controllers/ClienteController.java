@@ -37,6 +37,8 @@ public class ClienteController extends HttpServlet {
         String action = req.getParameter("action");
         if ("alterar".equals(action)) {
             req.getRequestDispatcher("/WEB-INF/views/cliente/alt-cliente.jsp").forward(req, resp);
+        } else if ("home".equals(action)) {
+            req.getRequestDispatcher("/WEB-INF/views/cliente/home.jsp").forward(req, resp);
         }
     }
 
@@ -125,6 +127,7 @@ public class ClienteController extends HttpServlet {
             ClienteDao dao = new ClienteDao();
             dao.alterar(cliente);
 
+            req.getSession().setAttribute("cliente", cliente);
             req.getRequestDispatcher("/WEB-INF/views/cliente/home.jsp").forward(req, resp);
 
         } catch (IOException exception) {

@@ -7,48 +7,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/../assets/css/list-usuario.css">
-
-    <!-- Remover link stylesheet abaixo ⬇ (colocado de forma provisória) Ass: Nicolas -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/../assets/img/favicon.png">
     <title>Endereços</title>
 </head>
 <body>
-<!-- Remover header (colocado de forma provisória) Depois o Murilo se vira 😁 Ass: Nicolas -->
-    <header>
-        <a href="/" class="Logo">
-            <div class="img-logo">
-                <h1 class="Logo">TechStore</h1>
-            </div>
-        </a>
-        <div class="links">
-            <div>
-                <button id="btnLogin" class="Login">Olá, ${sessionScope.cliente.nome}</button>
-            </div>
-            <div id="opcoesLogin" class="opcoes">
-                <a href="${pageContext.request.contextPath}/cliente?action=alterar" class="Login">Alterar Dados</a></br>
-                <a href="${pageContext.request.contextPath}/endereco?action=listar&id_cliente=${sessionScope.cliente.id}" class="Login">Endereços</a></br>
-                <a href="/index.jsp" class="Login" style="color: red;">Sair</a>
-            </div>
-            <div>
-                <a href="${pageContext.request.contextPath}/produto?action=listarPublico" class="Produtos">Produtos</a>
-            </div>
-            <div>
-                <a href="\" class="Categoria">Categoria</a>
-            </div>
-            <div>
-                <a href="\" class="Sobre">Sobre Nós</a>
-            </div>
-        </div>
-        <a href="${pageContext.request.contextPath}/carrinho" class="carrinho">
-            <div class="img">
-                <img src="${pageContext.request.contextPath}/../assets/img/carrinho.png" alt="carrinho">
-            </div>
-        </a>
-    </header>
-
-    <script src="${pageContext.request.contextPath}/assets/js/logins.js"></script>
-
+<%@ include file="/../../../assets/components/header-cliente.jsp" %>
 <section>
     <div class="dashboard-container">
         <div class="content-area">

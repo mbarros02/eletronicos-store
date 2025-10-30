@@ -11,10 +11,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/../assets/img/favicon.png">
     <title>Alterar</title>
 </head>
 <body>
-    <%@ include file="/assets/components/header.jsp" %>
+    <%@ include file="/../../../assets/components/header-cliente.jsp" %>
     <section id="login">
         <div class="card">
             <div class="title">
@@ -30,13 +31,13 @@
                 </div>
                 <div class="dataNascimento">
                     <label>Data de Nascimento:</label>
-                    <input type="date" name="dataNasc" value="<fmt:formatDate value="${cliente.dataNascimento}" pattern="yyyy-MM-dd"/>" required>
+                    <input type="date" name="dataNasc" value='${cliente.dataNascimento}' pattern='dd-MM-yyyy' required>
                 </div>
                 <div class="sexo">
                     <label for="">Sexo</label>
                     <select name="sexo">
-                        <option value="1" <c:if test="${cliente.sexo == 'Masculino'}">selected</c:if>>Masculino</option>
-                        <option value="2" <c:if test="${cliente.sexo == 'Feminino'}">selected</c:if>>Feminino</option>
+                        <option value="Masculino" <c:if test="${cliente.sexo == 'Masculino'}">selected="selected"</c:if>>Masculino</option>
+                        <option value="Feminino" <c:if test="${cliente.sexo == 'Feminino'}">selected="selected"</c:if>>Feminino</option>
                     </select>
                 </div>
                 <div class="login">

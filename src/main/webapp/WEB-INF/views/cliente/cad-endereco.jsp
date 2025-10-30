@@ -11,11 +11,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/../assets/img/favicon.png">
     <title>Cadastro de Cliente</title>
 </head>
 <body>
-    <%@ include file="/assets/components/header.jsp"%>
-
+    <%@ include file="/assets/components/header-cliente.jsp"%>
     <section id="login">
         <div class="card">
             <div class="title">
@@ -57,7 +57,7 @@
 
                <div class="tipo">
                    <label for="tipo_endereco">Tipo Endereço</label>
-                   <select id="tipo_endereco" name="tipo_endereco" style="pointer-events: none;">
+                   <select id="tipo_endereco" name="tipo_endereco" style="pointer-events: none; appearance: none;">
                        <option value="F" <c:if test="${totalEnderecos == 0}">selected</c:if>>Faturamento</option>
                        <option value="E" <c:if test="${totalEnderecos > 0}">selected</c:if>>Entrega</option>
                    </select>
@@ -74,7 +74,7 @@
                     </div>
                     <c:if test="${totalEnderecos > 0}">
                         <div class="buton">
-                            <a href="${pageContext.request.contextPath}/login?action=login-cliente" class="link">Finalizar</a>
+                            <a href="${pageContext.request.contextPath}/cliente?action=home" class="link">Home</a>
                         </div>
                     </c:if>
                 </div>

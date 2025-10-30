@@ -52,6 +52,7 @@ public class ClienteDao implements Base<Cliente> {
             stmt.setString(3, cliente.getSexo());
             stmt.setString(4, cliente.getSenha1());
             stmt.setInt(5, cliente.getId());
+
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException e) {

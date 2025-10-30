@@ -12,11 +12,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/../assets/img/favicon.png">
     <title>${produto.nome}</title>
 </head>
 <body>
-    <%@ include file="/assets/components/header.jsp" %>
-
+    <c:choose>
+        <c:when test="${not empty sessionScope.id_cliente}">
+            <%@ include file="/assets/components/header-cliente.jsp" %>
+        </c:when>
+        <c:otherwise>
+            <%@ include file="/assets/components/header.jsp" %>
+        </c:otherwise>
+    </c:choose>
     <section>
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
@@ -42,16 +49,28 @@
             <div class="avaliacao">
                 <p>Avaliação: ${produto.avaliacao}</p>
             </div>
-            <div class="buton">
-                <form action="${pageContext.request.contextPath}/carrinho" method="post">
-                    <input type="hidden" name="action" value="adicionar" />
-                    <input type="hidden" name="idProduto" value="${produto.id}" />
-                    <button type="submit">Comprar</button>
-                </form>
-            </div>
+            <c:choose>
+                <c:when test="${not empty sessionScope.id_cliente}">
+                    <div class="buton">
+                        <form action="${pageContext.request.contextPath}/carrinho" method="post">
+                            <input type="hidden" name="action" value="adicionar" />
+                            <input type="hidden" name="idProduto" value="${produto.id}" />
+                            <button type="submit">Comprar</button>
+                        </form>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="buton">
+                        <form action="${pageContext.request.contextPath}/carrinho" method="post">
+                            <input type="hidden" name="action" value="adicionar" />
+                            <input type="hidden" name="idProduto" value="${produto.id}" />
+                            <button type="submit" disabled>Comprar</button>
+                        </form>
+                    </div>
+                </c:otherwise>
+            </c:choose>
         </div>
     </section>
-
     <%@ include file="/assets/components/footer.jsp" %>
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>

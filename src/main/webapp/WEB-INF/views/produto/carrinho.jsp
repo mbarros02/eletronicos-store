@@ -19,10 +19,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/../assets/img/favicon.png">
     <title>Carrinho</title>
 </head>
 <body>
-    <%@ include file="/assets/components/header.jsp" %>
+    <c:choose>
+        <c:when test="${not empty sessionScope.id_cliente}">
+            <%@ include file="/assets/components/header-cliente.jsp" %>
+        </c:when>
+        <c:otherwise>
+            <%@ include file="/assets/components/header.jsp" %>
+        </c:otherwise>
+    </c:choose>
     <section>
         <div class="card-content">
             <c:choose>

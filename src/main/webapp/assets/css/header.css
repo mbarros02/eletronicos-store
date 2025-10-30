@@ -59,3 +59,26 @@ header>.carrinho {
     justify-content: center;
     width: 25%;
 }
+
+button {
+    border: none;
+    background-color: #3b82f6;
+    color: white;
+    padding: 9px;
+    border-radius: 7px;
+    margin-right: 17px;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.links {
+    display: flex;
+    gap: 20px;
+}
+.carrinho {
+    margin-left: 10px;
+}
