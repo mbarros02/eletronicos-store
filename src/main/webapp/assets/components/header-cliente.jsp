@@ -13,7 +13,7 @@
 </head>
 <body>
     <header>
-            <a href="/" class="Logo">
+            <a href="${pageContext.request.contextPath}/cliente?action=home" class="Logo">
                 <div class="img-logo">
                     <h1 class="Logo">TechStore</h1>
                 </div>

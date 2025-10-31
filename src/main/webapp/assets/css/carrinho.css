@@ -27,6 +27,7 @@ section .card-content {
 }
 .card-produto .titulo-produto{
     width: 70%;
+    padding: 20px;
 }
 .card-produto .titulo-produto>div{
     margin: 10px;
@@ -117,9 +118,20 @@ section .resumo{
     font-family: inter;
 }
 .cardbutton>div>div>a:hover {}
-
-/* Estilos para carrinho vazio */
-.carrinho-vazio {
+.cardbutton button{
+    color: white;
+    background-color: #3b82f6;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: inter;
+}
+.carrinho-vazio{
     text-align: center;
     padding: 50px;
     background-color: #f8f9fa;
@@ -138,7 +150,6 @@ section .resumo{
     font-size: 16px;
 }
 
-/* Controles de quantidade */
 .quantidade-controls {
     display: flex;
     align-items: center;
@@ -167,6 +178,7 @@ section .resumo{
     font-weight: bold;
     min-width: 30px;
     text-align: center;
+    padding: 20px;
 }
 
 .btn-remover {
@@ -183,7 +195,6 @@ section .resumo{
     background-color: #b91c1c;
 }
 
-/* Seção de frete */
 .frete-section {
     margin: 20px 0;
     padding: 15px;

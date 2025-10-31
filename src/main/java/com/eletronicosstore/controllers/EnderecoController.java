@@ -64,7 +64,6 @@ public class EnderecoController extends HttpServlet {
         }
     }
 
-
     private void cadastrar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ViaCep viaCep = new ViaCep();

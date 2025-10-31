@@ -23,21 +23,14 @@
     <title>Carrinho</title>
 </head>
 <body>
-    <c:choose>
-        <c:when test="${not empty sessionScope.id_cliente}">
-            <%@ include file="/assets/components/header-cliente.jsp" %>
-        </c:when>
-        <c:otherwise>
-            <%@ include file="/assets/components/header.jsp" %>
-        </c:otherwise>
-    </c:choose>
+    <%@ include file="/assets/components/header-cliente.jsp" %>
     <section>
         <div class="card-content">
             <c:choose>
                 <c:when test="${empty carrinho}">
                     <div class="carrinho-vazio">
                         <h2>Carrinho vazio</h2>
-                        <p>Adicione produtos ao seu carrinho para continuar.</p>
+                        <p>Adicione produtos ao seu carrinho para continuar</p>
                     </div>
                 </c:when>
                 <c:otherwise>
@@ -57,11 +50,8 @@
 
                             <div class="contador">
                                 <div class="quantidade-controls">
-                                    <button onclick="alterarQuantidade(${item.produto.id}, 'diminuir')" class="btn-quantidade">-</button>
-                                    <span class="quantidade">${item.quantidade}</span>
-                                    <button onclick="alterarQuantidade(${item.produto.id}, 'aumentar')" class="btn-quantidade">+</button>
+                                    <span class="quantidade">Qtd: ${item.quantidade}</span>
                                 </div>
-                                <button onclick="removerProduto(${item.produto.id})" class="btn-remover">Remover</button>
                             </div>
 
                             <div class="preco">
@@ -83,26 +73,6 @@
                     <p class="valor">R$ <fmt:formatNumber value="${subtotal}" pattern="#,##0.00" /></p>
                 </div>
 
-                <div class="frete-section">
-                    <h3>Calcular Frete</h3>
-                    <form method="get" action="checkout">
-                        <div class="frete-options">
-                            <label>
-                                <input type="radio" name="frete" value="economico" onchange="atualizarFrete()" ${frete == 15.00 ? 'checked' : ''}>
-                                Econômico - R$ 15,00 (5-7 dias)
-                            </label>
-                            <label>
-                                <input type="radio" name="frete" value="normal" onchange="atualizarFrete()" ${frete == 25.00 ? 'checked' : ''}>
-                                Normal - R$ 25,00 (3-5 dias)
-                            </label>
-                            <label>
-                                <input type="radio" name="frete" value="expresso" onchange="atualizarFrete()" ${frete == 35.00 ? 'checked' : ''}>
-                                Expresso - R$ 35,00 (1-2 dias)
-                            </label>
-                        </div>
-                    </form>
-                </div>
-
                 <div class="frete-valor">
                     <p class="description">Frete:</p>
                     <p class="valor">R$ <fmt:formatNumber value="${frete}" pattern="#,##0.00" /></p>
@@ -118,26 +88,17 @@
 
             <div class="cardbutton">
                 <div>
-                    <div>
-                        <c:choose>
-                            <c:when test="${not empty sessionScope.cliente}">
-                                <a onclick="return calcularFrete()">Finalizar Compra</a>
-                            </c:when>
-                            <c:otherwise>
-                                <a href="${pageContext.request.contextPath}/login?action=login-cliente">Finalizar Compra</a>
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
-                    <div>
-                        <c:choose>
-                            <c:when test="${not empty sessionScope.cliente}">
-                                <a href="${pageContext.request.contextPath}/cliente?action=home">Continuar Comprando</a>
-                            </c:when>
-                            <c:otherwise>
-                                <a href="/index.jsp">Continuar Comprando</a>
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
+                    <form method="get" action="">
+                        <div class="frete-options">
+                            <c:forEach var="endereco" items="${enderecos}">
+                                <label>
+                                    <input type="radio" name="enderecoSelecionado" value="${endereco.id}" required>
+                                    ${endereco.logradouro}, ${endereco.bairro}
+                                </label>
+                            </c:forEach>
+                        </div>
+                        <button type="submit">Comprar</button>
+                    </form>
                 </div>
             </div>
         </div>
