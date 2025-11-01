@@ -10,7 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CadastrarUsuariosSucessoTest {
+public class CadastrarUsuariosTest {
 
     private Usuario usuario;
     private UsuarioDao dao;

@@ -33,7 +33,7 @@ public class UsuarioDao implements Base<Usuario> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao cadastrar usuário!");
         }
-        return null;
+        return input;
     }
 
     @Override
