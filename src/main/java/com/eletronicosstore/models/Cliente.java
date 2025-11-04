@@ -14,12 +14,13 @@ public class Cliente {
 
     public Cliente() {}
 
-    public Cliente(int id, String nome, String sexo, String email, String cpf, String senha1) {
+    public Cliente(int id, String nome, String cpf, String sexo, LocalDate dataNasc, String email, String senha1) {
         this.id = id;
         this.nome = nome;
-        this.sexo = sexo;
-        this.email = email;
         this.cpf = cpf;
+        this.sexo = sexo;
+        this.dataNascimento = dataNasc;
+        this.email = email;
         this.senha1 = senha1;
     }
 

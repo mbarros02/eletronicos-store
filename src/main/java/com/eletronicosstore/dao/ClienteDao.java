@@ -4,6 +4,7 @@ import com.eletronicosstore.models.Cliente;
 import com.eletronicosstore.util.Conexao;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ClienteDao implements Base<Cliente> {
@@ -83,17 +84,19 @@ public class ClienteDao implements Base<Cliente> {
 
         try (Connection conn = new Conexao().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
-
             stmt.setString(1, email);
-
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
+                java.sql.Date sqlDate = rs.getDate("DATA_NASC");
+                LocalDate dataNasc = (sqlDate != null) ? sqlDate.toLocalDate() : null;
+
                 Cliente cliente = new Cliente(
                         rs.getInt("IDCLIENTE"),
                         rs.getString("NOME"),
                         rs.getString("CPF"),
                         rs.getString("SEXO"),
+                        dataNasc,                     // agora é LocalDate
                         rs.getString("EMAIL"),
                         rs.getString("SENHA")
                 );
