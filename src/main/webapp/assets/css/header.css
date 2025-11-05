@@ -74,6 +74,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: all 1s
+ease;
+    position: relative;
 }
 .links {
     display: flex;
@@ -82,3 +85,14 @@ header {
 .carrinho {
     margin-left: 10px;
 }
+
+.name{
+    color: #3b82f6;
+    font-family: 'Inter';
+    cursor: pointer;
+}
+.content{
+    width: 11%;
+}
+.opcoes{z-index: 99;position: absolute;right: 321px;top: 77px;background: white;padding: 0px 21px;transition: all 1.5s ease;}
+.opcoes>a{text-decoration: none;font-family: 'Inter';color: #387ceb;margin-bottom: 31px;}

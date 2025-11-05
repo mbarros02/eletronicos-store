@@ -27,7 +27,7 @@
 
                 <div class="login">
                     <label for="cep">CEP</label>
-                    <input type="text" id="cep" name="cep" required>
+                    <input type="text" id="cep" name="cep" onblur="buscarEnderecoPorCep(cep)" required>
                 </div>
 
                 <div class="login">

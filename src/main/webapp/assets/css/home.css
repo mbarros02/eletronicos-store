@@ -13,12 +13,12 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    width: 100%;
 }
 
 .swiper {
-    width: 45%;
-    height: 400px;
-    margin: 20px 20px;
+    width: 100%;
+    height: 100%;
 }
 
 .swiper-slide {
@@ -78,9 +78,9 @@
 #Produtos>.content>.card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: 25%;
-    height: 600px;
+    /* justify-content: space-between; */
+    width: 30.3%;
+    height: auto;
     box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
@@ -88,6 +88,7 @@
     border-radius: 10px;
     padding: 0;
     text-decoration: none;
+    margin-top: 28px;
 }
 
 #Produtos>.content>.card>.img {
@@ -109,7 +110,7 @@
 
 #Produtos>.content>.card>.content-card {
     width: 90%;
-    height: 40%;
+    height: auto;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -128,6 +129,15 @@
 
 #Produtos>.content>.card>.content-card>.description {
 
+ /* Compatibilidade antiga */
+
+ /* Recomendado */
+
+ /* Limita a largura */
+
+ max-width: 100%; /* Limita a largura */
+
+ word-wrap: break-word;
 }
 
 #Produtos>.content>.card>.content-card>.description>.link-categoria {
@@ -352,4 +362,11 @@
 
 a {
     text-decoration: none;
+}
+
+.buton{
+padding: 10px 0px;
+}
+.img{
+    width: 100%;
 }

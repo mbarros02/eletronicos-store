@@ -27,7 +27,17 @@
 
     <section id="pincipal">
         <div>
-            <h1>Eletronicos</h1>
+           <div class="swiper mySwiper">
+                       <div class="swiper-wrapper">
+                               <div class="swiper-slide">
+                                   <img class="img" src="${pageContext.request.contextPath}/assets/img/bg1.webp" alt="Imagem do produto"/>
+                               </div>
+                               <div class="swiper-slide">
+                                                                  <img class="img" src="${pageContext.request.contextPath}/assets/img/bg2.webp" alt="Imagem do produto"/>
+                                                              </div>
+                       </div>
+                       <div class="swiper-pagination"></div>
+                   </div>
         </div>
     </section>
 

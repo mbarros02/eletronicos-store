@@ -20,14 +20,6 @@
             </a>
             <div class="links">
                 <div>
-                    <button id="btnCliente" class="Login">Olá, ${sessionScope.cliente.nome}</button>
-                </div>
-                <div id="opcoesCliente" class="opcoes" style="display: none;">
-                    <a href="${pageContext.request.contextPath}/cliente?action=alterar" class="Login">Alterar Dados</a></br>
-                    <a href="${pageContext.request.contextPath}/endereco?action=listar&id_cliente=${sessionScope.cliente.id}" class="Login">Endereços</a></br>
-                    <a href="${pageContext.request.contextPath}/logout" class="Login" style="color: red;">Sair</a>
-                </div>
-                <div>
                     <a href="${pageContext.request.contextPath}/produto?action=listarPublico" class="Produtos">Produtos</a>
                 </div>
                 <div>
@@ -37,12 +29,21 @@
                     <a href="\" class="Sobre">Sobre Nós</a>
                 </div>
             </div>
+            <div class="content">
+                                <a id="btnCliente" class="name">Olá, ${sessionScope.cliente.nome}</a>
+                            </div>
+
             <a href="${pageContext.request.contextPath}/carrinho" class="carrinho">
                 <div class="img">
                     <img src="${pageContext.request.contextPath}/../assets/img/carrinho.png" alt="carrinho">
                 </div>
             </a>
     </header>
+    <div id="opcoesCliente" class="opcoes" style="display: none;">
+        <a href="${pageContext.request.contextPath}/cliente?action=alterar" class="Login">Alterar Dados</a></br>
+        <a href="${pageContext.request.contextPath}/endereco?action=listar&id_cliente=${sessionScope.cliente.id}" class="Login">Endereços</a></br>
+        <a href="${pageContext.request.contextPath}/logout" class="Login" style="color: red;">Sair</a>
+    </div>
     <script src="${pageContext.request.contextPath}/../assets/js/opcoes-cliente.js"></script>
 </body>
 </html>

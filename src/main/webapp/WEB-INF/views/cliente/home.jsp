@@ -15,6 +15,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/home.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -23,41 +24,108 @@
 </head>
 <body>
     <%@ include file="/../../../assets/components/header-cliente.jsp" %>
-    <section id="Produtos">
-        <div class="col">
-            <div class="title">
-                <h1>Produtos Gerais</h1>
+    <section id="pincipal">
+            <div>
+               <div class="swiper mySwiper">
+                           <div class="swiper-wrapper">
+                                   <div class="swiper-slide">
+                                       <img class="img" src="${pageContext.request.contextPath}/assets/img/bg1.webp" alt="Imagem do produto"/>
+                                   </div>
+                                   <div class="swiper-slide">
+                                                                      <img class="img" src="${pageContext.request.contextPath}/assets/img/bg2.webp" alt="Imagem do produto"/>
+                                                                  </div>
+                           </div>
+                           <div class="swiper-pagination"></div>
+                       </div>
             </div>
-        </div>
-        <div class="content">
-            <c:forEach var="produto" items="${produtos}">
-                <div class="card">
-                    <div class="img">
-                        <img src="${pageContext.request.contextPath}/${produto.imagens[0].caminho}">
-                    </div>
-                    <div class="content-card">
-                        <div class="title-card">
-                            <h3>${produto.nome}</h3>
-                        </div>
-                        <div class="description">
-                            <p>${produto.descricao}</p>
-                            <div>R$ <fmt:formatNumber value="${produto.preco}" type="currency" currencySymbol="R$" /></div>
-                        </div>
-                        <div class="buton">
-                            <a href="${pageContext.request.contextPath}/produto?action=visualizar&id=${produto.id}">
-                                <button>Ver detalhes</button>
-                            </a>
-                            <form action="${pageContext.request.contextPath}/carrinho" method="post" style="display:inline;">
-                                <input type="hidden" name="action" value="adicionar" />
-                                <input type="hidden" name="idProduto" value="${produto.id}" />
-                                <button type="submit">Adicionar ao Carrinho</button>
-                            </form>
-                        </div>
-                    </div>
+        </section>
+
+        <section id="Produtos">
+            <div class="col">
+                <div class="title">
+                    <h1>Produtos Gerais</h1>
                 </div>
-            </c:forEach>
-        </div>
-    </section>
+            </div>
+            <div class="content">
+                <c:forEach var="produto" items="${produtos}">
+                    <div class="card">
+                        <div class="img">
+                            <img src="${pageContext.request.contextPath}/${produto.imagens[0].caminho}">
+                        </div>
+                        <div class="content-card">
+                            <div class="title-card">
+                                <h3>${produto.nome}</h3>
+                            </div>
+                            <div class="description">
+                                <p>${produto.descricao}</p>
+                                <div>R$ <fmt:formatNumber value="${produto.preco}" type="currency" currencySymbol="R$" /></div>
+                            </div>
+                            <div class="buton">
+                                <a href="${pageContext.request.contextPath}/produto?action=visualizar&id=${produto.id}">
+                                    <button>Ver detalhes</button>
+                                </a>
+                                <form action="${pageContext.request.contextPath}/carrinho" method="post" style="display:inline;">
+                                    <input type="hidden" name="action" value="adicionar" />
+                                    <input type="hidden" name="idProduto" value="${produto.id}" />
+                                    <button type="submit">Adicionar ao Carrinho</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </section>
+
+        <section id="Produtos">
+            <div class="col">
+                <div class="title">
+                    <h1>Produtos em Destaque</h1>
+                </div>
+            </div>
+            <div class="content">
+                <c:forEach var="produto" items="${produtos}">
+                    <div class="card">
+                        <div class="img">
+                            <img src="${pageContext.request.contextPath}/${produto.imagens[0].caminho}">
+                        </div>
+                        <div class="content-card">
+                            <div class="title-card">
+                                <h3>${produto.nome}</h3>
+                            </div>
+                            <div class="description">
+                                <p>${produto.descricao}</p>
+                                <div>R$ <fmt:formatNumber value="${produto.preco}" type="currency" currencySymbol="R$" /></div>
+                            </div>
+                            <div class="buton">
+                                <a href="${pageContext.request.contextPath}/produto?action=visualizar&id=${produto.id}">
+                                    <button>Ver detalhes</button>
+                                </a>
+                                <form action="${pageContext.request.contextPath}/carrinho" method="post" style="display:inline;">
+                                    <input type="hidden" name="action" value="adicionar" />
+                                    <input type="hidden" name="idProduto" value="${produto.id}" />
+                                    <button type="submit">Adicionar ao Carrinho</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </section>
+
+        <section id="Noticias">
+            <div class="title">
+                <h1>Receba as Últimas Novidades e Ofertas!</h1>
+            </div>
+            <div class="description">
+                <h2>Inscreva-se em nossa newsletter para descontos exclusivos e lançamentos.</h2>
+            </div>
+            <div class="enviar">
+                <input type="text" placeholder="Seu e-mail">
+                <button>Inscrever</button>
+            </div>
+        </section>
     <%@ include file="/assets/components/footer.jsp" %>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 </body>
 </html>
