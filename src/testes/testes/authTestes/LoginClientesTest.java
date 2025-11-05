@@ -15,7 +15,6 @@ public class LoginClientesTest {
     private Cliente cliente;
     private ClienteDao dao;
     private String hash = "123456";
-    private String email = "testelogin5@barros.com";
 
     @Before
     public void configuracoesTeste() {
@@ -26,12 +25,27 @@ public class LoginClientesTest {
     }
 
     @Test
-    public void testarLoginCliente() {
-
+    public void testarLoginClienteValido() {
+        String email = "usuTeste@teste.com";
         cliente = dao.buscarPorEmail(email);
         assertNotNull("O cliente deve existir no banco.", cliente);
         boolean validaSenha = ValidarSenha.verificarSenha("123456", cliente.getSenha1());
-        assertTrue("Login com Sucesso", validaSenha);
+        assertTrue("Login com Sucesso!", validaSenha);
+    }
 
+    @Test
+    public void testarLoginClienteInvalido() {
+        String email = "testelogin5@barros.com";
+        cliente = dao.buscarPorEmail(email);
+        assertNull("O cliente não existe no banco.", cliente);
+    }
+
+    @Test
+    public void testarLoginClienteSenhaInvalida() {
+        String email = "usuTeste@teste.com";
+        cliente = dao.buscarPorEmail(email);
+        assertNotNull("O cliente não existe no banco.", cliente);
+        boolean validaSenha = ValidarSenha.verificarSenha("1234", cliente.getSenha1());
+        assertFalse("Falha de Login!", validaSenha);
     }
 }

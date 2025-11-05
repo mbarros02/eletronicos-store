@@ -18,6 +18,8 @@ public class CadastrarClienteTest {
     private Cliente cliente;
     private ClienteDao dao;
     private String hash = "123456";
+    private String senhaInvalida = "123";
+    private String cpfInvalido = "444.444.444-89";
     private int tamanhoSenha = hash.length();
     private LocalDate dataEspecifica = LocalDate.of(2002,1,26);
 
@@ -25,7 +27,7 @@ public class CadastrarClienteTest {
     public void configuracoesTeste() {
         if(tamanhoSenha >= 4) {
             hash = ValidarSenha.hashSenha(hash);
-            cliente = new Cliente(2,"Marcello", "871.422.930-71", "M", dataEspecifica, "testelogin@barros.com", hash);
+            cliente = new Cliente(7, "Usuario-Teste", "483.379.270-20", "M", dataEspecifica, "usuTeste@teste.com", hash);
             dao = new ClienteDao();
         } else {
             System.out.println("Senha inválida!");
@@ -40,22 +42,20 @@ public class CadastrarClienteTest {
 
     @Test
     public void testarCpfInvalido() {
-        boolean cpfValido = ValidarCpf.valido(cliente.getCpf());
-        assertFalse("O cpf é válido.", cpfValido);
+        boolean cpfValido = ValidarCpf.valido(cpfInvalido);
+        assertFalse("O cpf é inválido.", cpfValido);
     }
 
     @Test
     public void testarSenhaValida() {
         int tamanhoSenha = cliente.getSenha1().length();
         assertTrue("A senha deve conter no mínimo 4 caracteres.", tamanhoSenha >= 4);
-        System.out.println("Senha válida!");
     }
 
     @Test
     public void testarSenhaInvalida() {
-        int tamanhoSenha = cliente.getSenha1().length();
+        int tamanhoSenha = senhaInvalida.length();
         assertTrue("A senha deve conter no mínimo 4 caracteres.", tamanhoSenha < 4);
-        System.out.println("Senha inválida!");
     }
 
     @Test
@@ -70,13 +70,13 @@ public class CadastrarClienteTest {
 
     @Test
     public void testarSenhaCriptografada() {
-        boolean heshado = ValidarSenha.verificarSenha(cliente.getSenha1(),hash);
-        assertFalse("Senha correta, criptografada!", heshado);
+        boolean heshado = ValidarSenha.verificarSenha("123456",hash);
+        assertTrue("Senha correta, criptografada!", heshado);
     }
 
     @Test
     public void testarSenhaNaoCriptografada() {
-        boolean heshado = ValidarSenha.verificarSenha(cliente.getSenha1(),hash);
-        assertTrue("Senha incorreta, não hashada!", heshado);
+        boolean heshado = ValidarSenha.verificarSenha("123",hash);
+        assertFalse("Senha incorreta, não hashada!", heshado);
     }
 }

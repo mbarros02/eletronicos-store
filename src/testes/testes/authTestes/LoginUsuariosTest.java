@@ -26,7 +26,7 @@ public class LoginUsuariosTest {
     }
 
     @Test
-    public void testarLoginCliente() {
+    public void testarLoginUsuarioValido() {
 
         usuario = dao.buscarPorEmail(email);
         assertNotNull("O cliente deve existir no banco.", usuario);
