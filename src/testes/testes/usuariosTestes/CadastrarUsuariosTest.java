@@ -25,7 +25,7 @@ public class CadastrarUsuariosTest {
     public void configuracoesTest() {
         if(tamanhoSenha >= 4) {
             hash = ValidarSenha.hashSenha(hash);
-            input = new Usuario(10,"User_Teste", "871.422.930-71", "userTeste@teste.com", hash, 1);
+            input = new Usuario(10,"User_Teste", "447.668.848-92", "adm@teste.com", hash, 1);
             dao = new UsuarioDao();
         } else {
             System.out.println("Senha inválida!");
