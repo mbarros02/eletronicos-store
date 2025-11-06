@@ -4,7 +4,7 @@ const radiosPagamento = document.querySelectorAll('input[name="formaPagamento"]'
 
     radiosPagamento.forEach(radio => {
         radio.addEventListener('change', () => {
-            cartaoInfo.style.display = (radio.value === 'Cartao') ? 'block' : 'none';
+            cartaoInfo.style.display = (radio.value === 'Cartão') ? 'block' : 'none';
         });
     });
 
@@ -16,7 +16,7 @@ const radiosPagamento = document.querySelectorAll('input[name="formaPagamento"]'
             return;
         }
 
-        if (formaPagamento.value === 'cartao') {
+        if (formaPagamento.value === 'Cartão') {
             const numero = document.querySelector('input[name="numeroCartao"]').value.trim();
             const nome = document.querySelector('input[name="nomeCartao"]').value.trim();
             const cvv = document.querySelector('input[name="codigoVerificador"]').value.trim();
