@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/../assets/img/favicon.png">
-    <title>Carrinho</title>
+    <title>Checkout</title>
 </head>
 <body>
     <%@ include file="/assets/components/header-cliente.jsp" %>
@@ -88,16 +88,59 @@
 
             <div class="cardbutton">
                 <div>
-                    <form method="get" action="">
+                    <form method="post" action="checkout">
                         <div class="frete-options">
+                            <h3>Endereços</h3>
                             <c:forEach var="endereco" items="${enderecos}">
                                 <label>
                                     <input type="radio" name="enderecoSelecionado" value="${endereco.id}" required>
                                     ${endereco.logradouro}, ${endereco.bairro}
-                                </label>
+                                </label><br>
                             </c:forEach>
                         </div>
-                        <button type="submit">Comprar</button>
+
+                        <div class="frete-options">
+                            <h3>Forma de Pagamento</h3>
+                            <label>
+                                <input type="radio" name="formaPagamento" value="Boleto" required> Boleto Bancário
+                            </label><br>
+                            <label>
+                                <input type="radio" name="formaPagamento" value="Cartao" required> Cartão de Crédito
+                            </label>
+                        </div>
+
+                        <div id="cartao-info" style="display: none; margin-top: 10px;">
+                            <p>Dados do Cartão</p>
+                            <label>Número do Cartão:
+                                <input type="text" name="numeroCartao" maxlength="16" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+                            </label><br>
+                            <label>Nome Completo:
+                                <input type="text" name="nomeCartao">
+                            </label><br>
+                            <label>Código Verificador (CVV):
+                                <input type="text" name="codigoVerificador" maxlength="3" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+                            </label><br>
+                            <label>Data de Vencimento:
+                                <input type="date" name="dataVencimento">
+                            </label><br>
+                            <label>Quantidade de Parcelas:
+                                <select name="parcelas">
+                                    <option value=""></option>
+                                    <option value="1x">1x</option>
+                                    <option value="2x">2x</option>
+                                    <option value="3x">3x</option>
+                                    <option value="4x">4x</option>
+                                    <option value="5x">5x</option>
+                                    <option value="5x">6x</option>
+                                    <option value="5x">7x</option>
+                                    <option value="5x">8x</option>
+                                    <option value="5x">9x</option>
+                                    <option value="5x">10x</option>
+                                </select>
+                            </label>
+                        </div>
+                        <button type="button" onclick="window.history.back()">Voltar</button>
+                        <button type="submit">Próximo</button>
                     </form>
                 </div>
             </div>
@@ -105,5 +148,6 @@
     </section>
     <%@ include file="/assets/components/footer.jsp" %>
     <script src="${pageContext.request.contextPath}/assets/js/carrinho.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/pagamento.js"></script>
 </body>
 </html>
