@@ -4,7 +4,7 @@ const radiosPagamento = document.querySelectorAll('input[name="formaPagamento"]'
 
     radiosPagamento.forEach(radio => {
         radio.addEventListener('change', () => {
-            cartaoInfo.style.display = (radio.value === 'cartao') ? 'block' : 'none';
+            cartaoInfo.style.display = (radio.value === 'Cartao') ? 'block' : 'none';
         });
     });
 

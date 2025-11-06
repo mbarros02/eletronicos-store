@@ -127,6 +127,28 @@ public class EnderecoDao implements Base<EnderecoCliente>{
 
     @Override
     public EnderecoCliente buscarPorId(int id) {
+        String sql = "SELECT * FROM enderecos_clientes WHERE idendereco = ?";
+        try (Connection conn = new Conexao().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                EnderecoCliente endereco = new EnderecoCliente();
+                endereco.setId(rs.getInt("idendereco"));
+                endereco.setCep(rs.getString("cep"));
+                endereco.setLogradouro(rs.getString("logradouro"));
+                endereco.setBairro(rs.getString("bairro"));
+                endereco.setUf(rs.getString("uf"));
+                endereco.setTipoEndereco(rs.getString("tipo_endereco"));
+                endereco.setStatus(rs.getInt("status"));
+                endereco.setIdCliente(rs.getInt("id_cliente"));
+                return endereco;
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
 
