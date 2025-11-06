@@ -33,10 +33,6 @@ public class CheckoutController extends HttpServlet {
         double total = subtotal + (frete != null ? frete : 0.00);
 
         Cliente cliente = (Cliente) session.getAttribute("cliente");
-        if (cliente == null) {
-            resp.sendRedirect("login");
-            return;
-        }
 
         EnderecoDao enderecoDao = new EnderecoDao();
         List<EnderecoCliente> enderecos = enderecoDao.listarPorCliente(cliente.getId());
@@ -48,6 +44,49 @@ public class CheckoutController extends HttpServlet {
         req.setAttribute("enderecos", enderecos);
 
         req.getRequestDispatcher("/WEB-INF/views/cliente/checkout.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+
+        @SuppressWarnings("unchecked")
+        List<ItemCarrinho> carrinho = (List<ItemCarrinho>) session.getAttribute("carrinho");
+        Double frete = (Double) session.getAttribute("freteSelecionado");
+        Cliente cliente = (Cliente) session.getAttribute("cliente");
+
+        if (carrinho == null || carrinho.isEmpty()) {
+            resp.sendRedirect("carrinho");
+            return;
+        }
+
+        double subtotal = carrinho.stream().mapToDouble(ItemCarrinho::getSubtotal).sum();
+        double total = subtotal + (frete != null ? frete : 0.00);
+
+        String enderecoSelecionado = req.getParameter("enderecoSelecionado");
+        String formaPagamento = req.getParameter("formaPagamento");
+        String numeroCartao = req.getParameter("numeroCartao");
+        String nomeCartao = req.getParameter("nomeCartao");
+        String codigoVerificador = req.getParameter("codigoVerificador");
+        String dataVencimento = req.getParameter("dataVencimento");
+        String parcelas = req.getParameter("parcelas");
+
+        EnderecoDao enderecoDao = new EnderecoDao();
+        EnderecoCliente endereco = enderecoDao.buscarPorId(Integer.parseInt(enderecoSelecionado));
+
+        req.setAttribute("carrinho", carrinho);
+        req.setAttribute("subtotal", subtotal);
+        req.setAttribute("frete", frete != null ? frete : 0.00);
+        req.setAttribute("total", total);
+        req.setAttribute("endereco", endereco);
+        req.setAttribute("formaPagamento", formaPagamento);
+        req.setAttribute("numeroCartao", numeroCartao);
+        req.setAttribute("nomeCartao", nomeCartao);
+        req.setAttribute("codigoVerificador", codigoVerificador);
+        req.setAttribute("dataVencimento", dataVencimento);
+        req.setAttribute("parcelas", parcelas);
+
+        req.getRequestDispatcher("/WEB-INF/views/cliente/resumo.jsp").forward(req, resp);
     }
 }
 
