@@ -24,6 +24,25 @@
 </head>
 <body>
     <%@ include file="/../../../assets/components/header-cliente.jsp" %>
+  <c:if test="${not empty sessionScope.statusPedido}">
+      <c:choose>
+          <c:when test="${sessionScope.statusPedido == 'sucesso'}">
+              <script>
+                  alert("Pedido nº ${sessionScope.numeroPedido} de R$ ${sessionScope.valorTotal} foi registrado com sucesso!");
+              </script>
+          </c:when>
+          <c:otherwise>
+              <script>
+                  alert("O pedido não pôde ser registrado!");
+              </script>
+          </c:otherwise>
+      </c:choose>
+
+      <c:remove var="statusPedido" scope="session"/>
+      <c:remove var="numeroPedido" scope="session"/>
+      <c:remove var="valorTotal" scope="session"/>
+  </c:if>
+
     <section id="pincipal">
             <div>
                <div class="swiper mySwiper">

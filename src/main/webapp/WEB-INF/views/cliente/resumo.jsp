@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ page isELIgnored="false" %>
 <%@ page import="com.eletronicosstore.dao.ProdutoDao" %>
 <%@ page import="com.eletronicosstore.models.Produto" %>
 <%@ page import="java.util.List" %>
@@ -98,14 +97,25 @@
                        <p>Nome no Cartão: ${nomeCartao}</p>
                        <p>Parcelas: ${parcelas}</p>
                    </c:if>
+
                    <button type="button" onclick="window.history.back()">Voltar</button>
-                   <button type="">Finalizar</button>
+
+                   <form method="post" action="pedido" style="display:inline;">
+                       <input type="hidden" name="endereco" value="${endereco.logradouro}, ${endereco.bairro}">
+                       <input type="hidden" name="formaPagamento" value="${formaPagamento}">
+                       <input type="hidden" name="nomeCartao" value="${nomeCartao}">
+                       <input type="hidden" name="parcelas" value="${parcelas}">
+                       <input type="hidden" name="subtotal" value="${subtotal}">
+                       <input type="hidden" name="frete" value="${frete}">
+                       <input type="hidden" name="total" value="${total}">
+                       <button type="submit">Finalizar</button>
+                   </form>
                 </div>
             </div>
         </div>
     </section>
+
     <%@ include file="/assets/components/footer.jsp" %>
     <script src="${pageContext.request.contextPath}/assets/js/carrinho.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/pagamento.js"></script>
 </body>
 </html>

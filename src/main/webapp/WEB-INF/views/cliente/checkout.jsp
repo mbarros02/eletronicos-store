@@ -105,7 +105,7 @@
                                 <input type="radio" name="formaPagamento" value="Boleto" required> Boleto Bancário
                             </label><br>
                             <label>
-                                <input type="radio" name="formaPagamento" value="Cartao" required> Cartão de Crédito
+                                <input type="radio" name="formaPagamento" value="Cartão" required> Cartão de Crédito
                             </label>
                         </div>
 
@@ -131,11 +131,11 @@
                                     <option value="3x">3x</option>
                                     <option value="4x">4x</option>
                                     <option value="5x">5x</option>
-                                    <option value="5x">6x</option>
-                                    <option value="5x">7x</option>
-                                    <option value="5x">8x</option>
-                                    <option value="5x">9x</option>
-                                    <option value="5x">10x</option>
+                                    <option value="6x">6x</option>
+                                    <option value="7x">7x</option>
+                                    <option value="8x">8x</option>
+                                    <option value="9x">9x</option>
+                                    <option value="10x">10x</option>
                                 </select>
                             </label>
                         </div>

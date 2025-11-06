@@ -42,6 +42,7 @@
     <div id="opcoesCliente" class="opcoes" style="display: none;">
         <a href="${pageContext.request.contextPath}/cliente?action=alterar" class="Login">Alterar Dados</a></br>
         <a href="${pageContext.request.contextPath}/endereco?action=listar&id_cliente=${sessionScope.cliente.id}" class="Login">Endereços</a></br>
+        <a href="${pageContext.request.contextPath}/pedido?id_cliente=${sessionScope.cliente.id}" class="Login">Pedidos</a><br>
         <a href="${pageContext.request.contextPath}/logout" class="Login" style="color: red;">Sair</a>
     </div>
     <script src="${pageContext.request.contextPath}/../assets/js/opcoes-cliente.js"></script>
