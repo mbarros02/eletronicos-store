@@ -70,6 +70,7 @@ public class EnderecoController extends HttpServlet {
 
         String cep = request.getParameter("cep");
         String logradouro = request.getParameter("logradouro");
+        String numero = request.getParameter("numero");
         String complemento = request.getParameter("complemento");
         String bairro = request.getParameter("bairro");
         String localidade = request.getParameter("localidade");
@@ -80,6 +81,7 @@ public class EnderecoController extends HttpServlet {
         try {
             EnderecoCliente endereco = viaCep.buscarEnderecoPorCep(cep);
 
+            endereco.setNumero(request.getParameter("numero"));
             endereco.setComplemento(request.getParameter("complemento"));
             endereco.setTipoEndereco(request.getParameter("tipo_endereco"));
             endereco.setIdCliente(Integer.parseInt(request.getParameter("id_cliente")));
