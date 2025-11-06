@@ -5,6 +5,7 @@ public class EnderecoCliente {
     private String cep;
     private String logradouro;
     private String complemento;
+    private String numero;
     private String bairro;
     private String localidade;
     private String uf;
@@ -49,6 +50,9 @@ public class EnderecoCliente {
 
     public String getComplemento() { return complemento; }
     public void setComplemento(String complemento) { this.complemento = complemento; }
+
+    public String getNumero() {return numero;}
+    public void setNumero(String numero) {this.numero = numero;}
 
     public String getBairro() { return bairro; }
     public void setBairro(String bairro) { this.bairro = bairro; }

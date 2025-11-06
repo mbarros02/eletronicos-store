@@ -15,19 +15,20 @@ public class EnderecoDao implements Base<EnderecoCliente>{
     @Override
     public EnderecoCliente cadastrar(EnderecoCliente endereco) {
 
-        String sql = "INSERT INTO enderecos_clientes (CEP, LOGRADOURO, COMPLEMENTO, BAIRRO, LOCALIDADE, UF, TIPO_ENDERECO, ID_CLIENTE) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO enderecos_clientes (CEP, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, LOCALIDADE, UF, TIPO_ENDERECO, ID_CLIENTE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try(Connection conn = new Conexao().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, endereco.getCep());
             stmt.setString(2, endereco.getLogradouro());
-            stmt.setString(3, endereco.getComplemento());
-            stmt.setString(4, endereco.getBairro());
-            stmt.setString(5, endereco.getLocalidade());
-            stmt.setString(6, endereco.getUf());
-            stmt.setString(7, endereco.getTipoEndereco());
-            stmt.setInt(8, endereco.getIdCliente());
+            stmt.setString(3, endereco.getNumero());
+            stmt.setString(4, endereco.getComplemento());
+            stmt.setString(5, endereco.getBairro());
+            stmt.setString(6, endereco.getLocalidade());
+            stmt.setString(7, endereco.getUf());
+            stmt.setString(8, endereco.getTipoEndereco());
+            stmt.setInt(9, endereco.getIdCliente());
 
             stmt.execute();
             System.out.println("Cadastro de endereço realizado com sucesso!");
