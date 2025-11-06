@@ -86,3 +86,36 @@ CREATE TABLE enderecos_clientes(
     ID_CLIENTE INT NOT NULL,
     FOREIGN KEY (ID_CLIENTE) REFERENCES clientes(IDCLIENTE)
 );
+
+-- ============================================================
+-- TABELA: pedidos
+-- ============================================================
+CREATE TABLE pedidos (
+    idpedido INT AUTO_INCREMENT PRIMARY KEY,
+    numero_pedido INT UNIQUE,
+    idcliente INT NOT NULL,
+    endereco_entrega VARCHAR(255),
+    forma_pagamento VARCHAR(50),
+    nome_cartao VARCHAR(100),
+    parcelas VARCHAR(20),
+    subtotal DECIMAL(10,2),
+    frete DECIMAL(10,2),
+    total DECIMAL(10,2),
+    status VARCHAR(50) DEFAULT 'Aguardando pagamento',
+    data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (idcliente) REFERENCES clientes(idcliente)
+);
+
+-- ============================================================
+-- TABELA: itens_pedido
+-- ============================================================
+CREATE TABLE itens_pedido (
+    iditem INT AUTO_INCREMENT PRIMARY KEY,
+    idpedido INT NOT NULL,
+    idproduto INT NOT NULL,
+    quantidade INT NOT NULL,
+    preco_unitario DECIMAL(10,2),
+    subtotal DECIMAL(10,2),
+    FOREIGN KEY (idpedido) REFERENCES pedidos(idpedido),
+    FOREIGN KEY (idproduto) REFERENCES produtos(idproduto)
+);
