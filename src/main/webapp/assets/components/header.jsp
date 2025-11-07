@@ -37,7 +37,7 @@
         </div>
 
         <a href="${pageContext.request.contextPath}/carrinho" class="carrinho">
-            <div class="img">
+            <div class="img2">
                 <img src="${pageContext.request.contextPath}/../assets/img/carrinho.png" alt="">
             </div>
         </a>

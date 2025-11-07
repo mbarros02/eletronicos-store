@@ -63,6 +63,28 @@
             </form>
         </div>
     </section>
+      <script>
+        const nomeInput = document.querySelector('input[name="nome"]');
+
+        nomeInput.addEventListener('blur', function() {
+            const valor = nomeInput.value.trim();
+            const partes = valor.split(' ').filter(p => p.length > 0);
+
+            if (partes.length < 2 || partes[0].length < 3 || partes[partes.length - 1].length < 3) {
+                alert('Digite o nome e o sobrenome, cada um com pelo menos 3 caracteres.');
+            }
+        });
+
+        document.getElementById('formCadastro').addEventListener('submit', function(event) {
+            const valor = nomeInput.value.trim();
+            const partes = valor.split(' ').filter(p => p.length > 0);
+
+            if (partes.length < 2 || partes[0].length < 3 || partes[partes.length - 1].length < 3) {
+                alert('Digite o nome e o sobrenome, cada um com pelo menos 3 caracteres.');
+                event.preventDefault(); // Impede envio do formulário
+            }
+        });
+        </script>
     <%@ include file="/assets/components/footer.jsp" %>
 </body>
 </html>
