@@ -109,4 +109,39 @@ public class ItemPedidoDao implements Base<ItemPedido> {
 
         return itens;
     }
+
+    public List<ItemPedido> buscarItensPorPedido(int idPedido) {
+        List<ItemPedido> itens = new ArrayList<>();
+        String sql = "SELECT ip.*, p.NOME AS nome_produto " +
+                "FROM itens_pedido ip " +
+                "INNER JOIN produtos p ON ip.idproduto = p.IDPRODUTO " +
+                "WHERE ip.idpedido = ?";
+
+        try (Connection conn = new Conexao().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idPedido);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                ItemPedido item = new ItemPedido();
+                item.setIdItemPedido(rs.getInt("iditem"));
+                item.setIdPedido(rs.getInt("idpedido"));
+                item.setIdProduto(rs.getInt("idproduto"));
+                item.setQuantidade(rs.getInt("quantidade"));
+                item.setPrecoUnitario(rs.getDouble("preco_unitario"));
+                item.setSubtotal(rs.getDouble("subtotal"));
+
+                item.setNomeProduto(rs.getString("nome_produto"));
+
+                itens.add(item);
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar itens do pedido com nome do produto: " + e.getMessage(), e);
+        }
+
+        return itens;
+    }
 }

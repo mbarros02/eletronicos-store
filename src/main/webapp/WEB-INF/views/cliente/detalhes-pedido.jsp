@@ -67,14 +67,25 @@
     </p>
     <p><strong>Endereço de Entrega:</strong> ${pedido.enderecoEntrega}</p>
     <p><strong>Forma de Pagamento:</strong> ${pedido.formaPagamento}</p>
-    <p><strong>Nome no Cartão:</strong> ${pedido.nomeCartao}</p>
-    <p><strong>Parcelas:</strong> ${pedido.parcelas}</p>
+    <c:if test="${not empty pedido.nomeCartao}">
+        <p><strong>Nome no Cartão:</strong> ${pedido.nomeCartao}</p>
+    </c:if>
+
+    <c:if test="${not empty pedido.parcelas}">
+        <p><strong>Parcelas:</strong> ${pedido.parcelas}</p>
+    </c:if>
     <p><strong>Subtotal:</strong> R$ ${pedido.subtotal}</p>
     <p><strong>Frete:</strong> R$ ${pedido.frete}</p>
     <p><strong>Total:</strong> R$ ${pedido.total}</p>
     <p><strong>Status:</strong> ${pedido.status}</p>
 
-    <a href="${pageContext.request.contextPath}/pedido?id_cliente=${sessionScope.cliente.id}">Voltar para Meus Pedidos</a>
+    <h1>Itens</h1>
+
+    <c:forEach var="item" items="${itens}">
+        <p><strong>Produto:</strong> ${item.nomeProduto} - <strong>Quantidade:</strong> ${item.quantidade} - <strong>Preço:</strong> ${item.precoUnitario}</p><br/>
+    </c:forEach>
+
+    <a href="${pageContext.request.contextPath}/pedido?id_cliente=${sessionScope.cliente.id}">Meus Pedidos</a>
 </body>
 </html>
 

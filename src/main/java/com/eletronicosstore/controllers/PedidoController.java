@@ -1,6 +1,5 @@
 package com.eletronicosstore.controllers;
 
-import com.eletronicosstore.dao.EnderecoDao;
 import com.eletronicosstore.dao.ItemPedidoDao;
 import com.eletronicosstore.dao.PedidoDao;
 import com.eletronicosstore.models.Cliente;
@@ -99,11 +98,16 @@ public class PedidoController extends HttpServlet {
         String idClienteParam = req.getParameter("id_cliente");
 
         PedidoDao dao = new PedidoDao();
+        ItemPedidoDao itemPedidoDao = new ItemPedidoDao();
 
         if (idParam != null) {
             int idPedido = Integer.parseInt(idParam);
+
             Pedido pedido = dao.buscarPorId(idPedido);
+            List<ItemPedido> itens = itemPedidoDao.buscarItensPorPedido(idPedido);
+
             req.setAttribute("pedido", pedido);
+            req.setAttribute("itens", itens);
             req.getRequestDispatcher("/WEB-INF/views/cliente/detalhes-pedido.jsp").forward(req, resp);
             return;
         }

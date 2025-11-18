@@ -7,6 +7,7 @@ public class ItemPedido {
     private int quantidade;
     private double precoUnitario;
     private double subtotal;
+    private String nomeProduto;
 
     public int getIdItemPedido() {
         return idItemPedido;
@@ -54,5 +55,13 @@ public class ItemPedido {
 
     public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
+    }
+
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
     }
 }
