@@ -72,7 +72,7 @@ CREATE TABLE clientes (
 -- ============================================================
 -- TABELA: enderecos_clientes
 -- ============================================================
-CREATE TABLE enderecos_clientes(
+CREATE TABLE enderecos_clientes (
     IDENDERECO INT PRIMARY KEY AUTO_INCREMENT,
     CEP VARCHAR(10) NOT NULL,
     LOGRADOURO VARCHAR(255),
@@ -83,6 +83,7 @@ CREATE TABLE enderecos_clientes(
     UF CHAR(2) NOT NULL,
     TIPO_ENDERECO ENUM('F', 'E') NOT NULL,
     STATUS TINYINT(1) DEFAULT 1,
+    PRINCIPAL TINYINT(1) DEFAULT 0,
     ID_CLIENTE INT NOT NULL,
     FOREIGN KEY (ID_CLIENTE) REFERENCES clientes(IDCLIENTE)
 );

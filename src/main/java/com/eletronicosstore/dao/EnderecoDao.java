@@ -89,6 +89,7 @@ public class EnderecoDao implements Base<EnderecoCliente>{
                 e.setTipoEndereco(rs.getString("TIPO_ENDERECO"));
                 e.setIdCliente(rs.getInt("ID_CLIENTE"));
                 e.setStatus(rs.getInt("STATUS"));
+                e.setPrincipal(rs.getInt("PRINCIPAL"));
                 enderecos.add(e);
             }
         } catch (SQLException e) {
@@ -157,4 +158,24 @@ public class EnderecoDao implements Base<EnderecoCliente>{
         return List.of();
     }
 
+    public void desmarcarTodosEntrega() {
+        String sql = "UPDATE enderecos_clientes SET PRINCIPAL = 0 WHERE TIPO_ENDERECO = 'E'";
+        try (Connection conn = new Conexao().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao desmarcar endereços de entrega: " + e.getMessage(), e);
+        }
+    }
+
+    public void marcarComoPrincipal(int idEndereco) {
+        String sql = "UPDATE enderecos_clientes SET PRINCIPAL = 1 WHERE IDENDERECO = ?";
+        try (Connection conn = new Conexao().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idEndereco);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao marcar endereço como principal: " + e.getMessage(), e);
+        }
+    }
 }

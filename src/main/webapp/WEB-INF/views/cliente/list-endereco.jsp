@@ -36,6 +36,7 @@
                             <th>Tipo</th>
                             <th>Status</th>
                             <th>Ações</th>
+                            <th>Principal</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,15 +62,26 @@
                                 </td>
                                 <td class="actions">
                                     <div class="content-action">
-                                        <c:choose>
-                                            <c:when test="${endereco.status == 1}">
-                                                <a class="inativar" href="endereco?action=inativar&id=${endereco.id}&id_cliente=${sessionScope.cliente.id}" title="Inativar">Inativar</a>
-                                            </c:when>
-                                            <c:otherwise>
-                                               <a class="inativar" href="endereco?action=reativar&id=${endereco.id}&id_cliente=${sessionScope.cliente.id}" title="Ativar">Reativar</a>
-                                            </c:otherwise>
-                                        </c:choose>
+                                        <c:if test="${endereco.tipoEndereco != 'F'}">
+                                            <c:choose>
+                                                <c:when test="${endereco.status == 1}">
+                                                    <a class="inativar" href="endereco?action=inativar&id=${endereco.id}&id_cliente=${sessionScope.cliente.id}" title="Inativar">Inativar</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                   <a class="inativar" href="endereco?action=reativar&id=${endereco.id}&id_cliente=${sessionScope.cliente.id}" title="Ativar">Reativar</a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:if>
                                     </div>
+                                </td>
+                                <td>
+                                    <c:if test="${endereco.tipoEndereco != 'F' && endereco.status == 1}">
+                                        <c:if test="${endereco.tipoEndereco != 'F' && endereco.status == 1}">
+                                                <input type="radio" name="enderecoPrincipal" value="${endereco.id}"
+                                                    onclick="definirPrincipal(${endereco.id})"
+                                                    <c:if test="${endereco.principal != null && endereco.principal == 1}">checked</c:if> />
+                                        </c:if>
+                                    </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -79,6 +91,25 @@
         </div>
     </div>
 </section>
+
+<script>
+function definirPrincipal(idEndereco) {
+    fetch('endereco?action=definirPrincipal&id=' + idEndereco, {
+        method: 'POST'
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Endereço principal atualizado com sucesso!');
+        } else {
+            alert('Erro ao atualizar endereço principal');
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro ao atualizar endereço principal');
+    });
+}
+</script>
 
 <%@ include file="/assets/components/footer.jsp" %>
 </body>

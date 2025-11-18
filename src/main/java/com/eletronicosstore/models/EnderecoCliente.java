@@ -16,6 +16,7 @@ public class EnderecoCliente {
     private String siafi;
     private String tipoEndereco;
     private int status;
+    private int principal;
     private int idCliente;
 
     public EnderecoCliente() {
@@ -91,5 +92,13 @@ public class EnderecoCliente {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getPrincipal() {
+        return principal;
+    }
+
+    public void setPrincipal(int principal) {
+        this.principal = principal;
     }
 }

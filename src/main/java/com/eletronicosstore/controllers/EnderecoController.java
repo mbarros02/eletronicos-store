@@ -20,6 +20,12 @@ public class EnderecoController extends HttpServlet {
         try {
             if ("cadastro".equals(action)) {
                 this.cadastrar(request, response);
+            } else if ("definirPrincipal".equals(action)) {
+                int idEndereco = Integer.parseInt(request.getParameter("id"));
+
+                EnderecoDao enderecoDao = new EnderecoDao();
+                enderecoDao.desmarcarTodosEntrega();
+                enderecoDao.marcarComoPrincipal(idEndereco);
             }
         } catch (IOException ex) {
             throw new ServletException(ex);
@@ -91,11 +97,9 @@ public class EnderecoController extends HttpServlet {
 
             request.getSession().setAttribute("enderecos", endereco);
             response.sendRedirect(request.getContextPath() + "/endereco?action=cadastro&id_cliente=" + id_cliente);
-            return;
         } catch (IllegalArgumentException e) {
             request.setAttribute("erro", e.getMessage());
             request.getRequestDispatcher("erro.jsp").forward(request, response);
-            return;
         } catch (Exception e) {
             throw new ServletException(e);
         }
