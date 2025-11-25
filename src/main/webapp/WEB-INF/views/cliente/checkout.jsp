@@ -92,10 +92,16 @@
                         <div class="frete-options">
                             <h3>Endereços</h3>
                             <c:forEach var="endereco" items="${enderecos}">
-                                <label>
-                                    <input type="radio" name="enderecoSelecionado" value="${endereco.id}" required>
-                                    ${endereco.logradouro}, ${endereco.bairro}
-                                </label><br>
+                                <c:if test="${endereco.status == 1}">
+                                    <label>
+                                        <input type="radio"
+                                               name="enderecoSelecionado"
+                                               value="${endereco.id}"
+                                               <c:if test="${endereco.principal == 1}">checked</c:if>
+                                               required>
+                                        ${endereco.logradouro}, ${endereco.bairro}
+                                    </label><br>
+                                </c:if>
                             </c:forEach>
                         </div>
 
