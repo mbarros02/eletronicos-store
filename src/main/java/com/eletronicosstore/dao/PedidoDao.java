@@ -173,5 +173,44 @@ public class PedidoDao implements Base<Pedido> {
         return pedidos;
     }
 
+    public List<Pedido> listarPedidosOrdenadosPorData() {
+        List<Pedido> pedidos = new ArrayList<>();
+        String sql = "SELECT * FROM pedidos ORDER BY data_pedido DESC";
 
+        try (Connection conn = new Conexao().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Pedido pedido = new Pedido();
+                pedido.setIdPedido(rs.getInt("idpedido"));
+                pedido.setNumeroPedido(rs.getInt("numero_pedido"));
+                pedido.setTotal(rs.getDouble("total"));
+                pedido.setStatus(rs.getString("status"));
+                pedido.setData(rs.getTimestamp("data_pedido"));
+                pedidos.add(pedido);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao listar pedidos por data: " + e.getMessage(), e);
+        }
+
+        return pedidos;
+    }
+
+    public void atualizarStatus(int idPedido, String novoStatus) {
+        String sql = "UPDATE pedidos SET status = ? WHERE idpedido = ?";
+
+        try (Connection conn = new Conexao().getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, novoStatus);
+            ps.setInt(2, idPedido);
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

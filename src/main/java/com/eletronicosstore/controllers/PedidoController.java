@@ -22,6 +22,13 @@ public class PedidoController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
 
+        String action = req.getParameter("action");
+
+        if ("alterar-status".equals(action)) {
+            alterarStatus(req, resp);
+            return;
+        }
+
         HttpSession session = req.getSession();
         Cliente cliente = (Cliente) session.getAttribute("cliente");
         List<ItemCarrinho> carrinho = (List<ItemCarrinho>) session.getAttribute("carrinho");
@@ -94,6 +101,7 @@ public class PedidoController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String idParam = req.getParameter("id");
         String idClienteParam = req.getParameter("id_cliente");
 
@@ -118,5 +126,26 @@ public class PedidoController extends HttpServlet {
             req.setAttribute("pedidos", pedidos);
             req.getRequestDispatcher("/WEB-INF/views/cliente/meus-pedidos.jsp").forward(req, resp);
         }
+
+        String action = req.getParameter("action");
+
+        if ("listar-pedido".equals(action)) {
+            List<Pedido> pedidos = dao.listarPedidosOrdenadosPorData();
+            req.setAttribute("pedidos", pedidos);
+            req.getRequestDispatcher("/WEB-INF/views/usuario/listar-pedidos.jsp").forward(req, resp);
+        }
     }
+
+    private void alterarStatus(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+
+        int idPedido = Integer.parseInt(request.getParameter("idPedido"));
+        String novoStatus = request.getParameter("novoStatus");
+
+        PedidoDao pedidoDAO = new PedidoDao();
+        pedidoDAO.atualizarStatus(idPedido, novoStatus);
+
+        response.sendRedirect("pedido?action=listar-pedido");
+    }
+
 }

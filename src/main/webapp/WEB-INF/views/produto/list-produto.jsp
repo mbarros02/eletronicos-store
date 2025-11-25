@@ -29,6 +29,12 @@
                     <img class="img" src="${pageContext.request.contextPath}/../assets/img/produto.png" alt="Produto"/>
                     <a href="produto?action=listar">Produto</a>
                 </div>
+                <c:if test="${sessionScope.usuarioAtual != null && sessionScope.usuarioAtual.idGrupo == 2}">
+                    <div>
+                        <img class="img" src="${pageContext.request.contextPath}/../assets/img/pedido.png" alt="Pedidos"/>
+                        <a href="${pageContext.request.contextPath}/pedido?action=listar-pedido">Pedidos</a>
+                    </div>
+                </c:if>
             </div>
         </div>
 
