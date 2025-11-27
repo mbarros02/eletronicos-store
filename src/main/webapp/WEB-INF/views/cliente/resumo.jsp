@@ -87,14 +87,14 @@
 
             <div class="cardbutton">
                 <div>
-                   <h3>Endereço de Entrega</h3>
+                   <h3>Endereço de Entrega</h3><br>
                    <p>${endereco.logradouro}, ${endereco.bairro}</p>
                    <br>
-                   <h3>Forma de Pagamento</h3>
+                   <h3>Forma de Pagamento</h3><br>
                    <p>${formaPagamento}</p>
 
                    <c:if test="${formaPagamento == 'cartao'}">
-                       <p>Nome no Cartão: ${nomeCartao}</p>
+                       <p>Nome no Cartão: ${nomeCartao}</p><br>
                        <p>Parcelas: ${parcelas}</p>
                    </c:if>
 

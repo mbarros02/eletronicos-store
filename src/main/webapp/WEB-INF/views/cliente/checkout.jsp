@@ -129,7 +129,7 @@
                             <label>Data de Vencimento:
                                 <input type="date" name="dataVencimento">
                             </label><br>
-                            <label>Quantidade de Parcelas:
+                            <label style="width: 60%;">Quantidade de Parcelas:
                                 <select name="parcelas">
                                     <option value=""></option>
                                     <option value="1x">1x</option>

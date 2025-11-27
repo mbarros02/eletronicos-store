@@ -259,6 +259,46 @@ section .resumo{
     font-weight: bold;
     color: #3b82f6;
 }
+
 .contador{
     width: 20%;
+}
+
+#cartao-info {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    max-width: 350px;
+}
+
+#cartao-info p {
+    font-family: Inter;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+#cartao-info label {
+    display: block;
+    font-size: 17px;
+    font-family: Inter;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+#cartao-info input,
+#cartao-info select {
+    width: 95%;
+    padding: 7px;
+    font-size: 13px;
+    margin-top: 3px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.resumo p {
+    font-family: Inter;
 }

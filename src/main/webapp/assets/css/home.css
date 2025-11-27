@@ -78,8 +78,8 @@
 #Produtos>.content>.card {
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
-    width: 30.3%;
+    justify-content: space-evenly;
+    width: 30%;
     height: auto;
     box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 8px 15px 21px -1px rgba(0, 0, 0, 0.5);
@@ -111,6 +111,7 @@
 #Produtos>.content>.card>.content-card {
     width: 90%;
     height: auto;
+    gap: 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -128,16 +129,24 @@
 }
 
 #Produtos>.content>.card>.content-card>.description {
+    width: 95%;
+    max-width: 100%;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: Inter;
+}
 
- /* Compatibilidade antiga */
+#Produtos>.content>.card>.content-card>.description>.descricao {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
 
- /* Recomendado */
-
- /* Limita a largura */
-
- max-width: 100%; /* Limita a largura */
-
- word-wrap: break-word;
+#Produtos>.content>.card>.content-card>.description>.preco{
+    font-size: 25px;
 }
 
 #Produtos>.content>.card>.content-card>.description>.link-categoria {
@@ -365,8 +374,23 @@ a {
 }
 
 .buton{
-padding: 10px 0px;
+    padding: 10px 0px;
+    width: 100%;
+    display: flex;
+    padding: 10px 0px;
+    justify-content: space-around;
 }
+
+.buton button{
+    border: none;
+    background-color: #3b82f6;
+    color: white;
+    padding: 13px;
+    border-radius: 7px;
+    margin-right: 17px;
+    font-size: 18px;
+}
+
 .img{
     width: 100%;
 }
